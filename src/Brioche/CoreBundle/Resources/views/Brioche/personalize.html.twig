@@ -1,0 +1,72 @@
+{% extends "BriocheCoreBundle::layout.html.twig" %}
+
+{% block body %}
+<section class="personalize">
+    <h2 class="text-center">Touche personnelle</h2>
+    <br />
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <div class="thumbnail">
+                <img src="http://dummyimage.com/800x200/ababab/515151.jpg" alt="alt">
+                <h3 class="text-center">Vendéene 250</h3>
+                <div class="padd">
+                    <p class="lead">
+                        Et est admodum mirum videre plebem innumeram mentibus ardore
+                        quodam infuso cum dimicationum curulium eventu pendentem.
+                    </p>
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label for="butter" class="col-xs-4 control-label">Beurre</label>
+                            <input
+                                id="slider-butter"
+                                type="text"
+                                name="butter"
+                                value="1"
+                                class="span2"
+                                style="width: 200px"
+                                data-slider-min="0"
+                                data-slider-max="2"
+                                data-slider-step="1"
+                                data-slider-value="1"
+                                data-slider-formater="formaterButter"
+                            />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="sugar" class="col-xs-4 control-label">Sucre</label>
+                            <input
+                                id="slider-sugar"
+                                type="text"
+                                name="sugar"
+                                value="1"
+                                class="span2"
+                                style="width: 200px"
+                                data-slider-min="0"
+                                data-slider-max="2"
+                                data-slider-step="1"
+                                data-slider-value="1"
+                                data-slider-formater="formaterSugar"
+                            />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="extra" class="col-xs-4 control-label">Agréments (+2€)</label>
+                            <select id="extra" name="extra" class="extra-selector select2">
+                                <option value="0">Nature</option>
+                                <option value="1">Raisins secs</option>
+                                <option value="2">Figue</option>
+                            </select>
+                        </div>
+                        <div class="text-center">
+                            <button class="btn btn-success" role="submit">
+                                <span class="glyphicon glyphicon-ok-circle"></span>
+                                Valider
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

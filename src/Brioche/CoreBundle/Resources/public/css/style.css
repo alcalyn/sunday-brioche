@@ -1,0 +1,46 @@
+body {
+    background: url('../img/bg.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-color:#333;
+    padding-top: 70px;
+    overflow-x: hidden;
+}
+.tournees {
+    width: 300px;
+}
+.tournee {
+    margin-bottom: 16px;
+}
+.tournee button {
+}
+.tournee button.btndate {
+    width: 250px;
+}
+.tournee button.btndate p {
+    margin: 0;
+}
+.tournee button.btnaction {
+    width: 50px;
+    font-size: 34px;
+}
+.date {
+    margin-right: 16px;
+    font-size: 18px;
+}
+.count {
+    font-size: 16px;
+    font-weight: bold;
+}
+.count small {
+    font-weight: 400;
+    font-size: 12px;
+}
+.extra-selector {
+    width: 200px;
+}
+.padd {
+    padding: 16px;
+}

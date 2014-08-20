@@ -11,8 +11,8 @@ parameters:
     mailer_user:       ~
     mailer_password:   ~
 
-    locale:            en
-    secret:            ThisTokenIsNotSoSecretChangeIt
+    locale:            fr
+    secret:            ILoveBrioches
 
     debug_toolbar:          true
     debug_redirects:        false

@@ -1,10 +1,9 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
-        "This file is @generated automatically"
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "cad94f3ec696e0666a9084943bb60e61",
+    "hash": "95adc812910464d7880245ff02c16689",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1857,7 +1856,6 @@
     "stability-flags": {
         "friendsofsymfony/user-bundle": 20
     },
-    "prefer-stable": false,
     "platform": {
         "php": ">=5.3.3"
     },
