@@ -1,0 +1,4 @@
+brioche_core:
+    resource: "@BriocheCoreBundle/Resources/config/routing.yml"
+    prefix:   /
+

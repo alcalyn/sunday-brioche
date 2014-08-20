@@ -1,0 +1,3 @@
+brioche_core_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: BriocheCoreBundle:Default:index }
