@@ -1,0 +1,52 @@
+<?php
+
+namespace Brioche\CoreBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Client
+ *
+ * @ORM\Table(name="sb_client")
+ * @ORM\Entity(repositoryClass="Brioche\CoreBundle\Repository\ClientRepository")
+ */
+class Client
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255)
+     */
+    private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="address", type="string", length=255)
+     */
+    private $address;
+    
+    /**
+     * @var City
+     * 
+     * @ORM\ManyToOne(targetEntity="Brioche\CoreBundle\Entity\City")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $city;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+    }
+}

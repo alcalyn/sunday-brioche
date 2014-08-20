@@ -1,0 +1,6 @@
+model: Brioche\CoreBundle\Entity\Extra
+fixtures:
+    figue:
+        title: 'Figue'
+    raisin:
+        title: 'Raisins secs'

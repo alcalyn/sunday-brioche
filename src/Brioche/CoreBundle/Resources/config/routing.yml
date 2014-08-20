@@ -1,3 +1,7 @@
-brioche_core_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: BriocheCoreBundle:Default:index }
+brioche_core_front_controller:
+    resource: "@BriocheCoreBundle/Controller/FrontController.php"
+    type:     annotation
+
+brioche_core_brioche_controller:
+    resource: "@BriocheCoreBundle/Controller/BriocheController.php"
+    type:     annotation

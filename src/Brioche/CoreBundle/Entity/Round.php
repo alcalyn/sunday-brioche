@@ -1,0 +1,124 @@
+<?php
+
+namespace Brioche\CoreBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Round
+ *
+ * @ORM\Table(name="sb_round")
+ * @ORM\Entity(repositoryClass="Brioche\CoreBundle\Repository\RoundRepository")
+ */
+class Round
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date", type="date")
+     */
+    private $date;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="maximum", type="smallint")
+     */
+    private $maximum;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="dummy", type="smallint")
+     */
+    private $dummy;
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set date
+     *
+     * @param \DateTime $date
+     * @return Round
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return \DateTime 
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * Set maximum
+     *
+     * @param integer $maximum
+     * @return Round
+     */
+    public function setMaximum($maximum)
+    {
+        $this->maximum = $maximum;
+
+        return $this;
+    }
+
+    /**
+     * Get maximum
+     *
+     * @return integer 
+     */
+    public function getMaximum()
+    {
+        return $this->maximum;
+    }
+
+    /**
+     * Set dummy
+     *
+     * @param integer $dummy
+     * @return Round
+     */
+    public function setDummy($dummy)
+    {
+        $this->dummy = $dummy;
+
+        return $this;
+    }
+
+    /**
+     * Get dummy
+     *
+     * @return integer 
+     */
+    public function getDummy()
+    {
+        return $this->dummy;
+    }
+}

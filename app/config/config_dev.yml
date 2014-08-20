@@ -32,5 +32,9 @@ monolog:
 assetic:
     use_controller: "%use_assetic_controller%"
 
+khepin_yaml_fixtures:
+    resources:
+        - BriocheCoreBundle
+
 #swiftmailer:
 #    delivery_address: me@example.com

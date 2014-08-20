@@ -1,0 +1,8 @@
+model: Brioche\CoreBundle\Entity\City
+fixtures:
+    juvisy:
+        title: 'Juvisy sur Orge'
+        postalcode: '91 260'
+    savigny:
+        title: 'Savigny sur Orge'
+        postalcode: '91 600'
