@@ -3,7 +3,6 @@
 namespace Brioche\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use FOS\UserBundle\Model\User as FosUser;
 
 /**
  * Client
@@ -11,7 +10,7 @@ use FOS\UserBundle\Model\User as FosUser;
  * @ORM\Table(name="sb_client")
  * @ORM\Entity(repositoryClass="Brioche\CoreBundle\Repository\ClientRepository")
  */
-class Client extends FosUser
+class Client
 {
     /**
      * @var integer
@@ -20,7 +19,7 @@ class Client extends FosUser
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $id;
+    private $id;
 
     /**
      * @var string
@@ -43,14 +42,14 @@ class Client extends FosUser
      * @ORM\JoinColumn(nullable=true)
      */
     private $city;
-
+    
     /**
-     * Constructor
+     * @var Account
+     * 
+     * @ORM\OneToOne(targetEntity="Brioche\CoreBundle\Entity\Account")
+     * @ORM\JoinColumn(nullable=true)
      */
-    public function __construct()
-    {
-        parent::__construct();
-    }
+    private $account;
 
     /**
      * Get id
@@ -114,7 +113,7 @@ class Client extends FosUser
      * @param \Brioche\CoreBundle\Entity\City $city
      * @return Client
      */
-    public function setCity(\Brioche\CoreBundle\Entity\City $city)
+    public function setCity(City $city = null)
     {
         $this->city = $city;
 
@@ -129,5 +128,28 @@ class Client extends FosUser
     public function getCity()
     {
         return $this->city;
+    }
+
+    /**
+     * Set account
+     *
+     * @param \Brioche\CoreBundle\Entity\Account $account
+     * @return Client
+     */
+    public function setAccount(Account $account = null)
+    {
+        $this->account = $account;
+
+        return $this;
+    }
+
+    /**
+     * Get account
+     *
+     * @return \Brioche\CoreBundle\Entity\Account 
+     */
+    public function getAccount()
+    {
+        return $this->account;
     }
 }

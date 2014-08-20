@@ -13,6 +13,16 @@ use Doctrine\ORM\Mapping as ORM;
 class Brioche
 {
     /**
+     * @var int
+     */
+    const VENDEENE = 0;
+    
+    /**
+     * @var int
+     */
+    const PARISIENNE = 1;
+    
+    /**
      * @var integer
      *
      * @ORM\Column(name="id", type="integer")
@@ -25,7 +35,7 @@ class Brioche
      * @var Client
      * 
      * @ORM\ManyToOne(targetEntity="Brioche\CoreBundle\Entity\Client")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $client;
     
@@ -33,7 +43,7 @@ class Brioche
      * @var Round
      * 
      * @ORM\ManyToOne(targetEntity="Brioche\CoreBundle\Entity\Round")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $round;
     
@@ -72,7 +82,52 @@ class Brioche
      * @ORM\JoinColumn(nullable=true)
      */
     private $extra;
-
+    
+    /**
+     * @var float
+     * 
+     * @ORM\Column(name="price", type="decimal", precision=4, scale=2)
+     */
+    private $price;
+    
+    /**
+     * @var float
+     * 
+     * @ORM\Column(name="paid", type="decimal", precision=4, scale=2)
+     */
+    private $paid;
+    
+    /**
+     * @var boolean
+     * 
+     * @ORM\Column(name="valid", type="boolean")
+     */
+    private $valid;
+    
+    /**
+     * @var \DateTime
+     * 
+     * @ORM\Column(name="dateCreate", type="datetime")
+     */
+    private $dateCreate;
+    
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this
+            ->setType(Brioche::VENDEENE)
+            ->setSize(250)
+            ->setButter(1)
+            ->setSugar(1)
+            ->setPrice(0)
+            ->setPaid(0)
+            ->setValid(false)
+            ->setDateCreate(new \DateTime())
+        ;
+    }
+    
     /**
      * Get id
      *
@@ -181,7 +236,7 @@ class Brioche
      * @param \Brioche\CoreBundle\Entity\Client $client
      * @return Brioche
      */
-    public function setClient(\Brioche\CoreBundle\Entity\Client $client)
+    public function setClient(Client $client = null)
     {
         $this->client = $client;
 
@@ -204,7 +259,7 @@ class Brioche
      * @param \Brioche\CoreBundle\Entity\Round $round
      * @return Brioche
      */
-    public function setRound(\Brioche\CoreBundle\Entity\Round $round)
+    public function setRound(Round $round = null)
     {
         $this->round = $round;
 
@@ -227,7 +282,7 @@ class Brioche
      * @param \Brioche\CoreBundle\Entity\Extra $extra
      * @return Brioche
      */
-    public function setExtra(\Brioche\CoreBundle\Entity\Extra $extra = null)
+    public function setExtra(Extra $extra = null)
     {
         $this->extra = $extra;
 
@@ -242,5 +297,97 @@ class Brioche
     public function getExtra()
     {
         return $this->extra;
+    }
+
+    /**
+     * Set price
+     *
+     * @param string $price
+     * @return Brioche
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * Get price
+     *
+     * @return string 
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * Set paid
+     *
+     * @param string $paid
+     * @return Brioche
+     */
+    public function setPaid($paid)
+    {
+        $this->paid = $paid;
+
+        return $this;
+    }
+
+    /**
+     * Get paid
+     *
+     * @return string 
+     */
+    public function getPaid()
+    {
+        return $this->paid;
+    }
+
+    /**
+     * Set valid
+     *
+     * @param boolean $valid
+     * @return Brioche
+     */
+    public function setValid($valid)
+    {
+        $this->valid = $valid;
+
+        return $this;
+    }
+
+    /**
+     * Get valid
+     *
+     * @return boolean 
+     */
+    public function getValid()
+    {
+        return $this->valid;
+    }
+
+    /**
+     * Set dateCreate
+     *
+     * @param \DateTime $dateCreate
+     * @return Brioche
+     */
+    public function setDateCreate($dateCreate)
+    {
+        $this->dateCreate = $dateCreate;
+
+        return $this;
+    }
+
+    /**
+     * Get dateCreate
+     *
+     * @return \DateTime 
+     */
+    public function getDateCreate()
+    {
+        return $this->dateCreate;
     }
 }
