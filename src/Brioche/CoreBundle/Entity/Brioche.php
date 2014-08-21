@@ -57,7 +57,8 @@ class Brioche
     /**
      * @var integer
      * 
-     * @ORM\Column(name="size", type="smallint")
+     * @ORM\ManyToOne(targetEntity="Brioche\CoreBundle\Entity\Size")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $size;
     
@@ -164,10 +165,10 @@ class Brioche
     /**
      * Set size
      *
-     * @param integer $size
+     * @param \Brioche\CoreBundle\Entity\Size $size
      * @return Brioche
      */
-    public function setSize($size)
+    public function setSize(Size $size = null)
     {
         $this->size = $size;
 
@@ -177,13 +178,13 @@ class Brioche
     /**
      * Get size
      *
-     * @return integer 
+     * @return \Brioche\CoreBundle\Entity\Size 
      */
     public function getSize()
     {
         return $this->size;
     }
-
+    
     /**
      * Set butter
      *

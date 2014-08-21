@@ -2,5 +2,7 @@ model: Brioche\CoreBundle\Entity\Extra
 fixtures:
     figue:
         title: 'Figue'
+        price: 2
     raisin:
         title: 'Raisins secs'
+        price: 2

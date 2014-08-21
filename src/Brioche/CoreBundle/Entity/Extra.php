@@ -28,6 +28,13 @@ class Extra
      */
     private $title;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="price", type="decimal", precision=4, scale=2)
+     */
+    private $price;
+
 
     /**
      * Get id
@@ -60,5 +67,28 @@ class Extra
     public function getTitle()
     {
         return $this->title;
+    }
+
+    /**
+     * Set price
+     *
+     * @param string $price
+     * @return Extra
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * Get price
+     *
+     * @return string 
+     */
+    public function getPrice()
+    {
+        return $this->price;
     }
 }

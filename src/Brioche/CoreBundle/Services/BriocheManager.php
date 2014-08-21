@@ -16,60 +16,18 @@ class BriocheManager
      */
     public function getPrice(Brioche $brioche)
     {
-        $this->checkSize($brioche->getSize());
+        $size = $brioche->getSize();
+        $extra = $brioche->getExtra();
+        $price = 0;
         
-        $prices = $this->getSizePrice();
-        $agrementPrice = $this->getExtraPrice();
-        
-        $price = $prices[$brioche->getSize()];
-        
-        if (null !== $brioche->getExtra()) {
-            $price += $agrementPrice;
+        if ($size) {
+            $price += $size->getPrice();
+            
+            if ($extra) {
+                $price += $extra->getPrice();
+            }
         }
         
         return $price;
-    }
-    
-    /**
-     * Check if brioche size is one of expected sizes
-     * 
-     * @param \Brioche\CoreBundle\Entity\Brioche $brioche
-     * 
-     * @throws BriocheCoreException
-     */
-    public function checkSize(Brioche $brioche)
-    {
-        $sizes = array_keys($this->getSizePrice());
-        
-        if (!in_array($brioche->getSize(), $sizes)) {
-            throw new BriocheCoreException(
-                    'Unexpected brioche size: "'.$brioche->getSize().'", expected '.implode(', or ', $sizes).'.'
-            );
-        }
-    }
-    
-    /**
-     * Get size/price grid
-     * 
-     * @return array
-     */
-    public function getSizePrice()
-    {
-        return array(
-            125 => 6,
-            250 => 8,
-            375 => 10,
-            500 => 12,
-        );
-    }
-    
-    /**
-     * Get extra price
-     * 
-     * @return int
-     */
-    public function getExtraPrice()
-    {
-        return 2;
     }
 }
