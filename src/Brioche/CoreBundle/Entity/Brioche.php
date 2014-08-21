@@ -119,7 +119,6 @@ class Brioche
     {
         $this
             ->setType(Brioche::VENDEENE)
-            ->setSize(250)
             ->setButter(1)
             ->setSugar(1)
             ->setPrice(0)

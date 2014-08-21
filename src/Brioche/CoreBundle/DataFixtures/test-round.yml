@@ -1,0 +1,19 @@
+model: Brioche\CoreBundle\Entity\Round
+tags: [ test ]
+fixtures:
+    passed:
+        date: '2014-08-10'
+        maximum: 4
+        dummy: 2
+    r1:
+        date: '2014-08-31'
+        maximum: 4
+        dummy: 1
+    r2:
+        date: '2014-09-14'
+        maximum: 5
+        dummy: 1
+    r3:
+        date: '2014-09-28'
+        maximum: 5
+        dummy: 0

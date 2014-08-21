@@ -1,0 +1,26 @@
+model: Brioche\CoreBundle\Entity\Brioche
+tags: [ test ]
+fixtures:
+    1:
+        type: 0
+        round: r2
+        size: t500
+        butter: 1
+        sugar: 2
+        extra: figue
+        price: 14
+        paid: 7
+        client: bernadette
+        valid: true
+        dateCreate: '2014-08-21 10:36:00'
+    2:
+        type: 1
+        round: r3
+        size: t125
+        butter: 0
+        sugar: 0
+        extra: null
+        price: 6
+        paid: 0
+        valid: false
+        dateCreate: '2014-08-21 10:36:20'
