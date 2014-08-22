@@ -14,16 +14,9 @@ class FrontController extends Controller
      */
     public function indexAction()
     {
-        $client = new \Brioche\CoreBundle\Entity\Client;
+        $briocheBuilder = $this->get('brioche_core.brioche_builder');
         
-        $em = $this->getDoctrine()->getManager();
         
-        $client->setName('Rosette Dupuis');
-        $client->setAddress('1, rue de par là');
-        $client->setCity();
-        
-        $em->persist($client);
-        $em->flush();
         
         return array();
     }

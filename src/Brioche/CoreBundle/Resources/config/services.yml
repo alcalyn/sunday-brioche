@@ -1,3 +1,7 @@
 services:
     brioche_core.brioche_manager:
         class: Brioche\CoreBundle\Services\BriocheManager
+        
+    brioche_core.brioche_builder:
+        class: Brioche\CoreBundle\Services\BriocheBuilder
+        arguments: [@doctrine.orm.entity_manager, @session, @brioche_core.brioche_manager]

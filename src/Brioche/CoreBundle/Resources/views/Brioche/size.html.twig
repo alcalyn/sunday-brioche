@@ -11,24 +11,24 @@
                 <h3 class="text-center">Vendéene</h3>
                 <br />
                 <ul class="nav nav-tabs nav-justified" id="size-tab" role="tablist">
-                    <li><a href="#taille-125">125</a></li>
-                    <li class="active"><a href="#taille-250">250</a></li>
-                    <li><a href="#taille-375">375</a></li>
-                    <li><a href="#taille-500">500</a></li>
+                    {% for size in sizes %}
+                        <li{% if size.value == brioche.size.value %} class="active"{% endif %}>
+                            <a href="#taille-{{ size.value }}">{{ size.value }}</a>
+                        </li>
+                    {% endfor %}
                 </ul>
                 <div class="padd">
                     <div class="tab-content">
-                        <div class="tab-pane" id="taille-125">a</div>
-                        <div class="tab-pane active" id="taille-250">
-                            <h4>Brioche 250</h4>
-                            <p class="lead price">Prix : 8 €</p>
-                            <p><b>3</b> personnes</p>
-                        </div>
-                        <div class="tab-pane" id="taille-375">c</div>
-                        <div class="tab-pane" id="taille-500">d</div>
+                        {% for size in sizes %}
+                            <div class="tab-pane{% if size.value == brioche.size.value %} active{% endif %}" id="taille-{{ size.value }}">
+                                <h4>Brioche {{ size.value }}</h4>
+                                <p class="lead price">Prix : {{ size.price }} €</p>
+                                <p><b>{{ size.nbPeople }}</b> personnes</p>
+                            </div>
+                        {% endfor %}
                     </div>
-                    <form>
-                        <input type="hidden" name="size" value="250" />
+                    <form method="post">
+                        <input type="hidden" name="size" value="{{ brioche.size.value }}" />
                         <div class="text-center">
                             <button class="btn btn-success" role="submit">
                                 <span class="glyphicon glyphicon-ok-circle"></span>

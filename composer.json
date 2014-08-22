@@ -19,7 +19,8 @@
         "sensio/framework-extra-bundle": "~3.0",
         "khepin/yaml-fixtures-bundle": "~0.8.1",
         "friendsofsymfony/user-bundle": "~2.0@dev",
-        "incenteev/composer-parameter-handler": "~2.0"
+        "incenteev/composer-parameter-handler": "~2.0",
+        "alcalyn/flush-on-kernel-terminate-bundle": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

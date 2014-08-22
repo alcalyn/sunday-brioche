@@ -91,4 +91,12 @@ class City
     {
         return $this->postalcode;
     }
+    
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->title.' ('.$this->postalcode.')';
+    }
 }

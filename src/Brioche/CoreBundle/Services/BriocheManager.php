@@ -2,7 +2,6 @@
 
 namespace Brioche\CoreBundle\Services;
 
-use Brioche\CoreBundle\Exception\BriocheCoreException;
 use Brioche\CoreBundle\Entity\Brioche;
 
 class BriocheManager
@@ -14,7 +13,7 @@ class BriocheManager
      * 
      * @return int
      */
-    public function getPrice(Brioche $brioche)
+    public function calculatePrice(Brioche $brioche)
     {
         $size = $brioche->getSize();
         $extra = $brioche->getExtra();
@@ -29,5 +28,20 @@ class BriocheManager
         }
         
         return $price;
+    }
+    
+    /**
+     * Check if type is valid
+     * 
+     * @param int $type
+     * 
+     * @return boolean
+     */
+    public function checkType($type)
+    {
+        return in_array($type, array(
+            Brioche::VENDEENE,
+            Brioche::PARISIENNE,
+        ));
     }
 }

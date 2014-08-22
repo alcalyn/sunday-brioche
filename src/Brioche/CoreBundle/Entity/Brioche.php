@@ -34,7 +34,7 @@ class Brioche
     /**
      * @var Client
      * 
-     * @ORM\ManyToOne(targetEntity="Brioche\CoreBundle\Entity\Client")
+     * @ORM\ManyToOne(targetEntity="Brioche\CoreBundle\Entity\Client", cascade={"all"})
      * @ORM\JoinColumn(nullable=true)
      */
     private $client;
@@ -113,6 +113,41 @@ class Brioche
     private $dateCreate;
     
     /**
+     * @var boolean
+     * 
+     * @ORM\Column(name="validRound", type="boolean")
+     */
+    private $validRound;
+    
+    /**
+     * @var boolean
+     * 
+     * @ORM\Column(name="validType", type="boolean")
+     */
+    private $validType;
+    
+    /**
+     * @var boolean
+     * 
+     * @ORM\Column(name="validSize", type="boolean")
+     */
+    private $validSize;
+    
+    /**
+     * @var boolean
+     * 
+     * @ORM\Column(name="validPerso", type="boolean")
+     */
+    private $validPerso;
+    
+    /**
+     * @var boolean
+     * 
+     * @ORM\Column(name="validAddress", type="boolean")
+     */
+    private $validAddress;
+    
+    /**
      * Constructor
      */
     public function __construct()
@@ -125,6 +160,11 @@ class Brioche
             ->setPaid(0)
             ->setValid(false)
             ->setDateCreate(new \DateTime())
+            ->setValidRound(false)
+            ->setValidType(false)
+            ->setValidSize(false)
+            ->setValidPerso(false)
+            ->setValidAddress(false)
         ;
     }
     
@@ -159,6 +199,23 @@ class Brioche
     public function getType()
     {
         return $this->type;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getTypeTitle()
+    {
+        switch ($this->getType()) {
+            case self::VENDEENE:
+                return 'Vendéenne';
+                
+            case self::PARISIENNE:
+                return 'Parisienne';
+            
+            default:
+                return '???';
+        }
     }
 
     /**
@@ -389,5 +446,120 @@ class Brioche
     public function getDateCreate()
     {
         return $this->dateCreate;
+    }
+
+    /**
+     * Set validRound
+     *
+     * @param boolean $validRound
+     * @return Brioche
+     */
+    public function setValidRound($validRound)
+    {
+        $this->validRound = $validRound;
+
+        return $this;
+    }
+
+    /**
+     * Get validRound
+     *
+     * @return boolean 
+     */
+    public function getValidRound()
+    {
+        return $this->validRound;
+    }
+
+    /**
+     * Set validType
+     *
+     * @param boolean $validType
+     * @return Brioche
+     */
+    public function setValidType($validType)
+    {
+        $this->validType = $validType;
+
+        return $this;
+    }
+
+    /**
+     * Get validType
+     *
+     * @return boolean 
+     */
+    public function getValidType()
+    {
+        return $this->validType;
+    }
+
+    /**
+     * Set validSize
+     *
+     * @param boolean $validSize
+     * @return Brioche
+     */
+    public function setValidSize($validSize)
+    {
+        $this->validSize = $validSize;
+
+        return $this;
+    }
+
+    /**
+     * Get validSize
+     *
+     * @return boolean 
+     */
+    public function getValidSize()
+    {
+        return $this->validSize;
+    }
+
+    /**
+     * Set validPerso
+     *
+     * @param boolean $validPerso
+     * @return Brioche
+     */
+    public function setValidPerso($validPerso)
+    {
+        $this->validPerso = $validPerso;
+
+        return $this;
+    }
+
+    /**
+     * Get validPerso
+     *
+     * @return boolean 
+     */
+    public function getValidPerso()
+    {
+        return $this->validPerso;
+    }
+
+    /**
+     * Set validAddress
+     *
+     * @param boolean $validAddress
+     * @return Brioche
+     */
+    public function setValidAddress($validAddress)
+    {
+        $this->validAddress = $validAddress;
+
+        return $this;
+    }
+
+    /**
+     * Get validAddress
+     *
+     * @return boolean 
+     */
+    public function getValidAddress()
+    {
+        return $this->validAddress;
     }
 }

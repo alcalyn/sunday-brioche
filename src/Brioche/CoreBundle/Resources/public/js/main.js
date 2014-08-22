@@ -1,29 +1,31 @@
-jQuery(function () {
+$(function () {
     enableSizeSelector();
     enableSliders();
     enableSelect2();
+    Brioche.init();
 });
 
 function enableSizeSelector() {
-    jQuery('#size-tab a').click(function (e) {
+    $('#size-tab a').click(function (e) {
         e.preventDefault();
-        jQuery(this).tab('show');
-        var size = jQuery(this).attr('href').split('-')[1];
-        jQuery('input[name=size]').val(size);
-    })
+        $(this).tab('show');
+        var size = $(this).attr('href').split('-')[1];
+        $('input[name=size]').val(size);
+    });
 }
 
 function enableSliders() {
-    jQuery('#slider-butter').slider({
+    $('#slider-butter').slider({
         formater: formaterButter
     });
-    jQuery('#slider-sugar').slider({
+    $('#slider-sugar').slider({
         formater: formaterSugar
     });
 }
 
 function enableSelect2() {
-    jQuery('.select2').select2({
+    $('.select2-with-search').select2();
+    $('.select2').select2({
         minimumResultsForSearch: -1
     });
 }
@@ -35,3 +37,35 @@ function formaterButter(value) {
 function formaterSugar(value) {
     return ['Moins sucrée', 'Normal', 'Bien sucrée'][value];
 }
+
+var Brioche =
+{
+    init: function ()
+    {
+        if ($('section.type').size() > 0) {
+            BriocheType.init();
+        }
+    }
+};
+
+var BriocheType =
+{
+    init: function ()
+    {
+        $('section.type .type-vendeene').click(function () {
+            BriocheType.select(0);
+            return false;
+        });
+
+        $('section.type .type-parisienne').click(function () {
+            BriocheType.select(1);
+            return false;
+        });
+    },
+    
+    select: function (type)
+    {
+        $('input[name=type]').val(type);
+        $('form.form-type').submit();
+    }
+};

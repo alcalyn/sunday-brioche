@@ -3,6 +3,7 @@
 namespace Brioche\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Client
@@ -25,6 +26,8 @@ class Client
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255, nullable=true)
+     * 
+     * @Assert\NotBlank
      */
     private $name;
 
@@ -32,6 +35,8 @@ class Client
      * @var string
      *
      * @ORM\Column(name="address", type="string", length=255, nullable=true)
+     * 
+     * @Assert\NotBlank
      */
     private $address;
 
@@ -39,6 +44,9 @@ class Client
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=255, nullable=true)
+     * 
+     * @Assert\NotBlank
+     * @Assert\Email
      */
     private $email;
     
@@ -47,6 +55,8 @@ class Client
      * 
      * @ORM\ManyToOne(targetEntity="Brioche\CoreBundle\Entity\City")
      * @ORM\JoinColumn(nullable=true)
+     * 
+     * @Assert\NotBlank
      */
     private $city;
     

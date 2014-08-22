@@ -1,5 +1,8 @@
 model: Brioche\CoreBundle\Entity\Extra
 fixtures:
+    nature:
+        title: 'Nature'
+        price: 0
     figue:
         title: 'Figue'
         price: 2

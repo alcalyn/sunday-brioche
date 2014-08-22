@@ -6,17 +6,20 @@
     <br />
     <div class="row">
         <div class="col-sm-3 col-xs-6 col-sm-offset-3">
-            <a href="#" class="thumbnail">
+            <a href="#" class="thumbnail type-vendeene">
                 <img src="http://dummyimage.com/400x300/ababab/515151.jpg" alt="alt">
                 <h3 class="text-center">Vendéene</h3>
             </a>
         </div>
         <div class="col-sm-3 col-xs-6">
-            <a href="#" class="thumbnail">
+            <a href="#" class="thumbnail type-parisienne">
                 <img src="http://dummyimage.com/400x300/ababab/515151.jpg" alt="alt">
                 <h3 class="text-center">Parisienne</h3>
             </a>
         </div>
     </div>
+    <form class="form-type" method="post">
+        <input type="hidden" name="type" />
+    </form>
 </section>
 {% endblock %}
