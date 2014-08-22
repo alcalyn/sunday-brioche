@@ -73,17 +73,6 @@
         <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/select2/3.5.0/select2_locale_fr.min.js"></script>
 
         {% javascripts
-            '@PhaxCoreBundle/Resources/public/js/*'
-        %}
-            <script src="{{ asset_url }}" type="text/javascript"></script>
-        {% endjavascripts %}
-        <script type="text/javascript">
-            var phaxConfig = {
-                www_script: '{{ path('phax_script') }}'
-            }
-        </script>
-
-        {% javascripts
             '@BriocheCoreBundle/Resources/public/js/*'
         %}
                 <script src="{{ asset_url }}" type="text/javascript"></script>
