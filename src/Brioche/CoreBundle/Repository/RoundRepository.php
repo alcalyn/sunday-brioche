@@ -12,4 +12,19 @@ use Doctrine\ORM\EntityRepository;
  */
 class RoundRepository extends EntityRepository
 {
+    public function findFuturesRounds()
+    {
+        return $this->_em->createQueryBuilder()
+                ->select('r, b')
+                ->from('BriocheCoreBundle:Round', 'r')
+                ->leftJoin('r.brioches', 'b', 'with', 'b.valid = true')
+                ->where('r.date >= :now')
+                ->orderBy('r.date')
+                ->setParameters(array(
+                    ':now' => new \DateTime(),
+                ))
+                ->getQuery()
+                ->getResult()
+        ;
+    }
 }

@@ -42,7 +42,7 @@ class Brioche
     /**
      * @var Round
      * 
-     * @ORM\ManyToOne(targetEntity="Brioche\CoreBundle\Entity\Round")
+     * @ORM\ManyToOne(targetEntity="Brioche\CoreBundle\Entity\Round", inversedBy="brioches")
      * @ORM\JoinColumn(nullable=true)
      */
     private $round;

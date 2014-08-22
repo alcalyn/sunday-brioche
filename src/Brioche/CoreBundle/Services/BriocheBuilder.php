@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Doctrine\ORM\EntityManagerInterface;
 use Brioche\CoreBundle\Entity\Brioche;
 use Brioche\CoreBundle\Entity\Client;
+use Brioche\CoreBundle\Entity\Round;
 use Brioche\CoreBundle\Entity\Extra;
 use Brioche\CoreBundle\Entity\Size;
 
@@ -57,7 +58,9 @@ class BriocheBuilder
                 ->getRepository('BriocheCoreBundle:Brioche')
                 ->find($this->session->get('briocheId'))
             ;
-        } else {
+        }
+        
+        if (null === $brioche) {
             $brioche = $this->createDefaultBrioche();
             $this->em->persist($brioche);
             $this->em->flush();
@@ -106,6 +109,16 @@ class BriocheBuilder
             ->setExtra($extra)
             ->setClient(new Client())
         ;
+    }
+    
+    public function buildRound(Round $round)
+    {
+        $this->brioche
+            ->setRound($round)
+            ->setValidRound(true)
+        ;
+        
+        return $this;
     }
     
     public function buildType($type)

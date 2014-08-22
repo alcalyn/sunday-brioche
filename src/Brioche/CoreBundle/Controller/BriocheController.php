@@ -15,6 +15,35 @@ class BriocheController extends Controller
 {
     /**
      * @Route(
+     *      "/brioche/tournee",
+     *      name = "brioche_round"
+     * )
+     * @Template()
+     */
+    public function roundAction(Request $request)
+    {
+        $brioche = $this->getBriocheBuilder()->getCurrentBrioche();
+        $roundRepository = $this->getDoctrine()->getManager()->getRepository('BriocheCoreBundle:Round');
+        $rounds = $roundRepository->findFuturesRounds();
+        
+        if ($request->isMethod('post')) {
+            $round = $roundRepository->findOneBy(array(
+                'id' => $request->get('round'),
+            ));
+            
+            $this->getBriocheBuilder()->buildRound($round);
+            
+            return $this->redirect($this->generateUrl('brioche_type'));
+        }
+        
+        return array(
+            'brioche'   => $brioche,
+            'rounds'    => $rounds,
+        );
+    }
+    
+    /**
+     * @Route(
      *      "/brioche/type",
      *      name = "brioche_type"
      * )

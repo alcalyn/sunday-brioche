@@ -20,6 +20,13 @@ class Round
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+    
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     * 
+     * @ORM\OneToMany(targetEntity="Brioche\CoreBundle\Entity\Brioche", mappedBy="round")
+     */
+    private $brioches;
 
     /**
      * @var \DateTime
@@ -42,6 +49,13 @@ class Round
      */
     private $dummy;
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->brioches = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -120,5 +134,38 @@ class Round
     public function getDummy()
     {
         return $this->dummy;
+    }
+
+    /**
+     * Add brioches
+     *
+     * @param \Brioche\CoreBundle\Entity\Brioche $brioches
+     * @return Round
+     */
+    public function addBrioche(Brioche $brioches)
+    {
+        $this->brioches[] = $brioches;
+
+        return $this;
+    }
+
+    /**
+     * Remove brioches
+     *
+     * @param \Brioche\CoreBundle\Entity\Brioche $brioches
+     */
+    public function removeBrioche(Brioche $brioches)
+    {
+        $this->brioches->removeElement($brioches);
+    }
+
+    /**
+     * Get brioches
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getBrioches()
+    {
+        return $this->brioches;
     }
 }

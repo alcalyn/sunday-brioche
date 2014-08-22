@@ -29,6 +29,7 @@ body {
 .date {
     margin-right: 16px;
     font-size: 18px;
+    text-transform: capitalize;
 }
 .count {
     font-size: 16px;

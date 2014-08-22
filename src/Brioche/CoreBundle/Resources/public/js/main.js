@@ -42,9 +42,28 @@ var Brioche =
 {
     init: function ()
     {
+        if ($('section.round').size() > 0) {
+            BriocheRound.init();
+        }
+        
         if ($('section.type').size() > 0) {
             BriocheType.init();
         }
+    }
+};
+
+var BriocheRound =
+{
+    init: function ()
+    {
+        var $form = $('.form-round');
+        var $formInput = $('input[name=round]');
+        
+        $('.tournees .tournee button').click(function () {
+            var round = $(this).closest('.tournee').data('roundId');
+            $formInput.val(round);
+            $form.submit();
+        });
     }
 };
 
