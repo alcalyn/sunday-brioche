@@ -1,0 +1,50 @@
+<div class="row fuelux hidden-xs">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="wizard">
+            <ul class="steps">
+                {% set steps = [
+                    {
+                        route: 'brioche_type',
+                        title: 'Tournée',
+                        complete: brioche.getValidRound
+                    },
+                    {
+                        route: 'brioche_type',
+                        title: 'Type',
+                        complete: brioche.getValidType
+                    },
+                    {
+                        route: 'brioche_size',
+                        title: 'Taille',
+                        complete: brioche.getValidSize
+                    },
+                    {
+                        route: 'brioche_personalize',
+                        title: 'Touche personnelle',
+                        complete: brioche.getValidPerso
+                    },
+                    {
+                        route: 'brioche_address',
+                        title: 'Adresse',
+                        complete: brioche.getValidAddress
+                    },
+                    {
+                        route: 'brioche_type',
+                        title: 'Paiement',
+                        complete: false
+                    }
+                ] %}
+                
+                {% for step in steps %}
+                    <li class="
+                        {% if app.request.get('_route') == step.route %}active{% endif %}
+                        {% if step.complete %}complete{% endif %}
+                    ">
+                        <a href="{{ path(step.route) }}">{{ step.title }}</a>
+                        <span class="chevron"></span>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>

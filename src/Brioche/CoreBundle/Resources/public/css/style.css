@@ -44,16 +44,20 @@ body {
 .padd {
     padding: 16px;
 }
-.steps h3 {
+.home-steps h3 {
     text-align: center;
 }
-.steps p {
+.home-steps p {
     font-size: 16px;
     text-align: center;
 }
-.steps p img {
+.home-steps p img {
     width: 75%;
     max-width: 200px;
+}
+.select2-choice {
+    font-size: 16px;
+    height: 32px !important;
 }
 .has-feedback .form-control-feedback {
     position: absolute;
@@ -64,4 +68,14 @@ body {
     height: 34px;
     line-height: 34px;
     text-align: center;
+}
+.fuelux .wizard .steps a {
+    padding: 12px;
+}
+.fuelux .wizard .steps li {
+    padding-left: 18px;
+    padding-right: 8px;
+}
+.fuelux .wizard ul li.complete a {
+    color: #468847;
 }

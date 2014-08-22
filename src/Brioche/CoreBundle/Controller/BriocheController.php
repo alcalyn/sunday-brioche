@@ -27,7 +27,7 @@ class BriocheController extends Controller
         if ($request->isMethod('post')) {
             $this->getBriocheBuilder()->buildType($request->get('type'));
             
-            return $this->redirect($this->generateUrl('brioche_taille'));
+            return $this->redirect($this->generateUrl('brioche_size'));
         }
         
         return array(
@@ -38,7 +38,7 @@ class BriocheController extends Controller
     /**
      * @Route(
      *      "/brioche/taille",
-     *      name = "brioche_taille"
+     *      name = "brioche_size"
      * )
      * @Template()
      */
