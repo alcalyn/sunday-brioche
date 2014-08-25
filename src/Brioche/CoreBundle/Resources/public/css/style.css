@@ -26,9 +26,11 @@ body {
     width: 50px;
     font-size: 34px;
 }
-.date {
+.tournee .date {
     margin-right: 16px;
     font-size: 18px;
+}
+.date {
     text-transform: capitalize;
 }
 .count {
@@ -79,4 +81,12 @@ body {
 }
 .fuelux .wizard ul li.complete a {
     color: #468847;
+}
+.price-table {
+}
+.price-table .price {
+    text-align: right;
+}
+.price-table .total {
+    font-size: 32px;
 }

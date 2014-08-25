@@ -43,16 +43,16 @@ class BriocheBuilder
         $this->session = $session;
         $this->briocheManager = $briocheManager;
         
-        $this->brioche = $this->loadBrioche();
+        $this->loadBrioche();
     }
     
     /**
      * Load brioche from session and db or create a new
-     * 
-     * @return \Brioche\CoreBundle\Entity\Brioche
      */
     private function loadBrioche()
     {
+        $brioche = null;
+        
         if ($this->session->has('briocheId')) {
             $brioche = $this->em
                 ->getRepository('BriocheCoreBundle:Brioche')
@@ -67,7 +67,8 @@ class BriocheBuilder
             $this->session->set('briocheId', $brioche->getId());
         }
         
-        return $brioche;
+        $this->brioche = $brioche;
+        $this->updatePrice();
     }
     
     /**
@@ -111,6 +112,11 @@ class BriocheBuilder
         ;
     }
     
+    /**
+     * @param \Brioche\CoreBundle\Entity\Round $round
+     * 
+     * @return \Brioche\CoreBundle\Services\BriocheBuilder
+     */
     public function buildRound(Round $round)
     {
         $this->brioche
@@ -121,6 +127,13 @@ class BriocheBuilder
         return $this;
     }
     
+    /**
+     * @param int $type
+     * 
+     * @return \Brioche\CoreBundle\Services\BriocheBuilder
+     * 
+     * @throws BriocheCoreException if $type is invalid
+     */
     public function buildType($type)
     {
         if (!$this->briocheManager->checkType($type)) {
@@ -135,6 +148,11 @@ class BriocheBuilder
         return $this;
     }
     
+    /**
+     * @param \Brioche\CoreBundle\Entity\Size $size
+     * 
+     * @return \Brioche\CoreBundle\Services\BriocheBuilder
+     */
     public function buildSize(Size $size)
     {
         $this->brioche
@@ -142,9 +160,18 @@ class BriocheBuilder
             ->setValidSize(true)
         ;
         
+        $this->updatePrice();
+        
         return $this;
     }
     
+    /**
+     * @param int $butter
+     * @param int $sugar
+     * @param \Brioche\CoreBundle\Entity\Extra $extra
+     * 
+     * @return \Brioche\CoreBundle\Services\BriocheBuilder
+     */
     public function buildPerso($butter, $sugar, Extra $extra)
     {
         $this->brioche
@@ -154,6 +181,47 @@ class BriocheBuilder
             ->setValidPerso(true)
         ;
         
+        $this->updatePrice();
+        
         return $this;
+    }
+    
+    /**
+     * Update brioche price
+     * 
+     * @return \Brioche\CoreBundle\Services\BriocheBuilder
+     */
+    private function updatePrice()
+    {
+        $price = $this->briocheManager->calculatePrice($this->brioche);
+        $this->brioche->setPrice($price);
+        
+        return $this;
+    }
+    
+    /**
+     * Return next step which is not yet done from the beginning
+     * 
+     * @return string
+     */
+    public function getNextStep()
+    {
+        if (!$this->brioche->getValidRound()) {
+            return 'round';
+        }
+        
+        if (!$this->brioche->getValidSize()) {
+            return 'size';
+        }
+        
+        if (!$this->brioche->getValidPerso()) {
+            return 'personalize';
+        }
+        
+        if (!$this->brioche->getValidAddress()) {
+            return 'address';
+        }
+        
+        return 'summary';
     }
 }

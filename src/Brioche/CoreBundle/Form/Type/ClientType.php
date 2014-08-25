@@ -25,6 +25,7 @@ class ClientType extends AbstractType
                 ),
             ))
             ->add('email', 'email', array('label' => 'Email'))
+            ->add('phone', 'text', array('label' => 'Téléphone'))
             ->add('Valider', 'submit')
         ;
     }

@@ -562,4 +562,20 @@ class Brioche
     {
         return $this->validAddress;
     }
+    
+    /**
+     * Return true if all steps are valid and can process to checkout
+     * 
+     * @return boolean
+     */
+    public function isAllValid()
+    {
+        return
+            $this->getValidRound() &&
+            $this->getValidType() &&
+            $this->getValidSize() &&
+            $this->getValidPerso() &&
+            $this->getValidAddress()
+        ;
+    }
 }

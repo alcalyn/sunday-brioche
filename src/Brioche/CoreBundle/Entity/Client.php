@@ -49,6 +49,13 @@ class Client
      * @Assert\Email
      */
     private $email;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="phone", type="string", length=31, nullable=true)
+     */
+    private $phone;
     
     /**
      * @var City
@@ -191,5 +198,28 @@ class Client
     public function getAccount()
     {
         return $this->account;
+    }
+
+    /**
+     * Set phone
+     *
+     * @param string $phone
+     * @return Client
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    /**
+     * Get phone
+     *
+     * @return string 
+     */
+    public function getPhone()
+    {
+        return $this->phone;
     }
 }

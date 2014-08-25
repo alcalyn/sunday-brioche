@@ -10,6 +10,7 @@ use Brioche\CoreBundle\Exception\BriocheCoreException;
 use Brioche\CoreBundle\Services\BriocheManager;
 use Brioche\CoreBundle\Services\BriocheBuilder;
 use Brioche\CoreBundle\Form\Type\ClientType;
+use Brioche\CoreBundle\Entity\Brioche;
 
 class BriocheController extends Controller
 {
@@ -33,7 +34,7 @@ class BriocheController extends Controller
             
             $this->getBriocheBuilder()->buildRound($round);
             
-            return $this->redirect($this->generateUrl('brioche_type'));
+            return $this->redirectNextStep();
         }
         
         return array(
@@ -56,7 +57,7 @@ class BriocheController extends Controller
         if ($request->isMethod('post')) {
             $this->getBriocheBuilder()->buildType($request->get('type'));
             
-            return $this->redirect($this->generateUrl('brioche_size'));
+            return $this->redirectNextStep();
         }
         
         return array(
@@ -84,7 +85,7 @@ class BriocheController extends Controller
             
             $this->getBriocheBuilder()->buildSize($size);
             
-            return $this->redirect($this->generateUrl('brioche_personalize'));
+            return $this->redirectNextStep();
         }
         
         return array(
@@ -115,7 +116,7 @@ class BriocheController extends Controller
             
             $this->getBriocheBuilder()->buildPerso($butter, $sugar, $extra);
             
-            return $this->redirect($this->generateUrl('brioche_address'));
+            return $this->redirectNextStep();
         }
         
         return array(
@@ -141,11 +142,31 @@ class BriocheController extends Controller
         
         if ($clientForm->isValid()) {
             $brioche->setValidAddress(true);
+            
+            return $this->redirectNextStep();
         }
         
         return array(
             'brioche'       => $brioche,
             'clientForm'    => $clientForm->createView(),
+        );
+    }
+
+    /**
+     * @Route(
+     *      "/brioche/resume-commande",
+     *      name="brioche_summary"
+     * )
+     * @Template()
+     */
+    public function summaryAction()
+    {
+        $brioche = $this->getBriocheBuilder()->getCurrentBrioche();
+        $client = $brioche->getClient();
+        
+        return array(
+            'brioche' => $brioche,
+            'client' => $client,
         );
     }
     
@@ -155,5 +176,22 @@ class BriocheController extends Controller
     private function getBriocheBuilder()
     {
         return $this->get('brioche_core.brioche_builder');
+    }
+    
+    /**
+     * Return a redirect to the next step of the brioche proccess
+     * 
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    private function redirectNextStep()
+    {
+        $path = null;
+        
+        switch ($step = $this->getBriocheBuilder()->getNextStep()) {
+            default:
+                $path = 'brioche_'.$step;
+        }
+        
+        return $this->redirect($this->generateUrl($path));
     }
 }
