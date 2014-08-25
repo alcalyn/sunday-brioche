@@ -97,11 +97,11 @@ class BriocheController extends Controller
     /**
      * @Route(
      *      "/brioche/touche-personnelle",
-     *      name="brioche_personalize"
+     *      name="brioche_perso"
      * )
      * @Template()
      */
-    public function personalizeAction(Request $request)
+    public function persoAction(Request $request)
     {
         $extraRepository = $this->getDoctrine()->getManager()->getRepository('BriocheCoreBundle:Extra');
         $extras = $extraRepository->findAll();

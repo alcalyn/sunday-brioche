@@ -215,7 +215,7 @@ class BriocheBuilder
         }
         
         if (!$this->brioche->getValidPerso()) {
-            return 'personalize';
+            return 'perso';
         }
         
         if (!$this->brioche->getValidAddress()) {
