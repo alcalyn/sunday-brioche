@@ -14,71 +14,109 @@
                 <div class="row text-center">
                     <div class="col-md-6">
                         <h4>Brioche</h3>
-                        <p>
-                            Type <b>{{ brioche.typeTitle }}</b><br />
-                            <a href="{{ path('brioche_type') }}">Modifier</a><br />
-                            <br />
-                            Taille {{ brioche.size.value }} (~{{ brioche.size.averageWeight }}g),<br />
-                            pour <b>{{ brioche.size.nbPeople }}</b> personnes<br />
-                            <a href="{{ path('brioche_size') }}">Modifier</a>
-                        </p>
+                        {% if brioche.getValidType or brioche.getValidSize %}
+                            {% if brioche.getValidType %}
+                                <p>
+                                    Type <b>{{ brioche.typeTitle }}</b><br />
+                                    <a href="{{ path('brioche_type') }}">Modifier</a>
+                                </p>
+                            {% else %}
+                                <div class="well">
+                                    <a href="{{ path('brioche_type') }}">Choisir le type</a>
+                                </div>
+                            {% endif %}
+
+                            {% if brioche.getValidSize %}
+                                <p>
+                                    Taille {{ brioche.size.value }} (~{{ brioche.size.averageWeight }}g),<br />
+                                    pour <b>{{ brioche.size.nbPeople }}</b> personnes<br />
+                                    <a href="{{ path('brioche_size') }}">Modifier</a>
+                                </p>
+                            {% else %}
+                                <div class="well">
+                                    <a href="{{ path('brioche_size') }}">Choisir la taille</a>
+                                </div>
+                            {% endif %}
+                        {% else %}
+                            <div class="well">
+                                <a href="{{ path('brioche_type') }}">Choisir</a>
+                            </div>
+                        {% endif %}
                     </div>
                     <div class="col-md-6">
                         <h4>Touche personnelle</h4>
-                        <p>
-                            {% if brioche.butter == 0 %}
-                                Moins beurrée,<br />
-                            {% elseif brioche.butter == 2 %}
-                                Bien beurrée,<br />
-                            {% endif %}
-                            
-                            {% if brioche.sugar == 0 %}
-                                Moins sucrée,<br />
-                            {% elseif brioche.sugar == 2 %}
-                                Bien sucrée,<br />
-                            {% endif %}
-                            
-                            Agrément : <b>{{ brioche.extra.title }}</b><br />
-                            <a href="{{ path('brioche_personalize') }}">Modifier</a>
-                        </p>
+                        {% if brioche.getValidPerso %}
+                            <p>
+                                {% if brioche.butter == 0 %}
+                                    Moins beurrée,<br />
+                                {% elseif brioche.butter == 2 %}
+                                    Bien beurrée,<br />
+                                {% endif %}
+
+                                {% if brioche.sugar == 0 %}
+                                    Moins sucrée,<br />
+                                {% elseif brioche.sugar == 2 %}
+                                    Bien sucrée,<br />
+                                {% endif %}
+
+                                Agrément : <b>{{ brioche.extra.title }}</b><br />
+                                <a href="{{ path('brioche_personalize') }}">Modifier</a>
+                            </p>
+                        {% else %}
+                            <div class="well">
+                                <a href="{{ path('brioche_personalize') }}">Choisir</a>
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
                 <br />
                 <div class="row text-center">
                     <div class="col-md-6">
                         <h4>Date de livraison</h4>
-                        <p>
-                            <span class="date">
-                                <b>{{ brioche.round.date|localizeddate('none', 'none', 'fr', null, 'EEEE d MMMM') }}</b>
-                            </span>
-                            <br />
-                            <a href="{{ path('brioche_round') }}">Modifier</a><br />
-                            <br />
-                            Entre <b>7h45</b> et <b>8h15</b><br />
-                            <a href="#">Modifier</a>
-                        </p>
+                        {% if brioche.getValidRound %}
+                            <p>
+                                <span class="date">
+                                    <b>{{ brioche.round.date|localizeddate('none', 'none', 'fr', null, 'EEEE d MMMM') }}</b>
+                                </span>
+                                <br />
+                                <a href="{{ path('brioche_round') }}">Modifier</a><br />
+                                <br />
+                                Entre <b>7h45</b> et <b>8h15</b><br />
+                                <a href="#">Modifier</a>
+                            </p>
+                        {% else %}
+                            <div class="well">
+                                <a href="{{ path('brioche_round') }}">Choisir</a>
+                            </div>
+                        {% endif %}
                     </div>
                     <div class="col-md-6">
                         <h4>Adresse de livraison</h4>
-                        <address style="margin-bottom:0">
-                            <strong>{{ client.name }}</strong><br />
-                            {{ client.address }}<br />
-                            {{ client.city.postalcode }} {{ client.city.title }}<br />
+                        {% if brioche.getValidAddress %}
+                            <address style="margin-bottom:0">
+                                <strong>{{ client.name }}</strong><br />
+                                {{ client.address }}<br />
+                                {{ client.city.postalcode }} {{ client.city.title }}<br />
 
-                            {% if client.phone %}
-                                <abbr title="Téléphone">
-                                    <span class="glyphicon glyphicon-earphone"></span>
-                                </abbr> {{ client.phone }}
-                                <br />
-                            {% endif %}
+                                {% if client.phone %}
+                                    <abbr title="Téléphone">
+                                        <span class="glyphicon glyphicon-earphone"></span>
+                                    </abbr> {{ client.phone }}
+                                    <br />
+                                {% endif %}
 
-                            {% if client.email %}
-                                <abbr title="Email">
-                                    <span class="glyphicon glyphicon-envelope"></span>
-                                </abbr> {{ client.email }}
-                            {% endif %}
-                        </address>
-                        <a href="{{ path('brioche_address') }}">Modifier</a>
+                                {% if client.email %}
+                                    <abbr title="Email">
+                                        <span class="glyphicon glyphicon-envelope"></span>
+                                    </abbr> {{ client.email }}
+                                {% endif %}
+                            </address>
+                            <a href="{{ path('brioche_address') }}">Modifier</a>
+                        {% else %}
+                            <div class="well">
+                                <a href="{{ path('brioche_address') }}">Choisir</a>
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
 
