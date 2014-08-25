@@ -56,7 +56,7 @@ class BriocheBuilder
         if ($this->session->has('briocheId')) {
             $brioche = $this->em
                 ->getRepository('BriocheCoreBundle:Brioche')
-                ->find($this->session->get('briocheId'))
+                ->findFull($this->session->get('briocheId'))
             ;
         }
         
