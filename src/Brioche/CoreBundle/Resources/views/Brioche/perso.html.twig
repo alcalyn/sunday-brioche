@@ -55,7 +55,7 @@
                             <label for="extra" class="col-xs-4 control-label">Agrément</label>
                             <select id="extra" name="extra" class="extra-selector select2">
                                 {% for extra in extras %}
-                                    <option value="{{ extra.id }}"{% if brioche.extra.id == extra.id %} selected="selected"{% endif %}>
+                                    <option value="{{ extra.id }}"{% if brioche.extra and (brioche.extra.id == extra.id) %} selected="selected"{% endif %}>
                                         {{ extra.title }}
                                         {% if extra.price > 0 %}
                                             (+ {{ extra.price }} €)

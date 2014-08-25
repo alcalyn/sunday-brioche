@@ -34,7 +34,7 @@ class BriocheController extends Controller
             
             $this->getBriocheBuilder()->buildRound($round);
             
-            return $this->redirectNextStep();
+            return $this->redirectNextStep('round');
         }
         
         return array(
@@ -57,7 +57,7 @@ class BriocheController extends Controller
         if ($request->isMethod('post')) {
             $this->getBriocheBuilder()->buildType($request->get('type'));
             
-            return $this->redirectNextStep();
+            return $this->redirectNextStep('type');
         }
         
         return array(
@@ -85,7 +85,7 @@ class BriocheController extends Controller
             
             $this->getBriocheBuilder()->buildSize($size);
             
-            return $this->redirectNextStep();
+            return $this->redirectNextStep('size');
         }
         
         return array(
@@ -104,7 +104,7 @@ class BriocheController extends Controller
     public function persoAction(Request $request)
     {
         $extraRepository = $this->getDoctrine()->getManager()->getRepository('BriocheCoreBundle:Extra');
-        $extras = $extraRepository->findAll();
+        $extras = $extraRepository->findBy(array(), array('price' => 'asc'));
         $brioche = $this->getBriocheBuilder()->getCurrentBrioche();
         
         if ($request->isMethod('post')) {
@@ -116,7 +116,7 @@ class BriocheController extends Controller
             
             $this->getBriocheBuilder()->buildPerso($butter, $sugar, $extra);
             
-            return $this->redirectNextStep();
+            return $this->redirectNextStep('perso');
         }
         
         return array(
@@ -143,7 +143,7 @@ class BriocheController extends Controller
         if ($clientForm->isValid()) {
             $brioche->setValidAddress(true);
             
-            return $this->redirectNextStep();
+            return $this->redirectNextStep('address');
         }
         
         return array(
@@ -183,14 +183,10 @@ class BriocheController extends Controller
      * 
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    private function redirectNextStep()
+    private function redirectNextStep($from = null)
     {
-        $path = null;
-        
-        switch ($step = $this->getBriocheBuilder()->getNextStep()) {
-            default:
-                $path = 'brioche_'.$step;
-        }
+        $step = $this->getBriocheBuilder()->getNextStep($from);
+        $path = 'brioche_'.$step;
         
         return $this->redirect($this->generateUrl($path));
     }

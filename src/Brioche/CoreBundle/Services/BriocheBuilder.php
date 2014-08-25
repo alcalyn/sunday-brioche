@@ -101,13 +101,9 @@ class BriocheBuilder
             'value' => 250,
         ));
         
-        $extra = $this->em->getRepository('BriocheCoreBundle:Extra')->findOneBy(array(
-            'title' => 'Nature',
-        ));
-        
         return $brioche
             ->setSize($size)
-            ->setExtra($extra)
+            ->setExtra(null)
             ->setClient(new Client())
         ;
     }
@@ -202,26 +198,62 @@ class BriocheBuilder
     /**
      * Return next step which is not yet done from the beginning
      * 
+     * @param string $from a step
+     * 
      * @return string
      */
-    public function getNextStep()
+    public function getNextStep($from = null)
     {
-        if (!$this->brioche->getValidRound()) {
-            return 'round';
+        $steps = array(
+            'round',
+            'type',
+            'size',
+            'perso',
+            'address',
+            'summary',
+        );
+        
+        $stepFrom = 0;
+        
+        if (null !== $from) {
+            $index = array_search($from, $steps);
+            
+            if (false === $index) {
+                $stepFrom = 0;
+            } else {
+                $stepFrom = $index + 1;
+            }
         }
         
-        if (!$this->brioche->getValidSize()) {
-            return 'size';
+        switch ($stepFrom) {
+            default:
+            case 0:
+                if (!$this->brioche->getValidRound()) {
+                    return 'round';
+                }
+                
+            case 1:
+                if (!$this->brioche->getValidType()) {
+                    return 'type';
+                }
+                
+            case 2:
+                if (!$this->brioche->getValidSize()) {
+                    return 'size';
+                }
+                
+            case 3:
+                if (!$this->brioche->getValidPerso()) {
+                    return 'perso';
+                }
+                
+            case 4:
+                if (!$this->brioche->getValidAddress()) {
+                    return 'address';
+                }
+                
+            case 5:
+                return 'summary';
         }
-        
-        if (!$this->brioche->getValidPerso()) {
-            return 'perso';
-        }
-        
-        if (!$this->brioche->getValidAddress()) {
-            return 'address';
-        }
-        
-        return 'summary';
     }
 }
