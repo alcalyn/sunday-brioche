@@ -57,6 +57,7 @@ body {
 .home-steps p img {
     width: 75%;
     max-width: 200px;
+    max-height: 200px;
 }
 .select2-choice {
     font-size: 16px;
