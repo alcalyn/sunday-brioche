@@ -6,6 +6,10 @@ services:
         class: Brioche\CoreBundle\Services\BriocheBuilder
         arguments: [@doctrine.orm.entity_manager, @session, @brioche_core.brioche_manager]
         
+    brioche_core.brioche_payment:
+        class: Brioche\CoreBundle\Services\BriochePaymentService
+        arguments: [@payplug.payment]
+        
     twig.extension.intl:
             class: Twig_Extensions_Extension_Intl
             tags:

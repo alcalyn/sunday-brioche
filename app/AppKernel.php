@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new Phax\CoreBundle\PhaxCoreBundle(),
             new Alcalyn\FlushOnKernelTerminateBundle\AlcalynFlushOnKernelTerminateBundle(),
             new Brioche\CoreBundle\BriocheCoreBundle(),
+            new Alcalyn\PayplugBundle\AlcalynPayplugBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

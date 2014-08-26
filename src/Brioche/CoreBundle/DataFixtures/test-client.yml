@@ -2,12 +2,14 @@ model: Brioche\CoreBundle\Entity\Client
 tags: [ test ]
 fixtures:
     grobert:
-        name: 'DUCON'
+        first_name: Jean
+        last_name: DUCON
         address: '69, rue des Relous'
         email: 'grogro@free.fr'
         city: savigny
     bernadette:
-        name: 'Bernadette Dupuis'
+        first_name: Bernadette
+        last_name: Dupuis
         address: '45, rue des Puis'
         email: 'nadette-la-sauvageonne@hotmail.fr'
         city: juvisy

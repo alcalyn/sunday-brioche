@@ -1,3 +1,7 @@
+alcalyn_payplug:
+    resource: "@AlcalynPayplugBundle/Resources/config/routing.yml"
+    prefix:   /
+
 phax:
     resource: "@PhaxCoreBundle/Resources/config/routing.yml"
     

@@ -25,11 +25,20 @@ class Client
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255, nullable=true)
+     * @ORM\Column(name="first_name", type="string", length=255, nullable=true)
      * 
      * @Assert\NotBlank
      */
-    private $name;
+    private $first_name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="last_name", type="string", length=255, nullable=true)
+     * 
+     * @Assert\NotBlank
+     */
+    private $last_name;
 
     /**
      * @var string
@@ -86,26 +95,49 @@ class Client
     }
 
     /**
-     * Set name
+     * Set first_name
      *
-     * @param string $name
+     * @param string $firstName
      * @return Client
      */
-    public function setName($name)
+    public function setFirstName($firstName)
     {
-        $this->name = $name;
+        $this->first_name = $firstName;
 
         return $this;
     }
 
     /**
-     * Get name
+     * Get first_name
      *
      * @return string 
      */
-    public function getName()
+    public function getFirstName()
     {
-        return $this->name;
+        return $this->first_name;
+    }
+
+    /**
+     * Set last_name
+     *
+     * @param string $lastName
+     * @return Client
+     */
+    public function setLastName($lastName)
+    {
+        $this->last_name = $lastName;
+
+        return $this;
+    }
+
+    /**
+     * Get last_name
+     *
+     * @return string 
+     */
+    public function getLastName()
+    {
+        return $this->last_name;
     }
 
     /**

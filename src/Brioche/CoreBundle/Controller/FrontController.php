@@ -14,10 +14,6 @@ class FrontController extends Controller
      */
     public function indexAction()
     {
-        $briocheBuilder = $this->get('brioche_core.brioche_builder');
-        
-        
-        
         return array();
     }
 }

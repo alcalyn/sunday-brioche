@@ -17,3 +17,10 @@ parameters:
     debug_toolbar:          true
     debug_redirects:        false
     use_assetic_controller: true
+
+    payplug.account.url: null
+    payplug.account.amount_min: null
+    payplug.account.amount_max: null
+    payplug.account.currencies: null
+    payplug.account.payplugPublicKey: null
+    payplug.account.yourPrivateKey: null
