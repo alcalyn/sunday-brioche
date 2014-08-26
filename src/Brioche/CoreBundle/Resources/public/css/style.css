@@ -90,3 +90,7 @@ body {
 .price-table .total {
     font-size: 32px;
 }
+.allergenes {
+    font-size: 16px;
+    font-weight: bold;
+}

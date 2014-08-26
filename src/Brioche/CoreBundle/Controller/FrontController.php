@@ -9,10 +9,25 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class FrontController extends Controller
 {
     /**
-     * @Route("/")
+     * @Route(
+     *      "/",
+     *      name = "front_index"
+     * )
      * @Template()
      */
     public function indexAction()
+    {
+        return array();
+    }
+    
+    /**
+     * @Route(
+     *      "/produits-allergies",
+     *      name = "front_products"
+     * )
+     * @Template()
+     */
+    public function productsAction()
     {
         return array();
     }
