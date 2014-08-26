@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new Alcalyn\FlushOnKernelTerminateBundle\AlcalynFlushOnKernelTerminateBundle(),
             new Brioche\CoreBundle\BriocheCoreBundle(),
+            new Alcalyn\PayplugBundle\AlcalynPayplugBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

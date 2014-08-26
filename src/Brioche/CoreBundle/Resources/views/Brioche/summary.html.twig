@@ -94,16 +94,9 @@
                         <h4>Adresse de livraison</h4>
                         {% if brioche.getValidAddress %}
                             <address style="margin-bottom:0">
-                                <strong>{{ client.name }}</strong><br />
+                                <strong>{{ client.firstName }} {{ client.lastName }}</strong><br />
                                 {{ client.address }}<br />
                                 {{ client.city.postalcode }} {{ client.city.title }}<br />
-
-                                {% if client.phone %}
-                                    <abbr title="Téléphone">
-                                        <span class="glyphicon glyphicon-earphone"></span>
-                                    </abbr> {{ client.phone }}
-                                    <br />
-                                {% endif %}
 
                                 {% if client.email %}
                                     <abbr title="Email">
@@ -143,12 +136,12 @@
                             </table>
 
                             <div class="text-center">
-                                <button type="button" class="btn btn-primary">Payer tout maintenant</button>
+                                <a href="{{ pay_full_url }}" type="button" class="btn btn-primary">Payer tout maintenant</a>
                                 <br /><br />
                                 Vous pouvez payer la moitié maintenant par carte,<br />
                                 et le reste Dimanche matin en liquide.
                                 <br />
-                                <button type="button" class="btn btn-primary">Payer la moitié maintenant et le reste en liquide</button>
+                                <a href="{{ pay_half_url }}" type="button" class="btn btn-primary">Payer la moitié maintenant et le reste en liquide</a>
                             </div>
                         </div>
                     </div>

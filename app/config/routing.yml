@@ -1,3 +1,7 @@
+alcalyn_payplug:
+    resource: "@AlcalynPayplugBundle/Resources/config/routing.yml"
+    prefix:   /
+
 brioche_core:
     resource: "@BriocheCoreBundle/Resources/config/routing.yml"
     prefix:   /

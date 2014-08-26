@@ -163,10 +163,16 @@ class BriocheController extends Controller
     {
         $brioche = $this->getBriocheBuilder()->getCurrentBrioche();
         $client = $brioche->getClient();
+        $briochePayment = $this->get('brioche_core.brioche_payment');
+        
+        $payFullUrl = $briochePayment->getPaymentUrl($brioche, false);
+        $payHalfUrl = $briochePayment->getPaymentUrl($brioche, true);
         
         return array(
-            'brioche' => $brioche,
-            'client' => $client,
+            'brioche'       => $brioche,
+            'client'        => $client,
+            'pay_full_url'  => $payFullUrl,
+            'pay_half_url'  => $payHalfUrl,
         );
     }
     
@@ -179,7 +185,7 @@ class BriocheController extends Controller
     }
     
     /**
-     * Return a redirect to the next step of the brioche proccess
+     * Return a redirect to the next step of the brioche process
      * 
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
