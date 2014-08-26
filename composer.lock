@@ -1,10 +1,9 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
-        "This file is @generated automatically"
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "ad9c61770a3023358e791564702c6543",
+    "hash": "b326ea92b5b3cc0164a508334993e891",
     "packages": [
         {
             "name": "alcalyn/flush-on-kernel-terminate-bundle",
@@ -1149,50 +1148,6 @@
             "time": "2014-06-04 16:30:04"
         },
         {
-            "name": "phax/phax-bundle",
-            "version": "v0.8.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/alcalyn/phax-bundle.git",
-                "reference": "a6698ccd06d509f1f017d4143f601e1528e310f2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/alcalyn/phax-bundle/zipball/a6698ccd06d509f1f017d4143f601e1528e310f2",
-                "reference": "a6698ccd06d509f1f017d4143f601e1528e310f2",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4.0",
-                "symfony/symfony": "~2.3"
-            },
-            "type": "symfony-bundle",
-            "autoload": {
-                "psr-0": {
-                    "Phax\\CoreBundle": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Julien Maulny",
-                    "email": "doubjulien@hotmail.fr",
-                    "homepage": "http://my-contraste.com/julien-maulny/www"
-                }
-            ],
-            "description": "A php/javascript symfony2 bundle which provide a structure for ajax calls",
-            "homepage": "https://github.com/alcalyn/phax-bundle",
-            "keywords": [
-                "Symfony2",
-                "ajax",
-                "php"
-            ],
-            "time": "2014-04-05 17:11:15"
-        },
-        {
             "name": "psr/log",
             "version": "1.0.0",
             "source": {
@@ -1945,7 +1900,6 @@
         "friendsofsymfony/user-bundle": 20,
         "alcalyn/flush-on-kernel-terminate-bundle": 20
     },
-    "prefer-stable": false,
     "platform": {
         "php": ">=5.3.3"
     },
