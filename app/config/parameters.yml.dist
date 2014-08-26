@@ -18,9 +18,9 @@ parameters:
     debug_redirects:        false
     use_assetic_controller: true
 
-    payplug.account.url: null
-    payplug.account.amount_min: null
-    payplug.account.amount_max: null
-    payplug.account.currencies: null
-    payplug.account.payplugPublicKey: null
-    payplug.account.yourPrivateKey: null
+    payplug_account_url:                ~
+    payplug_account_amount_min:         ~
+    payplug_account_amount_max:         ~
+    payplug_account_currencies:         ~
+    payplug_account_payplugPublicKey:   ~
+    payplug_account_yourPrivateKey:     ~

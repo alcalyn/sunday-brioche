@@ -2,13 +2,29 @@
 
 namespace Brioche\CoreBundle\EventListener;
 
-use Alcalyn\PayplugBundle\Model\IPN;
 use Alcalyn\PayplugBundle\Event\PayplugIPNEvent;
+use Brioche\CoreBundle\Services\BriocheIPNService;
 
 class PaymentListener
 {
+    /**
+     * @var BriocheIPNService
+     */
+    private $briocheIPNService;
+    
+    /**
+     * @param BriocheIPNService $briocheIPNService
+     */
+    public function __construct(BriocheIPNService $briocheIPNService)
+    {
+        $this->briocheIPNService = $briocheIPNService;
+    }
+    
+    /**
+     * @param PayplugIPNEvent $event
+     */
     public function onPayment(PayplugIPNEvent $event)
     {
-        $ipn = $event->getIPN();
+        $this->briocheIPNService->processIPN($event->getIPN());
     }
 }

@@ -98,13 +98,6 @@
                                 {{ client.address }}<br />
                                 {{ client.city.postalcode }} {{ client.city.title }}<br />
 
-                                {% if client.phone %}
-                                    <abbr title="Téléphone">
-                                        <span class="glyphicon glyphicon-earphone"></span>
-                                    </abbr> {{ client.phone }}
-                                    <br />
-                                {% endif %}
-
                                 {% if client.email %}
                                     <abbr title="Email">
                                         <span class="glyphicon glyphicon-envelope"></span>

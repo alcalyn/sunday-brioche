@@ -75,3 +75,15 @@ fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
     user_class: Brioche\CoreBundle\Entity\Account
+
+# Payplug configuration
+alcalyn_payplug:
+    account:
+        url:                %payplug_account_url%
+        amount_min:         %payplug_account_amount_min%
+        amount_max:         %payplug_account_amount_max%
+        currencies:         %payplug_account_currencies%
+        payplugPublicKey:   %payplug_account_payplugPublicKey%
+        yourPrivateKey:     %payplug_account_yourPrivateKey%
+    class:
+        ipn: Brioche\CoreBundle\Entity\IPN

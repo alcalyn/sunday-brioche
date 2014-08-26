@@ -185,7 +185,7 @@ class BriocheController extends Controller
     }
     
     /**
-     * Return a redirect to the next step of the brioche proccess
+     * Return a redirect to the next step of the brioche process
      * 
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */

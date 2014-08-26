@@ -28,7 +28,7 @@ class BriochePaymentService
      * 
      * @return string
      * 
-     * @throws BriocheException if cannot proccess to payment now
+     * @throws BriocheException if cannot process to payment now
      */
     public function getPaymentUrl(Brioche $brioche, $half = false)
     {
