@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ad9c61770a3023358e791564702c6543",
+    "hash": "581a5293b161cefcff14b55ce30acac3",
     "packages": [
         {
             "name": "alcalyn/flush-on-kernel-terminate-bundle",
@@ -48,6 +48,50 @@
                 "optimization"
             ],
             "time": "2014-08-22 08:49:23"
+        },
+        {
+            "name": "alcalyn/payplug-bundle",
+            "version": "v0.8",
+            "target-dir": "Alcalyn/PayplugBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/alcalyn/payplug-bundle.git",
+                "reference": "d4f4ecef75322d6fe4132ff1f48b914f5752ca2c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/alcalyn/payplug-bundle/zipball/d4f4ecef75322d6fe4132ff1f48b914f5752ca2c",
+                "reference": "d4f4ecef75322d6fe4132ff1f48b914f5752ca2c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "symfony/symfony": "2.x"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "Alcalyn\\PayplugBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Julien Maulny",
+                    "email": "doubjulien@hotmail.fr"
+                }
+            ],
+            "description": "Payplug integration to symfony2",
+            "homepage": "https://github.com/alcalyn/payplug-bundle",
+            "keywords": [
+                "payment",
+                "payplug",
+                "symfony-bundle"
+            ],
+            "time": "2014-08-26 14:21:45"
         },
         {
             "name": "doctrine/annotations",
@@ -795,12 +839,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
-                "reference": "27a84cec3ea4daa32cd6fe308c0847ca9644f588"
+                "reference": "094bea6f318fbb067db3ddf6d26a62af0bf13442"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/27a84cec3ea4daa32cd6fe308c0847ca9644f588",
-                "reference": "27a84cec3ea4daa32cd6fe308c0847ca9644f588",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/094bea6f318fbb067db3ddf6d26a62af0bf13442",
+                "reference": "094bea6f318fbb067db3ddf6d26a62af0bf13442",
                 "shasum": ""
             },
             "require": {
@@ -854,7 +898,7 @@
             "keywords": [
                 "User management"
             ],
-            "time": "2014-08-04 23:04:17"
+            "time": "2014-08-23 11:32:38"
         },
         {
             "name": "incenteev/composer-parameter-handler",
@@ -1149,50 +1193,6 @@
             "time": "2014-06-04 16:30:04"
         },
         {
-            "name": "phax/phax-bundle",
-            "version": "v0.8.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/alcalyn/phax-bundle.git",
-                "reference": "a6698ccd06d509f1f017d4143f601e1528e310f2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/alcalyn/phax-bundle/zipball/a6698ccd06d509f1f017d4143f601e1528e310f2",
-                "reference": "a6698ccd06d509f1f017d4143f601e1528e310f2",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4.0",
-                "symfony/symfony": "~2.3"
-            },
-            "type": "symfony-bundle",
-            "autoload": {
-                "psr-0": {
-                    "Phax\\CoreBundle": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Julien Maulny",
-                    "email": "doubjulien@hotmail.fr",
-                    "homepage": "http://my-contraste.com/julien-maulny/www"
-                }
-            ],
-            "description": "A php/javascript symfony2 bundle which provide a structure for ajax calls",
-            "homepage": "https://github.com/alcalyn/phax-bundle",
-            "keywords": [
-                "Symfony2",
-                "ajax",
-                "php"
-            ],
-            "time": "2014-04-05 17:11:15"
-        },
-        {
             "name": "psr/log",
             "version": "1.0.0",
             "source": {
@@ -1232,17 +1232,17 @@
         },
         {
             "name": "sensio/distribution-bundle",
-            "version": "v3.0.4",
+            "version": "v3.0.5",
             "target-dir": "Sensio/Bundle/DistributionBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioDistributionBundle.git",
-                "reference": "df82b1ee2b833be97677c0b95fca27e68fd4a344"
+                "reference": "ad10123f2532f6e311e583cce203ef368eedc469"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/df82b1ee2b833be97677c0b95fca27e68fd4a344",
-                "reference": "df82b1ee2b833be97677c0b95fca27e68fd4a344",
+                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/ad10123f2532f6e311e583cce203ef368eedc469",
+                "reference": "ad10123f2532f6e311e583cce203ef368eedc469",
                 "shasum": ""
             },
             "require": {
@@ -1281,7 +1281,7 @@
                 "configuration",
                 "distribution"
             ],
-            "time": "2014-08-06 09:24:35"
+            "time": "2014-08-26 13:14:47"
         },
         {
             "name": "sensio/framework-extra-bundle",
