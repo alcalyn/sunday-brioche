@@ -14,6 +14,6 @@ services:
         class: Brioche\CoreBundle\Services\BriocheIPNService
         arguments: [@doctrine.orm.entity_manager, @brioche_core.brioche_builder]
         
-    brioche_core.mailer:
-        class: Brioche\CoreBundle\Services\MailService
-        arguments: [@swiftmailer.mailer]
+    brioche_core.mail_factory:
+        class: Brioche\CoreBundle\Services\MailFactory
+        arguments: [@templating, @swiftmailer.mailer]
