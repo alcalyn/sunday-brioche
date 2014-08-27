@@ -9,6 +9,9 @@ web/uploads/*
 web/bundles/*
 web/css/*
 web/js/*
+web/config.php
+app/SymfonyRequirements.php
+app/check.php
 
 # Configuration files
 app/config/parameters.ini
