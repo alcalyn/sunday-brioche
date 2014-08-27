@@ -37,6 +37,11 @@ class BriocheController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $brioche = $this->getBriocheBuilder()->getCurrentBrioche();
+        
+        if ($brioche->getLocked()) {
+            return $this->redirect($this->generateUrl('brioche_summary'));
+        }
+        
         $roundRepository = $em->getRepository('BriocheCoreBundle:Round');
         $rounds = $roundRepository->findFuturesRounds();
         
@@ -67,6 +72,10 @@ class BriocheController extends Controller
     {
         $brioche = $this->getBriocheBuilder()->getCurrentBrioche();
         
+        if ($brioche->getLocked()) {
+            return $this->redirect($this->generateUrl('brioche_summary'));
+        }
+        
         if ($request->isMethod('post')) {
             $this->getBriocheBuilder()->buildType($request->get('type'));
             
@@ -87,9 +96,14 @@ class BriocheController extends Controller
      */
     public function sizeAction(Request $request)
     {
+        $brioche = $this->getBriocheBuilder()->getCurrentBrioche();
+        
+        if ($brioche->getLocked()) {
+            return $this->redirect($this->generateUrl('brioche_summary'));
+        }
+        
         $sizeRepository = $this->getDoctrine()->getManager()->getRepository('BriocheCoreBundle:Size');
         $sizes = $sizeRepository->findAll();
-        $brioche = $this->getBriocheBuilder()->getCurrentBrioche();
         
         if ($request->isMethod('post')) {
             $size = $sizeRepository->findOneBy(array(
@@ -116,9 +130,14 @@ class BriocheController extends Controller
      */
     public function persoAction(Request $request)
     {
+        $brioche = $this->getBriocheBuilder()->getCurrentBrioche();
+        
+        if ($brioche->getLocked()) {
+            return $this->redirect($this->generateUrl('brioche_summary'));
+        }
+        
         $extraRepository = $this->getDoctrine()->getManager()->getRepository('BriocheCoreBundle:Extra');
         $extras = $extraRepository->findBy(array(), array('price' => 'asc'));
-        $brioche = $this->getBriocheBuilder()->getCurrentBrioche();
         
         if ($request->isMethod('post')) {
             $butter = $request->get('butter');
@@ -148,6 +167,11 @@ class BriocheController extends Controller
     public function addressAction(Request $request)
     {
         $brioche = $this->getBriocheBuilder()->getCurrentBrioche();
+        
+        if ($brioche->getLocked()) {
+            return $this->redirect($this->generateUrl('brioche_summary'));
+        }
+        
         $client = $brioche->getClient();
         $clientForm = $this->createForm(new ClientType, $client);
         

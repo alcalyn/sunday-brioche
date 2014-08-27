@@ -1,7 +1,7 @@
-{% extends "BriocheCoreBundle::layout.html.twig" %}
+{% extends "BriocheCoreBundle:Brioche:layout.html.twig" %}
 
 {% block body %}
-{% include 'BriocheCoreBundle:Brioche:_wizard.html.twig' %}
+{{ parent() }}
 
 <section class="perso">
     <h2 class="text-center">Touche personnelle</h2>

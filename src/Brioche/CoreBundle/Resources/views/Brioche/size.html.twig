@@ -1,7 +1,7 @@
-{% extends "BriocheCoreBundle::layout.html.twig" %}
+{% extends "BriocheCoreBundle:Brioche:layout.html.twig" %}
 
 {% block body %}
-{% include 'BriocheCoreBundle:Brioche:_wizard.html.twig' %}
+{{ parent() }}
 
 <section class="size">
     <h2 class="text-center">Taille de brioche</h2>

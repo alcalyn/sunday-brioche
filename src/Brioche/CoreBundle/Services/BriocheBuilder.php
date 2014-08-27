@@ -107,6 +107,8 @@ class BriocheBuilder
      */
     public function buildRound(Round $round)
     {
+        $this->checkLocked();
+        
         $this->brioche
             ->setRound($round)
             ->setValidRound(true)
@@ -124,6 +126,8 @@ class BriocheBuilder
      */
     public function buildType($type)
     {
+        $this->checkLocked();
+        
         if (!$this->briocheManager->checkType($type)) {
             throw new BriocheCoreException('unexpected value of $type');
         }
@@ -143,6 +147,8 @@ class BriocheBuilder
      */
     public function buildSize(Size $size)
     {
+        $this->checkLocked();
+        
         $this->brioche
             ->setSize($size)
             ->setValidSize(true)
@@ -162,6 +168,8 @@ class BriocheBuilder
      */
     public function buildPerso($butter, $sugar, Extra $extra)
     {
+        $this->checkLocked();
+        
         $this->brioche
             ->setButter($butter)
             ->setSugar($sugar)
@@ -184,6 +192,16 @@ class BriocheBuilder
         }
         
         $this->brioche->setLocked(true);
+    }
+    
+    /**
+     * @throws BriocheCoreException if brioche is locked
+     */
+    public function checkLocked()
+    {
+        if ($this->brioche->getLocked()) {
+            throw new BriocheCoreException('Brioche is locked');
+        }
     }
     
     /**

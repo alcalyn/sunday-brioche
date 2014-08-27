@@ -1,7 +1,7 @@
-{% extends "BriocheCoreBundle::layout.html.twig" %}
+{% extends "BriocheCoreBundle:Brioche:layout.html.twig" %}
 
 {% block body %}
-{% include 'BriocheCoreBundle:Brioche:_wizard.html.twig' %}
+{{ parent() }}
 
 <section class="summary">
     <h2 class="text-center">Résumé de la commande</h2>
@@ -18,7 +18,7 @@
                             {% if brioche.getValidType %}
                                 <p>
                                     Type <b>{{ brioche.typeTitle }}</b><br />
-                                    {% if not brioche.validated %}
+                                    {% if not brioche.locked %}
                                         <a href="{{ path('brioche_type') }}">Modifier</a>
                                     {% endif %}
                                 </p>
@@ -32,7 +32,7 @@
                                 <p>
                                     Taille {{ brioche.size.value }} (~{{ brioche.size.averageWeight }}g),<br />
                                     pour <b>{{ brioche.size.nbPeople }}</b> personnes<br />
-                                    {% if not brioche.validated %}
+                                    {% if not brioche.locked %}
                                         <a href="{{ path('brioche_size') }}">Modifier</a>
                                     {% endif %}
                                 </p>
@@ -64,7 +64,7 @@
                                 {% endif %}
 
                                 Agrément : <b>{{ brioche.extra.title }}</b><br />
-                                {% if not brioche.validated %}
+                                {% if not brioche.locked %}
                                     <a href="{{ path('brioche_perso') }}">Modifier</a>
                                 {% endif %}
                             </p>
@@ -85,7 +85,7 @@
                                     <b>{{ brioche.round.date|localizeddate('none', 'none', 'fr', null, 'EEEE d MMMM') }}</b>
                                 </span>
                                 <br />
-                                {% if not brioche.validated %}
+                                {% if not brioche.locked %}
                                     <a href="{{ path('brioche_round') }}">Modifier</a><br />
                                 {% endif %}
                                 <br />
@@ -111,7 +111,7 @@
                                     </abbr> {{ client.email }}
                                 {% endif %}
                             </address>
-                            {% if not brioche.validated %}
+                            {% if not brioche.locked %}
                                 <a href="{{ path('brioche_address') }}">Modifier</a>
                             {% endif %}
                         {% else %}

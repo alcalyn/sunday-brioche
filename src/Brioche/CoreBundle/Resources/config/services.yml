@@ -13,3 +13,7 @@ services:
     brioche_core.brioche_ipn_service:
         class: Brioche\CoreBundle\Services\BriocheIPNService
         arguments: [@doctrine.orm.entity_manager, @brioche_core.brioche_builder]
+        
+    brioche_core.mailer:
+        class: Brioche\CoreBundle\Services\MailService
+        arguments: [@swiftmailer.mailer]

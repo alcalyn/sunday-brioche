@@ -22,6 +22,8 @@ class FrontController extends Controller
         $roundRepository = $em->getRepository('BriocheCoreBundle:Round');
         $rounds = $roundRepository->findFuturesRounds();
         
+        $this->get('brioche_core.mailer')->sendTestMail();
+        
         return array(
             'rounds' => $rounds,
         );

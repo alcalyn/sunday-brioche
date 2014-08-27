@@ -1,0 +1,7 @@
+{% extends "BriocheCoreBundle::layout.html.twig" %}
+
+{% block body %}
+{% if not brioche.locked %}
+    {% include 'BriocheCoreBundle:Brioche:_wizard.html.twig' %}
+{% endif %}
+{% endblock %}
