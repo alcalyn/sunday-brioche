@@ -18,8 +18,8 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Alcalyn\FlushOnKernelTerminateBundle\AlcalynFlushOnKernelTerminateBundle(),
-            new Brioche\CoreBundle\BriocheCoreBundle(),
             new Alcalyn\PayplugBundle\AlcalynPayplugBundle(),
+            new Brioche\CoreBundle\BriocheCoreBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

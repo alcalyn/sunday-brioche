@@ -1,6 +1,6 @@
 services:
     brioche_core.listeners.payment:
         class: Brioche\CoreBundle\EventListener\PaymentListener
-        arguments: []
+        arguments: [@brioche_core.brioche_ipn_service]
         tags:
             - { name: kernel.event_listener, event: event.payplug.ipn, method: onPayment }

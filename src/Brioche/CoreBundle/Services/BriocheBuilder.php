@@ -4,6 +4,7 @@ namespace Brioche\CoreBundle\Services;
 
 use Symfony\Component\HttpFoundation\Session\Session;
 use Doctrine\ORM\EntityManagerInterface;
+use Brioche\CoreBundle\Exception\BriocheCoreException;
 use Brioche\CoreBundle\Entity\Brioche;
 use Brioche\CoreBundle\Entity\Client;
 use Brioche\CoreBundle\Entity\Round;
@@ -79,15 +80,6 @@ class BriocheBuilder
     public function getCurrentBrioche()
     {
         return $this->brioche;
-    }
-    
-    /**
-     * Valid current brioche and detach from builder
-     */
-    public function validCurrentBrioche()
-    {
-        $this->brioche->setValid(true);
-        $this->session->remove('briocheId');
     }
     
     /**
@@ -183,6 +175,18 @@ class BriocheBuilder
     }
     
     /**
+     * Lock current brioche and detach from builder
+     */
+    public function lockBrioche()
+    {
+        if (!$this->brioche->isAllValid()) {
+            throw new BriocheCoreException('Impossible to valid an incomplete brioche');
+        }
+        
+        $this->brioche->setLocked(true);
+    }
+    
+    /**
      * Update brioche price
      * 
      * @return \Brioche\CoreBundle\Services\BriocheBuilder
@@ -204,23 +208,21 @@ class BriocheBuilder
      */
     public function getNextStep($from = null)
     {
-        $steps = array(
-            'round',
-            'type',
-            'size',
-            'perso',
-            'address',
-            'summary',
-        );
-        
         $stepFrom = 0;
         
         if (null !== $from) {
+            $steps = array(
+                'round',
+                'type',
+                'size',
+                'perso',
+                'address',
+                'summary',
+            );
+            
             $index = array_search($from, $steps);
             
-            if (false === $index) {
-                $stepFrom = 0;
-            } else {
+            if ($index) {
                 $stepFrom = $index + 1;
             }
         }

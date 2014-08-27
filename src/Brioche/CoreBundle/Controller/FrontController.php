@@ -5,6 +5,7 @@ namespace Brioche\CoreBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Alcalyn\PayplugBundle\Model\Payment;
 
 class FrontController extends Controller
 {
@@ -17,7 +18,13 @@ class FrontController extends Controller
      */
     public function indexAction()
     {
-        return array();
+        $em = $this->getDoctrine()->getManager();
+        $roundRepository = $em->getRepository('BriocheCoreBundle:Round');
+        $rounds = $roundRepository->findFuturesRounds();
+        
+        return array(
+            'rounds' => $rounds,
+        );
     }
     
     /**

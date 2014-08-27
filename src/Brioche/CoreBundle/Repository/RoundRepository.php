@@ -17,7 +17,7 @@ class RoundRepository extends EntityRepository
         return $this->_em->createQueryBuilder()
                 ->select('r, b')
                 ->from('BriocheCoreBundle:Round', 'r')
-                ->leftJoin('r.brioches', 'b', 'with', 'b.valid = true')
+                ->leftJoin('r.brioches', 'b', 'with', 'b.validated = true')
                 ->where('r.date >= :now')
                 ->orderBy('r.date')
                 ->setParameters(array(

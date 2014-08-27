@@ -11,7 +11,8 @@ fixtures:
         price: 14
         paid: 7
         client: bernadette
-        valid: true
+        locked: true
+        validated: true
         dateCreate: '2014-08-21 10:36:00'
     2:
         type: 1
@@ -22,5 +23,6 @@ fixtures:
         extra: null
         price: 6
         paid: 0
-        valid: false
+        locked: false
+        validated: false
         dateCreate: '2014-08-21 10:36:20'

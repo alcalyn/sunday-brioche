@@ -36,7 +36,11 @@ class BriochePaymentService
             throw new BriocheException('Cannot pay brioche now, not completely finnished');
         }
         
-        if ($brioche->getValid()) {
+        if (!$brioche->getLocked()) {
+            throw new BriocheException('Cannot pay brioche now, it is not validated');
+        }
+        
+        if ($brioche->getValidated()) {
             throw new BriocheException('Cannot pay brioche, this is already paid');
         }
         

@@ -85,34 +85,6 @@ class Brioche
     private $extra;
     
     /**
-     * @var float
-     * 
-     * @ORM\Column(name="price", type="decimal", precision=4, scale=2)
-     */
-    private $price;
-    
-    /**
-     * @var float
-     * 
-     * @ORM\Column(name="paid", type="decimal", precision=4, scale=2)
-     */
-    private $paid;
-    
-    /**
-     * @var boolean
-     * 
-     * @ORM\Column(name="valid", type="boolean")
-     */
-    private $valid;
-    
-    /**
-     * @var \DateTime
-     * 
-     * @ORM\Column(name="dateCreate", type="datetime")
-     */
-    private $dateCreate;
-    
-    /**
      * @var boolean
      * 
      * @ORM\Column(name="validRound", type="boolean")
@@ -148,6 +120,41 @@ class Brioche
     private $validAddress;
     
     /**
+     * @var boolean whether brioche is validated and need to be paid
+     * 
+     * @ORM\Column(name="locked", type="boolean")
+     */
+    private $locked;
+    
+    /**
+     * @var float
+     * 
+     * @ORM\Column(name="price", type="decimal", precision=4, scale=2)
+     */
+    private $price;
+    
+    /**
+     * @var float
+     * 
+     * @ORM\Column(name="paid", type="decimal", precision=4, scale=2)
+     */
+    private $paid;
+    
+    /**
+     * @var boolean whether brioche will be made
+     * 
+     * @ORM\Column(name="validated", type="boolean")
+     */
+    private $validated;
+    
+    /**
+     * @var \DateTime
+     * 
+     * @ORM\Column(name="dateCreate", type="datetime")
+     */
+    private $dateCreate;
+    
+    /**
      * Constructor
      */
     public function __construct()
@@ -156,15 +163,16 @@ class Brioche
             ->setType(Brioche::VENDEENE)
             ->setButter(1)
             ->setSugar(1)
-            ->setPrice(0)
-            ->setPaid(0)
-            ->setValid(false)
-            ->setDateCreate(new \DateTime())
             ->setValidRound(false)
             ->setValidType(false)
             ->setValidSize(false)
             ->setValidPerso(false)
             ->setValidAddress(false)
+            ->setLocked(false)
+            ->setPrice(0)
+            ->setPaid(0)
+            ->setValidated(false)
+            ->setDateCreate(new \DateTime())
         ;
     }
     
@@ -403,29 +411,6 @@ class Brioche
     }
 
     /**
-     * Set valid
-     *
-     * @param boolean $valid
-     * @return Brioche
-     */
-    public function setValid($valid)
-    {
-        $this->valid = $valid;
-
-        return $this;
-    }
-
-    /**
-     * Get valid
-     *
-     * @return boolean 
-     */
-    public function getValid()
-    {
-        return $this->valid;
-    }
-
-    /**
      * Set dateCreate
      *
      * @param \DateTime $dateCreate
@@ -577,5 +562,51 @@ class Brioche
             $this->getValidPerso() &&
             $this->getValidAddress()
         ;
+    }
+
+    /**
+     * Set validated
+     *
+     * @param boolean $validated
+     * @return Brioche
+     */
+    public function setValidated($validated)
+    {
+        $this->validated = $validated;
+
+        return $this;
+    }
+
+    /**
+     * Get validated
+     *
+     * @return boolean 
+     */
+    public function getValidated()
+    {
+        return $this->validated;
+    }
+
+    /**
+     * Set locked
+     *
+     * @param boolean $locked
+     * @return Brioche
+     */
+    public function setLocked($locked)
+    {
+        $this->locked = $locked;
+
+        return $this;
+    }
+
+    /**
+     * Get locked
+     *
+     * @return boolean 
+     */
+    public function getLocked()
+    {
+        return $this->locked;
     }
 }

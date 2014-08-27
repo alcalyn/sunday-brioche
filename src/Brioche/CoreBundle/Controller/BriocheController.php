@@ -16,15 +16,28 @@ class BriocheController extends Controller
 {
     /**
      * @Route(
-     *      "/brioche/tournee",
+     *      "/ma-brioche",
+     *      name = "brioche_index"
+     * )
+     * @Template()
+     */
+    public function indexAction()
+    {
+        return $this->redirectNextStep();
+    }
+    
+    /**
+     * @Route(
+     *      "/ma-brioche/tournee",
      *      name = "brioche_round"
      * )
      * @Template()
      */
     public function roundAction(Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
         $brioche = $this->getBriocheBuilder()->getCurrentBrioche();
-        $roundRepository = $this->getDoctrine()->getManager()->getRepository('BriocheCoreBundle:Round');
+        $roundRepository = $em->getRepository('BriocheCoreBundle:Round');
         $rounds = $roundRepository->findFuturesRounds();
         
         if ($request->isMethod('post')) {
@@ -45,7 +58,7 @@ class BriocheController extends Controller
     
     /**
      * @Route(
-     *      "/brioche/type",
+     *      "/ma-brioche/type",
      *      name = "brioche_type"
      * )
      * @Template()
@@ -67,7 +80,7 @@ class BriocheController extends Controller
 
     /**
      * @Route(
-     *      "/brioche/taille",
+     *      "/ma-brioche/taille",
      *      name = "brioche_size"
      * )
      * @Template()
@@ -96,7 +109,7 @@ class BriocheController extends Controller
 
     /**
      * @Route(
-     *      "/brioche/touche-personnelle",
+     *      "/ma-brioche/touche-personnelle",
      *      name="brioche_perso"
      * )
      * @Template()
@@ -127,7 +140,7 @@ class BriocheController extends Controller
 
     /**
      * @Route(
-     *      "/brioche/adresse-de-livraison",
+     *      "/ma-brioche/adresse-de-livraison",
      *      name="brioche_address"
      * )
      * @Template()
@@ -154,23 +167,36 @@ class BriocheController extends Controller
 
     /**
      * @Route(
-     *      "/brioche/resume-commande",
+     *      "/ma-brioche/resume-commande",
      *      name="brioche_summary"
      * )
      * @Template()
      */
-    public function summaryAction()
+    public function summaryAction(Request $request)
     {
         $brioche = $this->getBriocheBuilder()->getCurrentBrioche();
-        $client = $brioche->getClient();
-        $briochePayment = $this->get('brioche_core.brioche_payment');
         
-        $payFullUrl = $briochePayment->getPaymentUrl($brioche, false);
-        $payHalfUrl = $briochePayment->getPaymentUrl($brioche, true);
+        if ($request->isMethod('post')) {
+            if ($request->get('valid')) {
+                $this->getBriocheBuilder()->lockBrioche();
+            }
+            
+            return $this->redirect($this->generateUrl('brioche_summary'));
+        }
+        
+        $payFullUrl = $payHalfUrl = null;
+        
+        if ($brioche->getLocked() && !$brioche->getValidated()) {
+            $briochePayment = $this->get('brioche_core.brioche_payment');
+
+            $payFullUrl = $briochePayment->getPaymentUrl($brioche, false);
+            $payHalfUrl = $briochePayment->getPaymentUrl($brioche, true);
+        }
+        
         
         return array(
             'brioche'       => $brioche,
-            'client'        => $client,
+            'client'        => $brioche->getClient(),
             'pay_full_url'  => $payFullUrl,
             'pay_half_url'  => $payHalfUrl,
         );
