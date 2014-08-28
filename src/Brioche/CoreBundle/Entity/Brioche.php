@@ -141,6 +141,13 @@ class Brioche
     private $paid;
     
     /**
+     * @var string
+     * 
+     * @ORM\Column(name="token", type="string", length=31, nullable=true)
+     */
+    private $token;
+    
+    /**
      * @var boolean whether brioche will be made
      * 
      * @ORM\Column(name="validated", type="boolean")
@@ -608,5 +615,28 @@ class Brioche
     public function getLocked()
     {
         return $this->locked;
+    }
+
+    /**
+     * Set token
+     *
+     * @param string $token
+     * @return Brioche
+     */
+    public function setToken($token)
+    {
+        $this->token = $token;
+
+        return $this;
+    }
+
+    /**
+     * Get token
+     *
+     * @return string 
+     */
+    public function getToken()
+    {
+        return $this->token;
     }
 }

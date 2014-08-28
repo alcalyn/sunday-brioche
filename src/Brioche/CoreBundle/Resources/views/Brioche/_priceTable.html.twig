@@ -1,0 +1,17 @@
+<h4 class="text-center">Prix</h4>
+<table class="table table-striped table-hover price-table">
+    <tbody>
+        <tr>
+            <td class="desc">Brioche taille {{ brioche.size.value }}</td>
+            <td class="price">{{ brioche.size.price|number_format(2, '.') }} €</td>
+        </tr>
+        <tr>
+            <td class="desc">Agrément : {{ brioche.extra.title }}</td>
+            <td class="price">{{ brioche.extra.price|number_format(2, '.') }} €</td>
+        </tr>
+        <tr class="total">
+            <td class="desc">Total :</td>
+            <td class="price text-success">{{ brioche.price|number_format(2, '.') }} €</td>
+        </tr>
+    </tbody>
+</table>

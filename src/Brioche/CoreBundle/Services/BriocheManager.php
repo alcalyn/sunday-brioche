@@ -44,4 +44,12 @@ class BriocheManager
             Brioche::PARISIENNE,
         ));
     }
+    
+    /**
+     * @return string
+     */
+    public function generateToken()
+    {
+        return substr(str_shuffle(md5(uniqid('', true))), 1);
+    }
 }

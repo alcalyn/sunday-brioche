@@ -191,7 +191,12 @@ class BriocheBuilder
             throw new BriocheCoreException('Impossible to valid an incomplete brioche');
         }
         
+        if ($this->brioche->getLocked()) {
+            throw new BriocheCoreException('Brioche already locked');
+        }
+        
         $this->brioche->setLocked(true);
+        $this->brioche->setToken($this->briocheManager->generateToken());
     }
     
     /**

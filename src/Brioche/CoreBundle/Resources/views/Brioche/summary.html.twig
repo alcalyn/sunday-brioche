@@ -9,118 +9,7 @@
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <div class="thumbnail">
-                <img alt="alt" src="http://dummyimage.com/800x200/ababab/515151.jpg">
-                <br />
-                <div class="row text-center">
-                    <div class="col-md-6">
-                        <h4>Brioche</h3>
-                        {% if brioche.getValidType or brioche.getValidSize %}
-                            {% if brioche.getValidType %}
-                                <p>
-                                    Type <b>{{ brioche.typeTitle }}</b><br />
-                                    {% if not brioche.locked %}
-                                        <a href="{{ path('brioche_type') }}">Modifier</a>
-                                    {% endif %}
-                                </p>
-                            {% else %}
-                                <div class="well">
-                                    <a href="{{ path('brioche_type') }}">Choisir le type</a>
-                                </div>
-                            {% endif %}
-
-                            {% if brioche.getValidSize %}
-                                <p>
-                                    Taille {{ brioche.size.value }} (~{{ brioche.size.averageWeight }}g),<br />
-                                    pour <b>{{ brioche.size.nbPeople }}</b> personnes<br />
-                                    {% if not brioche.locked %}
-                                        <a href="{{ path('brioche_size') }}">Modifier</a>
-                                    {% endif %}
-                                </p>
-                            {% else %}
-                                <div class="well">
-                                    <a href="{{ path('brioche_size') }}">Choisir la taille</a>
-                                </div>
-                            {% endif %}
-                        {% else %}
-                            <div class="well">
-                                <a href="{{ path('brioche_type') }}">Choisir</a>
-                            </div>
-                        {% endif %}
-                    </div>
-                    <div class="col-md-6">
-                        <h4>Touche personnelle</h4>
-                        {% if brioche.getValidPerso %}
-                            <p>
-                                {% if brioche.butter == 0 %}
-                                    Moins beurrée,<br />
-                                {% elseif brioche.butter == 2 %}
-                                    Bien beurrée,<br />
-                                {% endif %}
-
-                                {% if brioche.sugar == 0 %}
-                                    Moins sucrée,<br />
-                                {% elseif brioche.sugar == 2 %}
-                                    Bien sucrée,<br />
-                                {% endif %}
-
-                                Agrément : <b>{{ brioche.extra.title }}</b><br />
-                                {% if not brioche.locked %}
-                                    <a href="{{ path('brioche_perso') }}">Modifier</a>
-                                {% endif %}
-                            </p>
-                        {% else %}
-                            <div class="well">
-                                <a href="{{ path('brioche_perso') }}">Choisir</a>
-                            </div>
-                        {% endif %}
-                    </div>
-                </div>
-                <br />
-                <div class="row text-center">
-                    <div class="col-md-6">
-                        <h4>Date de livraison</h4>
-                        {% if brioche.getValidRound %}
-                            <p>
-                                <span class="date">
-                                    <b>{{ brioche.round.date|localizeddate('none', 'none', 'fr', null, 'EEEE d MMMM') }}</b>
-                                </span>
-                                <br />
-                                {% if not brioche.locked %}
-                                    <a href="{{ path('brioche_round') }}">Modifier</a><br />
-                                {% endif %}
-                                <br />
-                                Entre <b>8h</b> et <b>9h</b><br />
-                            </p>
-                        {% else %}
-                            <div class="well">
-                                <a href="{{ path('brioche_round') }}">Choisir</a>
-                            </div>
-                        {% endif %}
-                    </div>
-                    <div class="col-md-6">
-                        <h4>Adresse de livraison</h4>
-                        {% if brioche.getValidAddress %}
-                            <address style="margin-bottom:0">
-                                <strong>{{ client.firstName }} {{ client.lastName }}</strong><br />
-                                {{ client.address }}<br />
-                                {{ client.city.postalcode }} {{ client.city.title }}<br />
-
-                                {% if client.email %}
-                                    <abbr title="Email">
-                                        <span class="glyphicon glyphicon-envelope"></span>
-                                    </abbr> {{ client.email }}
-                                {% endif %}
-                            </address>
-                            {% if not brioche.locked %}
-                                <a href="{{ path('brioche_address') }}">Modifier</a>
-                            {% endif %}
-                        {% else %}
-                            <div class="well">
-                                <a href="{{ path('brioche_address') }}">Choisir</a>
-                            </div>
-                        {% endif %}
-                    </div>
-                </div>
+                {% include 'BriocheCoreBundle:Brioche:_summaryTable.html.twig' %}
 
                 <br /><br />
                 <div class="row">
@@ -130,23 +19,7 @@
                                 Votre brioche n'est pas terminée.
                                 <a href="{{ path('brioche_index') }}">Compléter les étapes manquantes</a>.</p>
                         {% else %}
-                            <h4 class="text-center">Prix</h4>
-                            <table class="table table-striped table-hover price-table">
-                                <tbody>
-                                    <tr>
-                                        <td class="desc">Brioche taille {{ brioche.size.value }}</td>
-                                        <td class="price">{{ brioche.size.price|number_format(2, '.') }} €</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="desc">Agrément : {{ brioche.extra.title }}</td>
-                                        <td class="price">{{ brioche.extra.price|number_format(2, '.') }} €</td>
-                                    </tr>
-                                    <tr class="total">
-                                        <td class="desc">Total :</td>
-                                        <td class="price text-success">{{ brioche.price|number_format(2, '.') }} €</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            {% include 'BriocheCoreBundle:Brioche:_priceTable.html.twig' %}
 
                             {% if not brioche.locked %}
                                 <div class="row">
@@ -155,26 +28,6 @@
                                             <form method="post">
                                                 <input type="submit" name="valid" value="Valider cette brioche" class="btn btn-primary" />
                                             </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            {% elseif not brioche.validated %}
-                                <div class="text-center">
-                                    <a href="{{ pay_full_url }}" type="button" class="btn btn-primary">Payer tout maintenant</a>
-                                    <br /><br />
-                                    Vous pouvez payer la moitié maintenant par carte,<br />
-                                    et le reste {{ brioche.round.date|localizeddate('none', 'none', 'fr', null, 'EEEE')|capitalize }} matin en liquide.
-                                    <br />
-                                    <a href="{{ pay_half_url }}" type="button" class="btn btn-primary">Payer la moitié maintenant et le reste en liquide</a>
-                                </div>
-                            {% else %}
-                                <div class="row">
-                                    <div class="col-md-10 col-md-offset-1">
-                                        <div class="text-center">
-                                            <p class="lead text-success">
-                                                <span class="glyphicon glyphicon-ok"></span>
-                                                Paiement reçu : <b>{{ brioche.paid|number_format(2, '.') }} €</b>
-                                            </p>
                                         </div>
                                     </div>
                                 </div>

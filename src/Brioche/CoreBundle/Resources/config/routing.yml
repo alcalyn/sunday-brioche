@@ -5,3 +5,7 @@ brioche_core_front_controller:
 brioche_core_brioche_controller:
     resource: "@BriocheCoreBundle/Controller/BriocheController.php"
     type:     annotation
+
+brioche_core_command_controller:
+    resource: "@BriocheCoreBundle/Controller/CommandController.php"
+    type:     annotation

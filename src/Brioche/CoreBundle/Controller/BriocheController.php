@@ -200,29 +200,27 @@ class BriocheController extends Controller
     {
         $brioche = $this->getBriocheBuilder()->getCurrentBrioche();
         
+        if ($brioche->getLocked()) {
+            return $this->redirect($this->generateUrl('command_index', array(
+                'token' => $brioche->getToken(),
+            )));
+        }
+        
         if ($request->isMethod('post')) {
             if ($request->get('valid')) {
                 $this->getBriocheBuilder()->lockBrioche();
+                
+                return $this->redirect($this->generateUrl('command_index', array(
+                    'token' => $brioche->getToken(),
+                )).'#paiement');
             }
             
             return $this->redirect($this->generateUrl('brioche_summary'));
         }
         
-        $payFullUrl = $payHalfUrl = null;
-        
-        if ($brioche->getLocked() && !$brioche->getValidated()) {
-            $briochePayment = $this->get('brioche_core.brioche_payment');
-
-            $payFullUrl = $briochePayment->getPaymentUrl($brioche, false);
-            $payHalfUrl = $briochePayment->getPaymentUrl($brioche, true);
-        }
-        
-        
         return array(
-            'brioche'       => $brioche,
-            'client'        => $brioche->getClient(),
-            'pay_full_url'  => $payFullUrl,
-            'pay_half_url'  => $payHalfUrl,
+            'brioche'   => $brioche,
+            'client'    => $brioche->getClient(),
         );
     }
     
