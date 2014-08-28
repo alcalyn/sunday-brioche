@@ -67,7 +67,10 @@
                                 Paiement reçu : <b>{{ brioche.paid|number_format(2, '.') }} €</b>
                             </p>
                         {% else %}
-                            <p class="lead text-center">Aucun paiement n'a encore été reçu.</p>
+                            <p class="lead text-center">
+                                Aucun paiement n'a encore été reçu.
+                                <a href="?">Rafraîchir</a>.
+                            </p>
                         {% endif %}
                     </div>
                 </div>

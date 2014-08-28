@@ -210,9 +210,13 @@ class BriocheController extends Controller
             if ($request->get('valid')) {
                 $this->getBriocheBuilder()->lockBrioche();
                 
-                return $this->redirect($this->generateUrl('command_index', array(
+                $commandUrl = $this->generateUrl('command_index', array(
                     'token' => $brioche->getToken(),
-                )).'#paiement');
+                ));
+                
+                $this->get('brioche_core.mail_factory')->sendBriocheValidatedMail($brioche->getClient(), $commandUrl);
+                
+                return $this->redirect($commandUrl.'#paiement');
             }
             
             return $this->redirect($this->generateUrl('brioche_summary'));

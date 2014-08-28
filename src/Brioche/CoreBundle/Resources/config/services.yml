@@ -12,7 +12,7 @@ services:
         
     brioche_core.brioche_ipn_service:
         class: Brioche\CoreBundle\Services\BriocheIPNService
-        arguments: [@doctrine.orm.entity_manager, @brioche_core.brioche_builder]
+        arguments: [@doctrine.orm.entity_manager, @brioche_core.mail_factory]
         
     brioche_core.mail_factory:
         class: Brioche\CoreBundle\Services\MailFactory

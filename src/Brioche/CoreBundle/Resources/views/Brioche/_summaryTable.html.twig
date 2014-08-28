@@ -90,7 +90,7 @@
         <h4>Adresse de livraison</h4>
         {% if brioche.getValidAddress %}
             <address style="margin-bottom:0">
-                <strong>{{ client.firstName }} {{ client.lastName }}</strong><br />
+                <strong>{{ client.fullName }}</strong><br />
                 {{ client.address }}<br />
                 {{ client.city.postalcode }} {{ client.city.title }}<br />
 

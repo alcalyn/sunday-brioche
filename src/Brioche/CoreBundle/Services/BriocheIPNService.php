@@ -15,11 +15,18 @@ class BriocheIPNService
     private $em;
     
     /**
-     * @param EntityManagerInterface $em
+     * @var MailFactory
      */
-    public function __construct(EntityManagerInterface $em)
+    private $mailer;
+    
+    /**
+     * @param EntityManagerInterface $em
+     * @param MailFactory $mailer
+     */
+    public function __construct(EntityManagerInterface $em, MailFactory $mailer)
     {
         $this->em = $em;
+        $this->mailer = $mailer;
     }
     
     /**
@@ -36,6 +43,8 @@ class BriocheIPNService
             if ($ipn->getAmount() > 0) {
                 $brioche->setValidated(true);
             }
+            
+            $this->mailer->sendPaymentReceivedMail($brioche->getClient(), $ipn->getAmount() / 100);
         }
         
         // Save IPN in database in every case

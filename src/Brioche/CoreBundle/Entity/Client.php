@@ -132,6 +132,16 @@ class Client
     {
         return $this->last_name;
     }
+    
+    /**
+     * Get full name
+     * 
+     * @return string
+     */
+    public function getFullName()
+    {
+        return $this->getFirstName().' '.$this->getLastName();
+    }
 
     /**
      * Set address

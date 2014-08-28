@@ -1,0 +1,8 @@
+{% extends "BriocheCoreBundle:Mail:layout.html.twig" %}
+
+{% block body %}
+<p>
+    Nous avons bien reçu un paiment de <b>{{ value|number_format(2, '.') }} €</b>.<br />
+    Votre commande a donc été prise en compte.
+</p>
+{% endblock %}
