@@ -12,9 +12,9 @@ use Doctrine\ORM\EntityRepository;
  */
 class BriocheRepository extends EntityRepository
 {
-    public function findFull($id)
+    private function findFull()
     {
-        $q = $this->_em->createQueryBuilder()
+        return $this->_em->createQueryBuilder()
                 ->select('b, r, s, e, cl, ci')
                 ->from('BriocheCoreBundle:Brioche', 'b')
                 ->leftJoin('b.round', 'r')
@@ -22,8 +22,27 @@ class BriocheRepository extends EntityRepository
                 ->leftJoin('b.extra', 'e')
                 ->leftJoin('b.client', 'cl')
                 ->leftJoin('cl.city', 'ci')
+        ;
+    }
+    
+    public function findFullById($id)
+    {
+        $q = $this->findFull()
                 ->where('b.id = :id')
                 ->setParameter(':id', $id)
+        ;
+        
+        return $q
+                ->getQuery()
+                ->getOneOrNullResult()
+        ;
+    }
+    
+    public function findFullByToken($token)
+    {
+        $q = $this->findFull()
+                ->where('b.token = :token')
+                ->setParameter(':token', $token)
         ;
         
         return $q

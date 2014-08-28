@@ -135,6 +135,26 @@ class Round
     {
         return $this->dummy;
     }
+    
+    /**
+     * Get total of orders counting real orders plus dummies orders
+     * 
+     * @return integer
+     */
+    public function getTotal()
+    {
+        return $this->dummy + $this->getBrioches()->count();
+    }
+    
+    /**
+     * Return whether round is full or orders
+     * 
+     * @return boolean
+     */
+    public function isFull()
+    {
+        return $this->getTotal() >= $this->getMaximum();
+    }
 
     /**
      * Add brioches

@@ -11,6 +11,13 @@ use Brioche\CoreBundle\Entity\Client;
 class MailFactory
 {
     /**
+     * Set to false to disable mail in dev
+     * 
+     * @var boolean
+     */
+    const MAILS_ENABLED = false;
+    
+    /**
      * @var EngineInterface
      */
     private $templating;
@@ -65,7 +72,7 @@ class MailFactory
         
         $this->setTo($mail, $client);
         
-        $this->mailer->send($mail);
+        $this->send($mail);
     }
     
     /**
@@ -82,7 +89,7 @@ class MailFactory
         
         $this->setTo($mail, $client);
         
-        $this->mailer->send($mail);
+        $this->send($mail);
     }
     
     /**
@@ -96,5 +103,15 @@ class MailFactory
         $mail->setTo(array(
             $client->getEmail() => $client->getFullName(),
         ));
+    }
+    
+    /**
+     * @param Swift_Mime_Message $mail
+     */
+    public function send(Swift_Mime_Message $mail)
+    {
+        if (self::MAILS_ENABLED) {
+            $this->mailer->send($mail);
+        }
     }
 }

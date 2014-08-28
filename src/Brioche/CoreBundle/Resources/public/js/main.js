@@ -59,7 +59,7 @@ var BriocheRound =
         var $form = $('.form-round');
         var $formInput = $('input[name=round]');
         
-        $('.tournees .tournee button').click(function () {
+        $('.tournees .tournee:not(.full) button').click(function () {
             var round = $(this).closest('.tournee').data('roundId');
             $formInput.val(round);
             $form.submit();

@@ -18,9 +18,7 @@ class CommandController extends Controller
     public function indexAction($token)
     {
         $em = $this->getDoctrine()->getManager();
-        $brioche = $em->getRepository('BriocheCoreBundle:Brioche')->findOneBy(array(
-            'token' => $token,
-        ));
+        $brioche = $em->getRepository('BriocheCoreBundle:Brioche')->findFullByToken($token);
         
         $vars = array(
             'brioche'       => $brioche,

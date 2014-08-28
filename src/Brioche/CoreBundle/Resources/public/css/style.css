@@ -16,6 +16,9 @@ body {
 }
 .tournee button {
 }
+.tournee.full button {
+    cursor: not-allowed;
+}
 .tournee button.btndate {
     width: 250px;
 }
@@ -23,8 +26,11 @@ body {
     margin: 0;
 }
 .tournee button.btnaction {
-    width: 50px;
-    font-size: 34px;
+    width: 46px;
+    font-size: 28px;
+}
+.tournee button.btnaction span {
+    margin: 8px 0 13px 0;
 }
 .tournee .date {
     margin-right: 16px;

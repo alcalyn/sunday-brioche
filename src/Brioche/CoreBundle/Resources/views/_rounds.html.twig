@@ -2,14 +2,20 @@
     <div class="col-md-4 col-md-offset-4">
         <div class="center-block tournees">
             {% for round in rounds %}
-                <div class="btn-group tournee" data-round-id="{{ round.id }}">
+                <div class="btn-group tournee{% if round.full %} full{% endif%}" data-round-id="{{ round.id }}">
                     <button class="btn btn-primary btndate" role="button">
                         <p class="date">{{ round.date|localizeddate('none', 'none', 'fr', null, 'EEEE d MMMM') }}</p>
                         <p class="count"><small>Commandes :</small> {{ round.dummy + round.brioches|length }} / {{ round.maximum }}</p>
                     </button>
-                    <button class="btn btn-success btnaction" role="button">
-                        <span class="glyphicon glyphicon-ok-circle"></span>
-                    </button>
+                    {% if not round.full %}
+                        <button class="btn btn-success btnaction" role="button">
+                            <span class="glyphicon glyphicon-ok"></span>
+                        </button>
+                    {% else %}
+                        <button class="btn btn-primary btnaction" role="button">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                    {% endif %}
                 </div>
             {% endfor %}
         </div>

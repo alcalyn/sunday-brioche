@@ -57,7 +57,7 @@ class BriocheBuilder
         if ($this->session->has('briocheId')) {
             $brioche = $this->em
                 ->getRepository('BriocheCoreBundle:Brioche')
-                ->findFull($this->session->get('briocheId'))
+                ->findFullById($this->session->get('briocheId'))
             ;
         }
         
@@ -104,10 +104,16 @@ class BriocheBuilder
      * @param \Brioche\CoreBundle\Entity\Round $round
      * 
      * @return \Brioche\CoreBundle\Services\BriocheBuilder
+     * 
+     * @throws BriocheCoreException if $round is full
      */
     public function buildRound(Round $round)
     {
         $this->checkLocked();
+        
+        if ($round->isFull()) {
+            throw new BriocheCoreException('This round is full');
+        }
         
         $this->brioche
             ->setRound($round)
