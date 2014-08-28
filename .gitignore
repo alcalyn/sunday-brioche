@@ -12,6 +12,7 @@ web/js/*
 web/config.php
 app/SymfonyRequirements.php
 app/check.php
+app/spool
 
 # Configuration files
 app/config/parameters.ini

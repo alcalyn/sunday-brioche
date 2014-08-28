@@ -15,7 +15,7 @@ class MailFactory
      * 
      * @var boolean
      */
-    const MAILS_ENABLED = false;
+    const MAILS_ENABLED = true;
     
     /**
      * @var EngineInterface
@@ -48,7 +48,7 @@ class MailFactory
     {
         $mail = Swift_Message::newInstance()
             ->setSubject('Brioche du Dimanche')
-            ->setFrom(array('contact@free.fr' => 'Brioche du Dimanche'))
+            ->setFrom(array('contact@brioche-du-dimanche.com' => 'Brioche du Dimanche'))
         ;
         
         $body = $this->templating->render($template, $variables);

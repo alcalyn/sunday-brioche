@@ -9,6 +9,3 @@ brioche_core:
 brioche_core_fosuser:
     resource: "@BriocheCoreBundle/Resources/config/routingFosUser.yml"
     prefix:   /
-
-console:
-    resource: "@CoreSphereConsoleBundle/Resources/config/routing.yml"

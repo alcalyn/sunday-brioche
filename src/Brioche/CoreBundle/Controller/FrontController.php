@@ -37,4 +37,25 @@ class FrontController extends Controller
     {
         return array();
     }
+    
+    /**
+     * Execute a symfony command
+     * and print result
+     * 
+     * @param string $c
+     */
+    private function command($c)
+    {
+        $kernel = $this->container->get('kernel');
+        $app = new \Symfony\Bundle\FrameworkBundle\Console\Application($kernel);
+
+        $input = new \Symfony\Component\Console\Input\StringInput($c);
+        $output = new \Symfony\Component\Console\Output\StreamOutput(fopen('php://temp', 'w'));
+
+        $app->doRun($input, $output);
+
+        rewind($output->getStream());
+        $response =  stream_get_contents($output->getStream());
+		var_dump($response);
+    }
 }
