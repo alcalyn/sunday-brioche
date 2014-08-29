@@ -8,6 +8,9 @@ body {
     padding-top: 70px;
     overflow-x: hidden;
 }
+h1 {
+    margin: 0;
+}
 .tournees {
     width: 300px;
 }

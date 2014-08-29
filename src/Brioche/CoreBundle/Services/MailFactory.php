@@ -47,7 +47,7 @@ class MailFactory
     public function createMail($template, array $variables = array())
     {
         $mail = Swift_Message::newInstance()
-            ->setSubject('Brioche du Dimanche')
+            ->setSubject($this->subject())
             ->setFrom(array('contact@brioche-du-dimanche.com' => 'Brioche du Dimanche'))
         ;
         
@@ -67,10 +67,12 @@ class MailFactory
     public function sendBriocheValidatedMail(Client $client, $commandUrl)
     {
         $mail = $this->createMail('BriocheCoreBundle:Mail:briocheValidated.html.twig', array(
+            'client' => $client,
             'command_url' => $commandUrl,
         ));
         
-        $this->setTo($mail, $client);
+        $mail->setTo($this->to($client));
+        $mail->setSubject($this->subject('Brioche validée'));
         
         $this->send($mail);
     }
@@ -84,25 +86,44 @@ class MailFactory
     public function sendPaymentReceivedMail(Client $client, $value)
     {
         $mail = $this->createMail('BriocheCoreBundle:Mail:paymentReceived.html.twig', array(
+            'client' => $client,
             'value' => $value,
         ));
         
-        $this->setTo($mail, $client);
+        $mail->setTo($this->to($client));
+        $mail->setSubject($this->subject('Paiement reçu'));
         
         $this->send($mail);
     }
     
     /**
-     * Set to $client
+     * Return a formatted to from a client
      * 
-     * @param Swift_Mime_Message $mail
-     * @param \Brioche\CoreBundle\Entity\Client $client
+     * @param Client $client
+     * 
+     * @return array
      */
-    public function setTo(Swift_Mime_Message $mail, Client $client)
+    private function to(Client $client)
     {
-        $mail->setTo(array(
+        return array(
             $client->getEmail() => $client->getFullName(),
-        ));
+        );
+    }
+    
+    /**
+     * Format a standard subject
+     * 
+     * @param string $string
+     * 
+     * @return string
+     */
+    private function subject($string = null)
+    {
+        if (null === $string) {
+            return 'Brioche du Dimanche';
+        } else {
+            return $string.' - Brioche du Dimanche';
+        }
     }
     
     /**

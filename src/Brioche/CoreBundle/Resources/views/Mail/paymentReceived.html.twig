@@ -2,6 +2,8 @@
 
 {% block body %}
 <p>
+    Bonjour {{ client.fullName }},<br />
+    <br />
     Nous avons bien reçu un paiment de <b>{{ value|number_format(2, '.') }} €</b>.<br />
     Votre commande a donc été prise en compte.
 </p>

@@ -2,12 +2,14 @@
 
 {% block body %}
 <p>
+    Bonjour {{ client.fullName }},<br />
+    <br />
     Vous avez validé votre brioche.
     Vous avez maintenant accès au suivi de cette brioche sur :<br />
-    <a href="{{ command_url }}">{{ command_url }}</a>.
+    <a href="{{ command_url }}" style="color: #428bca">{{ command_url }}</a>.
 </p>
 <p>
     Cette page vous permettra de suivre le paiement de la commande
-    et de communiquer avec moi.
+    et de communiquer avec Brioche du Dimanche.
 </p>
 {% endblock %}
