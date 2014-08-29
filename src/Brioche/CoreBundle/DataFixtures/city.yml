@@ -6,3 +6,27 @@ fixtures:
     savigny:
         title: 'Savigny sur Orge'
         postalcode: '91 600'
+    athis_mons:
+        title: 'Athis-Mons'
+        postalcode: '91 200'
+    paray_vieille_poste:
+        title: 'Paray-Vieille-Poste'
+        postalcode: '91 550'
+    morangis:
+        title: 'Morangis'
+        postalcode: '91 420'
+    wissous:
+        title: 'Wissous'
+        postalcode: '91 320'
+    viry_chatillon:
+        title: 'Viry-Châtillon'
+        postalcode: '91 170'
+    draveil:
+        title: 'Draveil'
+        postalcode: '91 210'
+    vigneux_sur_seine:
+        title: 'Vigneux-sur-Seine'
+        postalcode: '91 270'
+    grigny:
+        title: 'Grigny'
+        postalcode: '91 350'

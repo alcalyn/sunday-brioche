@@ -4,19 +4,19 @@ fixtures:
         value: 125
         price: 6
         nbPeople: 2
-        averageWeight: 250
+        averageWeight: 220
     t250:
         value: 250
         price: 8
         nbPeople: 3
-        averageWeight: 450
+        averageWeight: 430
     t375:
         value: 375
         price: 10
         nbPeople: 4
-        averageWeight: 700
+        averageWeight: 650
     t500:
         value: 500
         price: 12
         nbPeople: 6
-        averageWeight: 950
+        averageWeight: 850

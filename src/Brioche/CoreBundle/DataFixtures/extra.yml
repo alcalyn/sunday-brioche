@@ -9,3 +9,9 @@ fixtures:
     raisin:
         title: 'Raisins secs'
         price: 2
+    citron:
+        title: Citron
+        price: 2
+    chocolat:
+        title: 'Pépites de chocolat'
+        price: 2
