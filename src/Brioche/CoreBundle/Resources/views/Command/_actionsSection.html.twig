@@ -1,0 +1,31 @@
+<section id="actions" class="thread actions">
+    <div class="panel">
+        <div class="panel-body">
+            <div class="row actions">
+                <div class="col-sm-4">
+                    <div class="well">
+                        <a class="choose-message" href="#actions" title="Ecrire un message">
+                            <img class="img-responsive" width="140" src="{{ asset('bundles/briochecore/img/msg.png') }}" alt="Message" />
+                        </a>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="well">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="well">
+                    </div>
+                </div>
+            </div>
+            <div class="row action message" style="display:none">
+                <div class="col-sm-12">
+                    {{ form_start(messageForm) }}
+                        {{ form_widget(messageForm.content, { 'attr': { 'placeholder': 'Votre message...' }}) }}
+                        <br />
+                    {{ form_end(messageForm) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

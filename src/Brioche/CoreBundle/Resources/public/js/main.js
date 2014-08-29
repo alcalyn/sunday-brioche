@@ -15,6 +15,7 @@ $(function () {
         enableSelect2();
     }
     
+    initActions();
     Brioche.init();
 });
 
@@ -153,3 +154,14 @@ var BriocheType =
         $('form.form-type').submit();
     }
 };
+
+function initActions() {
+    if (0 === $('section.actions')) {
+        return;
+    }
+    
+    $('.choose-message').click(function () {
+        $('.action').hide();
+        $('.action.message').show();
+    });
+}

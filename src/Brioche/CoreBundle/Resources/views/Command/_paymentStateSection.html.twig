@@ -1,0 +1,17 @@
+<section class="thread payment-state">
+    <div class="panel">
+        <div class="panel-body">
+            {% if brioche.validated %}
+                <p class="lead text-center text-success">
+                    <span class="glyphicon glyphicon-ok"></span>
+                    Paiement reçu : <b>{{ brioche.paid|number_format(2, '.') }} €</b>
+                </p>
+            {% else %}
+                <p class="lead text-center">
+                    Aucun paiement n'a encore été reçu.
+                    <a href="?">Rafraîchir</a>.
+                </p>
+            {% endif %}
+        </div>
+    </div>
+</section>

@@ -6,91 +6,21 @@
 <div class="row">
     <div class="col-sm-6 col-sm-offset-3">
         <div class="thread-group">
-            <section class="thread summary">
-                <h2 class="text-center">Suivi commande</h2>
-                <br />
-                <div class="thumbnail">
-                    {% include 'BriocheCoreBundle:Brioche:_summaryTable.html.twig' %}
+            {% include 'BriocheCoreBundle:Command:_summarySection.html.twig' %}
 
-                    <br />
-                    <div class="row">
-                        <div class="col-md-10 col-md-offset-1">
-                            {% include 'BriocheCoreBundle:Brioche:_priceTable.html.twig' %}
-                        </div>
-                    </div>
-                </div>
-                </div>
-            </section>
             {% if not brioche.validated %}
-                <section id="paiement" class="thread">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="panel">
-                                <div class="panel-body">
-                                    <h3 class="text-center">Choix de la méthode de paiment</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <a href="{{ pay_full_url }}" class="thumbnail" target="_blank">
-                                <p class="well text-center lead">
-                                    <img width="200" src="{{ asset('bundles/briochecore/img/cb.png') }}" alt="Carte bancaire" />
-                                </p>
-                                <p class="text-center">Payer tout maintenant</p>
-                            </a>
-                        </div>
-                        <div class="col-sm-6">
-                            <a href="{{ pay_half_url }}" class="thumbnail" target="_blank">
-                                <p class="well text-center lead">
-                                    <img width="99" src="{{ asset('bundles/briochecore/img/cb.png') }}" alt="Liquide" />
-                                    +
-                                    <img width="90" src="{{ asset('bundles/briochecore/img/cash.png') }}" alt="Liquide" />
-                                </p>
-                                <p class="text-center">
-                                    Payer la moitié maintenant, et le reste
-                                    {{ brioche.round.date|localizeddate('none', 'none', 'fr', null, 'EEEE')|capitalize }}
-                                    matin en liquide.
-                                </p>
-                            </a>
-                        </div>
-                    </div>
-                </section>
+                {% include 'BriocheCoreBundle:Command:_paymentOptionsSection.html.twig' %}
             {% endif %}
-            <section class="thread payment-state">
-                <div class="panel">
-                    <div class="panel-body">
-                        {% if brioche.validated %}
-                            <p class="lead text-center text-success">
-                                <span class="glyphicon glyphicon-ok"></span>
-                                Paiement reçu : <b>{{ brioche.paid|number_format(2, '.') }} €</b>
-                            </p>
-                        {% else %}
-                            <p class="lead text-center">
-                                Aucun paiement n'a encore été reçu.
-                                <a href="?">Rafraîchir</a>.
-                            </p>
-                        {% endif %}
-                    </div>
-                </div>
-            </section>
+
+            {% include 'BriocheCoreBundle:Command:_paymentStateSection.html.twig' %}
+
             {% if brioche.validated %}
-                <section class="thread thanks-msg">
-                    <div class="panel">
-                        <div class="panel-body">
-                            <p class="lead text-center">
-                                Merci. Votre commande a été prise en compte,
-                                et la brioche vous sera bien livrée le
-                                <b class="date">{{ brioche.round.date|localizeddate('none', 'none', 'fr', null, 'EEEE d MMMM') }}</b>
-                                au petit matin.<br />
-                                <br />
-                                Vous pouvez vous servir de ce suivi de commande pour communiquer avec moi.
-                            </p>
-                        </div>
-                    </div>
-                </section>
+                {% include 'BriocheCoreBundle:Command:_thanksSection.html.twig' %}
             {% endif %}
+
+            {% include 'BriocheCoreBundle:Command:_messagesSection.html.twig' %}
+
+            {% include 'BriocheCoreBundle:Command:_actionsSection.html.twig' %}
         </div>
     </div>
 </div>

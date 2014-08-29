@@ -104,3 +104,13 @@ body {
 .no-margin-top {
     margin-top: 0;
 }
+section.actions {
+}
+section.actions .row.actions .well {
+    height: 170px;
+    margin-bottom: 0;
+}
+
+section.actions .action {
+    margin-top: 16px;
+}

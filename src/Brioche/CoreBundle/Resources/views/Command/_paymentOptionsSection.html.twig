@@ -1,0 +1,35 @@
+<section id="paiement" class="thread">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel">
+                <div class="panel-body">
+                    <h3 class="text-center">Choix de la méthode de paiment</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <a href="{{ pay_full_url }}" class="thumbnail" target="_blank">
+                <p class="well text-center lead">
+                    <img width="200" src="{{ asset('bundles/briochecore/img/cb.png') }}" alt="Carte bancaire" />
+                </p>
+                <p class="text-center">Payer tout maintenant</p>
+            </a>
+        </div>
+        <div class="col-sm-6">
+            <a href="{{ pay_half_url }}" class="thumbnail" target="_blank">
+                <p class="well text-center lead">
+                    <img width="99" src="{{ asset('bundles/briochecore/img/cb.png') }}" alt="Liquide" />
+                    +
+                    <img width="90" src="{{ asset('bundles/briochecore/img/cash.png') }}" alt="Liquide" />
+                </p>
+                <p class="text-center">
+                    Payer la moitié maintenant, et le reste
+                    {{ brioche.round.date|localizeddate('none', 'none', 'fr', null, 'EEEE')|capitalize }}
+                    matin en liquide.
+                </p>
+            </a>
+        </div>
+    </div>
+</section>

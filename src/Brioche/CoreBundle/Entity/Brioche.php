@@ -3,6 +3,7 @@
 namespace Brioche\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * Brioche
@@ -153,6 +154,13 @@ class Brioche
      * @ORM\Column(name="validated", type="boolean")
      */
     private $validated;
+    
+    /**
+     * @var Collection
+     * 
+     * @ORM\OneToMany(targetEntity="Brioche\CoreBundle\Entity\Message", mappedBy="brioche")
+     */
+    private $messages;
     
     /**
      * @var \DateTime
@@ -638,5 +646,38 @@ class Brioche
     public function getToken()
     {
         return $this->token;
+    }
+
+    /**
+     * Add messages
+     *
+     * @param \Brioche\CoreBundle\Entity\Message $messages
+     * @return Brioche
+     */
+    public function addMessage(Message $messages)
+    {
+        $this->messages[] = $messages;
+
+        return $this;
+    }
+
+    /**
+     * Remove messages
+     *
+     * @param \Brioche\CoreBundle\Entity\Message $messages
+     */
+    public function removeMessage(Message $messages)
+    {
+        $this->messages->removeElement($messages);
+    }
+
+    /**
+     * Get messages
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMessages()
+    {
+        return $this->messages;
     }
 }
