@@ -212,7 +212,7 @@ class BriocheController extends Controller
                 
                 $commandUrl = $this->generateUrl('command_index', array(
                     'token' => $brioche->getToken(),
-                ));
+                ), true);
                 
                 $this->get('brioche_core.mail_factory')->sendBriocheValidatedMail($brioche->getClient(), $commandUrl);
                 

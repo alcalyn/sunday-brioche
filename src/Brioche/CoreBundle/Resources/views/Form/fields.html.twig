@@ -89,10 +89,19 @@
 {% spaceless %}
     {% if label is empty %}
         {% set label = name|humanize %}
+    {% else %}
+        {% set label = label ~ name|humanize %}
     {% endif %}
-    {% set attr = attr|merge({'class':'btn btn-primary'}) %}
+    {% set attr = attr|merge({'class': attr.class|default('') ~ ' btn btn-primary'}) %}
     <div class="col-sm-offset-4 col-sm-8">
-        <button type="{{ type|default('button') }}" {{ block('button_attributes') }}>{{ label|trans({}, translation_domain) }}</button>
+        <button type="{{ type|default('button') }}" {{ block('button_attributes') }}>{{ label|trans({}, translation_domain)|raw }}</button>
     </div>
 {% endspaceless %}
 {% endblock button_widget %}
+
+{% block submit_widget -%}
+{% set type = type|default('submit') %}
+{% set attr = attr|merge({'class': attr.class|default('') ~ ' btn-success'}) %}
+{% set label = '<span class="glyphicon glyphicon-ok-circle"></span> ' ~ label %}
+{{- block('button_widget') -}}
+{%- endblock submit_widget %}

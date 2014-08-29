@@ -12,10 +12,10 @@
                 <img src="http://dummyimage.com/800x200/ababab/515151.jpg" alt="alt">
                 <h3 class="text-center">{{ brioche.typeTitle }}</h3>
                 <br />
-                <ul class="nav nav-tabs nav-justified" id="size-tab" role="tablist">
+                <ul class="nav nav-pills nav-justified" id="size-tab" role="tablist">
                     {% for size in sizes %}
                         <li{% if size.value == brioche.size.value %} class="active"{% endif %}>
-                            <a href="#taille-{{ size.value }}">{{ size.value }}</a>
+                            <a href="#taille-{{ size.value }}">Taille {{ size.value }}</a>
                         </li>
                     {% endfor %}
                 </ul>
@@ -23,9 +23,16 @@
                     <div class="tab-content">
                         {% for size in sizes %}
                             <div class="tab-pane{% if size.value == brioche.size.value %} active{% endif %}" id="taille-{{ size.value }}">
-                                <h4>Brioche {{ size.value }}</h4>
-                                <p class="lead price">Prix : {{ size.price }} €</p>
-                                <p><b>{{ size.nbPeople }}</b> personnes</p>
+                                <div class="row">
+                                    <div class="col-sm-5">
+                                        <img src="http://dummyimage.com/200x150/ababab/515151.jpg" class="img-thumbnail img-responsive" alt="Brioche {{ size.averageWeight }} grammes">
+                                    </div>
+                                    <div class="col-sm-7">
+                                        <h3 class="no-margin-top">Brioche {{ size.averageWeight }} grammes</h3>
+                                        <p class="lead price text-success">Prix : {{ size.price|number_format(2, '.') }} €</p>
+                                        <p>Pour <b>{{ size.nbPeople }}</b> personnes</p>
+                                    </div>
+                                </div>
                             </div>
                         {% endfor %}
                     </div>
