@@ -60,6 +60,22 @@ class MailFactory
     }
     
     /**
+     * Send $content to $to
+     * 
+     * @param string $to
+     * @param string $content
+     */
+    public function sendSimpleMail($to, $content)
+    {
+        $mail = $this->createMail('BriocheCoreBundle:Mail:test.html.twig', array(
+            'content' => $content,
+        ));
+        
+        $mail->setTo($to);
+        $this->send($mail);
+    }
+    
+    /**
      * Send a mail when a brioche has been validated
      * 
      * @param \Brioche\CoreBundle\Entity\Client $client
