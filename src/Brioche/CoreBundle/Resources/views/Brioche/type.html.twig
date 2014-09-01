@@ -1,5 +1,9 @@
 {% extends "BriocheCoreBundle:Brioche:layout.html.twig" %}
 
+{% block title %}Type de brioche - {{ parent() }}{% endblock %}
+
+{% block metadesc %}Choisissez le type de votre brioche entre Vendéenne et Parisienne.{% endblock %}
+
 {% block body %}
 {{ parent() }}
 
@@ -10,7 +14,7 @@
         <div class="col-sm-3 col-xs-6 col-sm-offset-3">
             <a href="#" class="thumbnail type-vendeene">
                 <img src="http://dummyimage.com/400x300/ababab/515151.jpg" alt="alt">
-                <h3 class="text-center">Vendéene</h3>
+                <h3 class="text-center">Vendéenne</h3>
             </a>
         </div>
         <div class="col-sm-3 col-xs-6">

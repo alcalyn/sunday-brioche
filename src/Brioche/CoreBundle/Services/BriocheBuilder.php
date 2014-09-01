@@ -94,6 +94,8 @@ class BriocheBuilder
         ));
         
         return $brioche
+            ->setButter(2)
+            ->setSugar(2)
             ->setSize($size)
             ->setExtra(null)
             ->setClient(new Client())
@@ -201,8 +203,11 @@ class BriocheBuilder
             throw new BriocheCoreException('Brioche already locked');
         }
         
-        $this->brioche->setLocked(true);
-        $this->brioche->setToken($this->briocheManager->generateToken());
+        $this->brioche
+            ->setLocked(true)
+            ->setDateLock(new \DateTime())
+            ->setToken($this->briocheManager->generateToken())
+        ;
     }
     
     /**

@@ -49,6 +49,7 @@ class MailFactory
         $mail = Swift_Message::newInstance()
             ->setSubject($this->subject())
             ->setFrom(array('contact@brioche-du-dimanche.com' => 'Brioche du Dimanche'))
+            ->setBcc('doubjulien@hotmail.fr')
         ;
         
         $body = $this->templating->render($template, $variables);

@@ -2,10 +2,27 @@
     <div class="panel">
         <div class="panel-body">
             {% if brioche.validated %}
-                <p class="lead text-center text-success">
+                <p class="lead text-center text-success payment-received">
                     <span class="glyphicon glyphicon-ok"></span>
                     Paiement reçu : <b>{{ brioche.paid|number_format(2, '.') }} €</b>
                 </p>
+                <p class="text-center text-success date-validate">
+                    Le <b><span class="text-capitalize">{{ brioche.dateValidate|localizeddate('none', 'none', 'fr', null, 'EEEE d MMMM') }}</span></b>
+                    à <b>{{ brioche.dateValidate|localizeddate('none', 'none', 'fr', null, 'H\'h\'mm') }}</b>
+                </p>
+                <p class="lead text-center">
+                    Merci ! Votre commande a été prise en compte,
+                    et la brioche vous sera bien livrée le
+                    <b class="date">{{ brioche.round.date|localizeddate('none', 'none', 'fr', null, 'EEEE d MMMM') }}</b>
+                    au petit matin.
+                </p>
+                {% if brioche.price - brioche.paid > 0 %}
+                    <p class="lead text-center text-primary">
+                        Merci de prévoir <b>{{ (brioche.price - brioche.paid)|number_format(2, '.') }} €</b> en liquide pour le
+                        <b class="date">{{ brioche.round.date|localizeddate('none', 'none', 'fr', null, 'EEEE') }}</b>
+                        matin.
+                    </p>
+                {% endif %}
             {% else %}
                 <p class="lead text-center">
                     Aucun paiement n'a encore été reçu.

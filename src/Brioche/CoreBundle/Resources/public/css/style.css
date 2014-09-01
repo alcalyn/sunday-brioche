@@ -113,7 +113,21 @@ section.actions .row.actions .well {
     height: 170px;
     margin-bottom: 0;
 }
-
+section.actions .row.actions a {
+    font-size: 16px;
+}
+section.actions .row.actions a img {
+    margin: 8px auto auto auto;
+}
 section.actions .action {
     margin-top: 16px;
+}
+.payment-received {
+    margin: 0;
+}
+.date-validate {
+    margin: 0 0 16px 0;
+}
+address abbr {
+    margin-right: 12px;
 }

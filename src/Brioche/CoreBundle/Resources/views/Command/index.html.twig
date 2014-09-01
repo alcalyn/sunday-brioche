@@ -1,5 +1,7 @@
 {% extends "BriocheCoreBundle::layout.html.twig" %}
 
+{% block title %}Suivi de commande {{ client.fullName }} - {{ parent() }}{% endblock %}
+
 {% block body %}
 {{ parent() }}
 
@@ -8,17 +10,17 @@
         <div class="thread-group">
             {% include 'BriocheCoreBundle:Command:_summarySection.html.twig' %}
 
+            {% include 'BriocheCoreBundle:Command:_firstMessageSection.html.twig' %}
+
             {% if not brioche.validated %}
                 {% include 'BriocheCoreBundle:Command:_paymentOptionsSection.html.twig' %}
             {% endif %}
 
             {% include 'BriocheCoreBundle:Command:_paymentStateSection.html.twig' %}
 
-            {% if brioche.validated %}
-                {% include 'BriocheCoreBundle:Command:_thanksSection.html.twig' %}
-            {% endif %}
-
-            {% include 'BriocheCoreBundle:Command:_messagesSection.html.twig' %}
+            {% for message in brioche.messages %}
+                {% include 'BriocheCoreBundle:Command:_messageSection.html.twig' %}
+            {% endfor %}
 
             {% include 'BriocheCoreBundle:Command:_actionsSection.html.twig' %}
         </div>

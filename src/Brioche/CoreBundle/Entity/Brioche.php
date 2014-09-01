@@ -170,6 +170,20 @@ class Brioche
     private $dateCreate;
     
     /**
+     * @var \DateTime
+     * 
+     * @ORM\Column(name="dateLock", type="datetime", nullable=true)
+     */
+    private $dateLock;
+    
+    /**
+     * @var \DateTime
+     * 
+     * @ORM\Column(name="dateValidate", type="datetime", nullable=true)
+     */
+    private $dateValidate;
+    
+    /**
      * Constructor
      */
     public function __construct()
@@ -426,29 +440,6 @@ class Brioche
     }
 
     /**
-     * Set dateCreate
-     *
-     * @param \DateTime $dateCreate
-     * @return Brioche
-     */
-    public function setDateCreate($dateCreate)
-    {
-        $this->dateCreate = $dateCreate;
-
-        return $this;
-    }
-
-    /**
-     * Get dateCreate
-     *
-     * @return \DateTime 
-     */
-    public function getDateCreate()
-    {
-        return $this->dateCreate;
-    }
-
-    /**
      * Set validRound
      *
      * @param boolean $validRound
@@ -679,5 +670,74 @@ class Brioche
     public function getMessages()
     {
         return $this->messages;
+    }
+
+    /**
+     * Set dateCreate
+     *
+     * @param \DateTime $dateCreate
+     * @return Brioche
+     */
+    public function setDateCreate($dateCreate)
+    {
+        $this->dateCreate = $dateCreate;
+
+        return $this;
+    }
+
+    /**
+     * Get dateCreate
+     *
+     * @return \DateTime 
+     */
+    public function getDateCreate()
+    {
+        return $this->dateCreate;
+    }
+
+    /**
+     * Set dateLock
+     *
+     * @param \DateTime $dateLock
+     * @return Brioche
+     */
+    public function setDateLock($dateLock)
+    {
+        $this->dateLock = $dateLock;
+
+        return $this;
+    }
+
+    /**
+     * Get dateLock
+     *
+     * @return \DateTime 
+     */
+    public function getDateLock()
+    {
+        return $this->dateLock;
+    }
+
+    /**
+     * Set dateValidate
+     *
+     * @param \DateTime $dateValidate
+     * @return Brioche
+     */
+    public function setDateValidate($dateValidate)
+    {
+        $this->dateValidate = $dateValidate;
+
+        return $this;
+    }
+
+    /**
+     * Get dateValidate
+     *
+     * @return \DateTime 
+     */
+    public function getDateValidate()
+    {
+        return $this->dateValidate;
     }
 }

@@ -11,7 +11,7 @@ $(function () {
     if ($.browser.mobile) {
         enableMobileSliders();
     } else {
-        enableSliders();
+        enableSliders(); // Replace with https://github.com/seiyria/bootstrap-slider when mature
         enableSelect2();
     }
     
@@ -30,10 +30,11 @@ function enableSizeSelector() {
 
 function enableSliders() {
     $('#slider-butter').slider({
-        formater: formaterButter
+        formater: formatterButter
     });
+    
     $('#slider-sugar').slider({
-        formater: formaterSugar
+        formater: formatterSugar
     });
 }
 
@@ -56,9 +57,9 @@ function enableModileSlider(type) {
         .hide()
         .after('<br class="hidden-sm hidden-mg hidden-lg" />\
         <ul class="nav nav-pills nav-justified m-slider-'+type+'">\
-            <li><a data-'+type+'="0" href="#">'+formater(type, 0)+'</a></li>\
-            <li><a data-'+type+'="1" href="#">'+formater(type, 1)+'</a></li>\
-            <li><a data-'+type+'="2" href="#">'+formater(type, 2)+'</a></li>\
+            <li><a data-'+type+'="0" href="#">'+formatter(type, 0)+'</a></li>\
+            <li><a data-'+type+'="1" href="#">'+formatter(type, 1)+'</a></li>\
+            <li><a data-'+type+'="2" href="#">'+formatter(type, 2)+'</a></li>\
         </ul>')
     ;
     
@@ -84,24 +85,24 @@ function enableSelect2() {
     });
 }
 
-function formater(type, value) {
+function formatter(type, value) {
     if (type === 'butter') {
-        return formaterButter(value);
+        return formatterButter(value);
     }
     
     if (type === 'sugar') {
-        return formaterSugar(value);
+        return formatterSugar(value);
     }
     
     return -1;
 }
 
-function formaterButter(value) {
-    return ['Moins beurée', 'Normal', 'Bien beurrée'][value];
+function formatterButter(value) {
+    return ['', 'Moins beurée', 'Normal', 'Bien beurrée'][value];
 }
 
-function formaterSugar(value) {
-    return ['Moins sucrée', 'Normal', 'Bien sucrée'][value];
+function formatterSugar(value) {
+    return ['', 'Moins sucrée', 'Normal', 'Bien sucrée'][value];
 }
 
 var Brioche =

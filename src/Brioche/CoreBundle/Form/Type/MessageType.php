@@ -16,7 +16,7 @@ class MessageType extends AbstractType
     {
         $builder
             ->add('content', 'textarea', array('label' => 'Message'))
-            ->add('Valider', 'submit')
+            ->add('Envoyer', 'submit')
         ;
     }
     

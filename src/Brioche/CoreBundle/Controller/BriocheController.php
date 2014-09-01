@@ -173,7 +173,7 @@ class BriocheController extends Controller
         }
         
         $client = $brioche->getClient();
-        $clientForm = $this->createForm(new ClientType, $client);
+        $clientForm = $this->createForm(new ClientType(), $client);
         
         $clientForm->handleRequest($request);
         
@@ -216,7 +216,7 @@ class BriocheController extends Controller
                 
                 $this->get('brioche_core.mail_factory')->sendBriocheValidatedMail($brioche->getClient(), $commandUrl);
                 
-                return $this->redirect($commandUrl.'#paiement');
+                return $this->redirect($commandUrl.'#suivi-commande');
             }
             
             return $this->redirect($this->generateUrl('brioche_summary'));

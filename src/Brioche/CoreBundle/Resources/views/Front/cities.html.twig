@@ -1,0 +1,31 @@
+{% extends "BriocheCoreBundle::layout.html.twig" %}
+
+{% block title %}Villes desservies - {{ parent() }}{% endblock %}
+
+{% block metadesc %}Villes dans lequelles je livre vos brioches gratuitement.{% endblock %}
+
+{% block body %}
+<section class="cities">
+    <h2 class="text-center">Villes desservies</h2>
+    <br />
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <p class="lead">
+                        Je livre pour l'instant vos brioches en Essonne, dans les villes suivantes uniqement :<br />
+                        <br />
+
+                        <ul>
+                            {% for city in cities %}
+                                <li class="lead">
+                                    <b>{{ city.title }}</b> ({{ city.postalcode }})
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </p>
+                </div>
+            </div>
+        </div>
+</section>
+{% endblock %}

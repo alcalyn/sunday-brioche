@@ -23,7 +23,7 @@ class BriocheRepository extends EntityRepository
                 ->leftJoin('b.client', 'cl')
                 ->leftJoin('cl.city', 'ci')
                 ->leftJoin('b.messages', 'm')
-                ->orderBy('m.dateCreated')
+                ->orderBy('m.dateCreate')
         ;
     }
     

@@ -39,6 +39,35 @@ class FrontController extends Controller
     }
     
     /**
+     * @Route(
+     *      "/villes-desservies",
+     *      name = "front_cities"
+     * )
+     * @Template()
+     */
+    public function citiesAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $cities = $em->getRepository('BriocheCoreBundle:City')->findBy(array(), array('title' => 'asc'));
+        
+        return array(
+            'cities' => $cities,
+        );
+    }
+    
+    /**
+     * @Route(
+     *      "/contact",
+     *      name = "front_contact"
+     * )
+     * @Template()
+     */
+    public function contactAction()
+    {
+        return array();
+    }
+    
+    /**
      * Execute a symfony command
      * and print result
      * 

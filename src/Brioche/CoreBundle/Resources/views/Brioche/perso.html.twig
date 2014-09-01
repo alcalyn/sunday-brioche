@@ -1,5 +1,9 @@
 {% extends "BriocheCoreBundle:Brioche:layout.html.twig" %}
 
+{% block title %}Touche personnelle - {{ parent() }}{% endblock %}
+
+{% block metadesc %}Vous préférez une brioche bien sucrée, ou peu beurrée ? Personnalisez la composition de votre brioche !{% endblock %}
+
 {% block body %}
 {{ parent() }}
 
@@ -26,12 +30,11 @@
                                 name="butter"
                                 value="{{ brioche.butter }}"
                                 class="span2"
-                                style="width: 200px"
-                                data-slider-min="0"
-                                data-slider-max="2"
+                                style="width: 200px;display:none"
+                                data-slider-min="1"
+                                data-slider-max="3"
                                 data-slider-step="1"
                                 data-slider-value="{{ brioche.butter }}"
-                                data-slider-formater="formaterButter"
                             />
                         </div>
 
@@ -43,12 +46,11 @@
                                 name="sugar"
                                 value="{{ brioche.sugar }}"
                                 class="span2"
-                                style="width: 200px"
-                                data-slider-min="0"
-                                data-slider-max="2"
+                                style="width: 200px;display:none"
+                                data-slider-min="1"
+                                data-slider-max="3"
                                 data-slider-step="1"
                                 data-slider-value="{{ brioche.sugar }}"
-                                data-slider-formater="formaterSugar"
                             />
                         </div>
 

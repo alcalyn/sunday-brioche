@@ -41,7 +41,10 @@ class BriocheIPNService
             $brioche->setPaid($brioche->getPaid() + ($ipn->getAmount() / 100));
             
             if ($ipn->getAmount() > 0) {
-                $brioche->setValidated(true);
+                $brioche
+                    ->setValidated(true)
+                    ->setDateValidate(new \DateTime())
+                ;
             }
             
             $this->mailer->sendPaymentReceivedMail($brioche->getClient(), $ipn->getAmount() / 100);

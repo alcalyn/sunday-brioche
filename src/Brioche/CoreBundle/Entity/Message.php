@@ -50,16 +50,16 @@ class Message
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateCreated", type="datetime")
+     * @ORM\Column(name="dateCreate", type="datetime")
      */
-    private $dateCreated;
+    private $dateCreate;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->dateCreated = new \DateTime();
+        $this->dateCreate = new \DateTime();
     }
     
     /**
@@ -96,26 +96,26 @@ class Message
     }
 
     /**
-     * Set dateCreated
+     * Set dateCreate
      *
-     * @param \DateTime $dateCreated
+     * @param \DateTime $dateCreate
      * @return Message
      */
-    public function setDateCreated($dateCreated)
+    public function setDateCreate($dateCreate)
     {
-        $this->dateCreated = $dateCreated;
+        $this->dateCreate = $dateCreate;
 
         return $this;
     }
 
     /**
-     * Get dateCreated
+     * Get dateCreate
      *
      * @return \DateTime 
      */
-    public function getDateCreated()
+    public function getDateCreate()
     {
-        return $this->dateCreated;
+        return $this->dateCreate;
     }
 
     /**

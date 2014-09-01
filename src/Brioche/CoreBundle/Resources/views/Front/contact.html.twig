@@ -1,0 +1,28 @@
+{% extends "BriocheCoreBundle::layout.html.twig" %}
+
+{% block title %}Contact - {{ parent() }}{% endblock %}
+
+{% block metadesc %}Contactez-moi par mail ou par téléphone.{% endblock %}
+
+{% block body %}
+<section class="contact">
+    <h2 class="text-center">Contact</h2>
+    <br />
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <address class="lead text-center">
+                        <strong>Brioche du Dimanche</strong><br />
+                        <br />
+                        <abbr title="Email">
+                            <span class="glyphicon glyphicon-envelope"></span></abbr>contact@brioche-du-dimanche.com<br />
+                        <br />
+                        <abbr title="Téléphone">
+                            <span class="glyphicon glyphicon-phone"></span></abbr>+336 67 37 99 96<br />
+                    </address>
+                </div>
+            </div>
+        </div>
+</section>
+{% endblock %}
