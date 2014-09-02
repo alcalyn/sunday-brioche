@@ -40,15 +40,15 @@
         <h4>Touche personnelle</h4>
         {% if brioche.getValidPerso %}
             <p>
-                {% if brioche.butter == 0 %}
+                {% if brioche.butter == 1 %}
                     Moins beurrée,<br />
-                {% elseif brioche.butter == 2 %}
+                {% elseif brioche.butter == 3 %}
                     Bien beurrée,<br />
                 {% endif %}
 
-                {% if brioche.sugar == 0 %}
+                {% if brioche.sugar == 1 %}
                     Moins sucrée,<br />
-                {% elseif brioche.sugar == 2 %}
+                {% elseif brioche.sugar == 3 %}
                     Bien sucrée,<br />
                 {% endif %}
 

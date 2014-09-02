@@ -5,8 +5,8 @@ fixtures:
         type: 0
         round: r2
         size: t500
-        butter: 1
-        sugar: 2
+        butter: 2
+        sugar: 3
         extra: figue
         price: 14
         paid: 7
@@ -18,8 +18,8 @@ fixtures:
         type: 1
         round: r3
         size: t125
-        butter: 0
-        sugar: 0
+        butter: 1
+        sugar: 1
         extra: null
         price: 6
         paid: 0
