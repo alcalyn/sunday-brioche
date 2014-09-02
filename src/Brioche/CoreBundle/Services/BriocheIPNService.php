@@ -5,7 +5,6 @@ namespace Brioche\CoreBundle\Services;
 use Doctrine\ORM\EntityManagerInterface;
 use Brioche\CoreBundle\Entity\IPN;
 use Brioche\CoreBundle\Entity\Brioche;
-use Brioche\CoreBundle\Services\BriocheBuilder;
 
 class BriocheIPNService
 {

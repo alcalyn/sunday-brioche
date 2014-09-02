@@ -32,9 +32,10 @@ class CommandController extends Controller
         
         if (!$brioche->getValidated()) {
             $briochePayment = $this->get('brioche_core.brioche_payment');
+            $returnUrl = $this->generateUrl('command_index', array('token' => $token), true);
 
-            $vars['pay_full_url'] = $briochePayment->getPaymentUrl($brioche, false);
-            $vars['pay_half_url'] = $briochePayment->getPaymentUrl($brioche, true);
+            $vars['pay_full_url'] = $briochePayment->getPaymentUrl($brioche, $returnUrl, false);
+            $vars['pay_half_url'] = $briochePayment->getPaymentUrl($brioche, $returnUrl, true);
         }
         
         return $vars;

@@ -4,3 +4,9 @@ services:
         arguments: [@brioche_core.brioche_ipn_service]
         tags:
             - { name: kernel.event_listener, event: event.payplug.ipn, method: onPayment }
+            
+    brioche_core.listeners.malformed_ipn:
+        class: Brioche\CoreBundle\EventListener\MalformedIPNListener
+        arguments: [@logger]
+        tags:
+            - { name: kernel.event_listener, event: event.payplug.ipn.malformed, method: onMalformedIPN }

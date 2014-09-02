@@ -24,13 +24,14 @@ class BriochePaymentService
     
     /**
      * @param Brioche $brioche
+     * @param string $returnUrl
      * @param boolean $half if true, the price will be only the half
      * 
      * @return string
      * 
      * @throws BriocheException if cannot process to payment now
      */
-    public function getPaymentUrl(Brioche $brioche, $half = false)
+    public function getPaymentUrl(Brioche $brioche, $returnUrl, $half = false)
     {
         if (!$brioche->isAllValid()) {
             throw new BriocheException('Cannot pay brioche now, not completely finnished');
@@ -48,7 +49,10 @@ class BriochePaymentService
         $payment = new Payment();
         
         $payment
-            ->setCurrency('EUR')
+            ->setCurrency(Payment::EUROS)
+            ->setReturnUrl($returnUrl)
+            ->setCancelUrl($returnUrl)
+            ->setCustomData('Custom data Brioche du Dimanche')
             ->setAmount($brioche->getPrice() * ($half ? 50 : 100))
             ->setFirstName($client->getFirstName())
             ->setLastName($client->getLastName())
