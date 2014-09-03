@@ -9,3 +9,7 @@ brioche_core_brioche_controller:
 brioche_core_command_controller:
     resource: "@BriocheCoreBundle/Controller/CommandController.php"
     type:     annotation
+
+brioche_core_maillist_controller:
+    resource: "@BriocheCoreBundle/Controller/MailListController.php"
+    type:     annotation

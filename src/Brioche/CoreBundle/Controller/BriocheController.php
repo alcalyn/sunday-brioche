@@ -55,9 +55,12 @@ class BriocheController extends Controller
             return $this->redirectNextStep('round');
         }
         
+        $mailForm = $this->get('brioche_core.mail_list')->createForm($this->generateUrl('maillist_add'));
+        
         return array(
             'brioche'   => $brioche,
             'rounds'    => $rounds,
+            'mailForm' => $mailForm->createView(),
         );
     }
     

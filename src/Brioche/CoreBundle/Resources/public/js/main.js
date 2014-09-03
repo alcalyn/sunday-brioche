@@ -16,6 +16,7 @@ $(function () {
     }
     
     initActions();
+    initMailListFormAjax();
     Brioche.init();
 });
 
@@ -165,4 +166,69 @@ function initActions() {
         $('.action').hide();
         $('.action.message').show();
     });
+}
+
+function initMailListFormAjax() {
+    var formName = 'brioche_corebundle_mail';
+    var $form = $('form[name="'+formName+'"]');
+    var $input = $form.find('input[type=email]');
+    var $submit = $form.find('button[type=submit]');
+    
+    if ($form.size() > 0) {
+        $form.submit(function () {
+            var action = $form.attr('action');
+            var data = $form.serialize();
+            
+            $.post(action, data, function (r) {
+                $form.find('.form-control-feedback').remove();
+                $form.find('.has-success').removeClass('has-success');
+                $form.find('.has-error').removeClass('has-error');
+                
+                if (r.ok) {
+                    $input.closest('.has-feedback').addClass('has-success');
+                    $input.after('<span class="glyphicon glyphicon-ok form-control-feedback"></span>');
+                    
+                    $submit.remove();
+                    
+                    $('.mail-list-bottom-message').html('Votre email a bien été enregistrée.');
+                    
+                    $input.popover('destroy');
+                } else {
+                    $input
+                        .popover({
+                            content: getReason(r.reason)
+                        })
+                        .popover('show')
+                        .on('hidden.bs.popover', function () {
+                            $input.popover('destroy');
+                        })
+                    ;
+                    
+                    $input.closest('.has-feedback').addClass('has-error');
+                    $input.after('<span class="glyphicon glyphicon-remove form-control-feedback"></span>');
+                    
+                    $input.removeAttr('disabled');
+                    $submit.removeAttr('disabled');
+                }
+            });
+            
+            $input.attr('disabled', 'disabled');
+            $submit.attr('disabled', 'disabled');
+            
+            return false;
+        });
+    }
+}
+
+function getReason(id) {
+    switch (id) {
+        case 'form_invalid':
+            return 'L\'adresse email est invalide.';
+        
+        case 'duplicate':
+            return 'Cette adresse email est déjà enregistrée.';
+        
+        default:
+            return 'Erreur.';
+    }
 }

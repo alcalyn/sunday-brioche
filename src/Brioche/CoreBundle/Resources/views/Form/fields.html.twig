@@ -24,7 +24,7 @@
 {% spaceless %}
     <div class="form-group has-feedback{% if form.vars.submitted %} has-{{ form.vars.valid ? 'success' : 'error' }}{% endif %}">
         {{ form_label(form) }}
-        <div class="col-sm-8">
+        <div class="{{ attr.wrapper_class|default('col-sm-8') }}">
             {{ form_widget(form) }}
         </div>
         {{ form_errors(form) }}

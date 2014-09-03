@@ -20,9 +20,11 @@ class FrontController extends Controller
         $em = $this->getDoctrine()->getManager();
         $roundRepository = $em->getRepository('BriocheCoreBundle:Round');
         $rounds = $roundRepository->findFuturesRounds();
+        $mailForm = $this->get('brioche_core.mail_list')->createForm($this->generateUrl('maillist_add'));
         
         return array(
             'rounds' => $rounds,
+            'mailForm' => $mailForm->createView(),
         );
     }
     

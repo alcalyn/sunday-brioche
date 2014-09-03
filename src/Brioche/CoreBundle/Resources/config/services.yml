@@ -17,3 +17,7 @@ services:
     brioche_core.mail_factory:
         class: Brioche\CoreBundle\Services\MailFactory
         arguments: [@templating, @swiftmailer.mailer]
+        
+    brioche_core.mail_list:
+        class: Brioche\CoreBundle\Services\MailListService
+        arguments: [@form.factory]
