@@ -140,7 +140,17 @@ class Client
      */
     public function getFullName()
     {
-        return $this->getFirstName().' '.$this->getLastName();
+        $fullName = array();
+        
+        if (null !== $this->getFirstName()) {
+            $fullName []= $this->getFirstName();
+        }
+        
+        if (null !== $this->getLastName()) {
+            $fullName []= $this->getLastName();
+        }
+        
+        return implode(' ', $fullName);
     }
 
     /**

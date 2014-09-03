@@ -17,6 +17,7 @@ $(function () {
     
     initActions();
     initMailListFormAjax();
+    initStarRating();
     Brioche.init();
 });
 
@@ -231,4 +232,19 @@ function getReason(id) {
         default:
             return 'Erreur.';
     }
+}
+
+function initStarRating() {
+    $('.extended-rating').each(function () {
+        var $this = $(this);
+        
+        $this.rating({
+            step: $this.attr('step'),
+            size: 'xs',
+            defaultCaption: '{rating} sur 5',
+            starCaptions: {},
+            clearButton: '',
+            clearCaption: 'Votre note'
+        });
+    });
 }

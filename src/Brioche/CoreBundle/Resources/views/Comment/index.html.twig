@@ -1,0 +1,54 @@
+{% extends "BriocheCoreBundle::layout.html.twig" %}
+
+{% block title %}Livre d'or - {{ parent() }}{% endblock %}
+
+{% block metadesc %}Liste des commentaires déposés par les clients de Brioche du Dimanche.{% endblock %}
+
+{% block body %}
+<section class="guest-book">
+    <h2 class="text-center">Livre d'or</h2>
+    <br />
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <div class="add-comment">
+                <div class="panel">
+                    <div class="panel-body">
+                        {{ form(commentForm) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            {% for comment in comments %}
+                <div class="comment">
+                    <div class="panel">
+                        <div class="panel-body">
+                            <div class="stars">
+                                <p class="lead text-right text-{{ ['default', 'danger', 'warning', 'info', 'primary', 'success'][comment.note] }}">
+                                    {% for i in 1..comment.note %}
+                                        <span class="glyphicon glyphicon-star"></span>
+                                    {% endfor %}
+                                    {% if comment.note < 5 %}
+                                        {% for i in comment.note..4 %}
+                                            <span class="glyphicon glyphicon-star-empty"></span>
+                                        {% endfor %}
+                                    {% endif %}
+                                </p>
+                            </div>
+                            <p class="lead">{{ comment.content|nl2br }}</p>
+                            <p class="text-right">
+                                <b>{{ comment.author }}</b>,
+
+                                le <span class="text-capitalize">{{ comment.dateCreate|localizeddate('none', 'none', 'fr', null, 'EEEE d MMMM') }}</span>
+                                à {{ comment.dateCreate|localizeddate('none', 'none', 'fr', null, 'H\'h\'mm') }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

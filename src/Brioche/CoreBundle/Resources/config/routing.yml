@@ -1,9 +1,9 @@
-brioche_core_front_controller:
-    resource: "@BriocheCoreBundle/Controller/FrontController.php"
-    type:     annotation
-
 brioche_core_brioche_controller:
     resource: "@BriocheCoreBundle/Controller/BriocheController.php"
+    type:     annotation
+
+brioche_core_front_controller:
+    resource: "@BriocheCoreBundle/Controller/FrontController.php"
     type:     annotation
 
 brioche_core_command_controller:
@@ -12,4 +12,8 @@ brioche_core_command_controller:
 
 brioche_core_maillist_controller:
     resource: "@BriocheCoreBundle/Controller/MailListController.php"
+    type:     annotation
+
+brioche_core_comment_controller:
+    resource: "@BriocheCoreBundle/Controller/CommentController.php"
     type:     annotation
