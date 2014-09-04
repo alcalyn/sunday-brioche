@@ -82,12 +82,38 @@ h1 {
     line-height: 34px;
     text-align: center;
 }
+.fuelux .wizard {
+    border-radius: 100px;
+}
+.fuelux .wizard .steps li:nth-child(1) {
+    border-radius: 100px 0 0 100px;
+}
 .fuelux .wizard .steps a {
-    padding: 12px;
+    font-size: 16px;
+    padding: 8px 4px 8px 4px;
 }
 .fuelux .wizard .steps li {
     padding-left: 18px;
     padding-right: 8px;
+    height: 36px;
+    line-height: 36px;
+}
+.fuelux .wizard .steps li .chevron {
+    border-width: 18px 0 18px 10px;
+    right: -10px;
+}
+.fuelux .wizard ul li .chevron:before {
+    border-width: 18px 0 18px 10px;
+    top: -18px;
+}
+.fuelux .wizard ul li.active .chevron:before {
+    border-left-width: 10px;
+}
+.fuelux .wizard ul li.complete .chevron:before {
+    border-left-width: 10px;
+}
+.fuelux .wizard ul li.complete:hover .chevron:before {
+    border-left-width: 10px;
 }
 .fuelux .wizard ul li.complete a {
     color: #468847;
