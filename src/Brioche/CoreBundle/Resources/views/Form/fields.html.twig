@@ -93,7 +93,7 @@
         {% set label = label ~ name|humanize %}
     {% endif %}
     {% set attr = attr|merge({'class': attr.class|default('') ~ ' btn btn-primary'}) %}
-    <div class="col-sm-offset-4 col-sm-8">
+    <div class="{{ attr.wrapper_class|default('col-sm-offset-4 col-sm-8') }}">
         <button type="{{ type|default('button') }}" {{ block('button_attributes') }}>{{ label|trans({}, translation_domain)|raw }}</button>
     </div>
 {% endspaceless %}

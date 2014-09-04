@@ -86,6 +86,20 @@ class Brioche
     private $extra;
     
     /**
+     * @var string
+     * 
+     * @ORM\Column(name="ship_time_min", type="time")
+     */
+    private $shipTimeMin;
+    
+    /**
+     * @var string
+     * 
+     * @ORM\Column(name="ship_time_max", type="time")
+     */
+    private $shipTimeMax;
+    
+    /**
      * @var boolean
      * 
      * @ORM\Column(name="validRound", type="boolean")
@@ -119,6 +133,13 @@ class Brioche
      * @ORM\Column(name="validAddress", type="boolean")
      */
     private $validAddress;
+    
+    /**
+     * @var boolean
+     * 
+     * @ORM\Column(name="validTime", type="boolean")
+     */
+    private $validTime;
     
     /**
      * @var boolean whether brioche is validated and need to be paid
@@ -192,11 +213,14 @@ class Brioche
             ->setType(Brioche::VENDEENE)
             ->setButter(1)
             ->setSugar(1)
+            ->setShipTimeMin(new \DateTime('8:00'))
+            ->setShipTimeMax(new \DateTime('9:00'))
             ->setValidRound(false)
             ->setValidType(false)
             ->setValidSize(false)
             ->setValidPerso(false)
             ->setValidAddress(false)
+            ->setValidTime(false)
             ->setLocked(false)
             ->setPrice(0)
             ->setPaid(0)
@@ -394,6 +418,52 @@ class Brioche
     }
 
     /**
+     * Set shipTimeMin
+     *
+     * @param \DateTime $shipTimeMin
+     * @return Brioche
+     */
+    public function setShipTimeMin($shipTimeMin)
+    {
+        $this->shipTimeMin = $shipTimeMin;
+
+        return $this;
+    }
+
+    /**
+     * Get shipTimeMin
+     *
+     * @return \DateTime 
+     */
+    public function getShipTimeMin()
+    {
+        return $this->shipTimeMin;
+    }
+
+    /**
+     * Set shipTimeMax
+     *
+     * @param \DateTime $shipTimeMax
+     * @return Brioche
+     */
+    public function setShipTimeMax($shipTimeMax)
+    {
+        $this->shipTimeMax = $shipTimeMax;
+
+        return $this;
+    }
+
+    /**
+     * Get shipTimeMax
+     *
+     * @return \DateTime 
+     */
+    public function getShipTimeMax()
+    {
+        return $this->shipTimeMax;
+    }
+
+    /**
      * Set price
      *
      * @param string $price
@@ -553,6 +623,29 @@ class Brioche
     {
         return $this->validAddress;
     }
+
+    /**
+     * Set validTime
+     *
+     * @param boolean $validTime
+     * @return Brioche
+     */
+    public function setValidTime($validTime)
+    {
+        $this->validTime = $validTime;
+
+        return $this;
+    }
+
+    /**
+     * Get validTime
+     *
+     * @return boolean 
+     */
+    public function getValidTime()
+    {
+        return $this->validTime;
+    }
     
     /**
      * Return true if all steps are valid and can process to checkout
@@ -566,7 +659,8 @@ class Brioche
             $this->getValidType() &&
             $this->getValidSize() &&
             $this->getValidPerso() &&
-            $this->getValidAddress()
+            $this->getValidAddress() &&
+            $this->getValidTime()
         ;
     }
 

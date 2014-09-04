@@ -191,6 +191,29 @@ class BriocheBuilder
     }
     
     /**
+     * Valid ship times.
+     * Swap min and max if they are not ascendant.
+     * 
+     * @return BriocheBuilder
+     */
+    public function buildTime()
+    {
+        $this->checkLocked();
+        
+        $brioche = $this->brioche;
+        
+        if ($brioche->getShipTimeMin() > $brioche->getShipTimeMax()) {
+            $swap = $brioche->getShipTimeMin();
+            $brioche->setShipTimeMin($brioche->getShipTimeMax());
+            $brioche->setShipTimeMax($swap);
+        }
+        
+        $brioche->setValidTime(true);
+        
+        return $this;
+    }
+    
+    /**
      * Lock current brioche and detach from builder
      */
     public function lockBrioche()
@@ -251,6 +274,7 @@ class BriocheBuilder
                 'size',
                 'perso',
                 'address',
+                'time',
                 'summary',
             );
             
@@ -261,34 +285,41 @@ class BriocheBuilder
             }
         }
         
+        $i = 0;
+        
         switch ($stepFrom) {
             default:
-            case 0:
+            case $i++:
                 if (!$this->brioche->getValidRound()) {
                     return 'round';
                 }
                 
-            case 1:
+            case $i++:
                 if (!$this->brioche->getValidType()) {
                     return 'type';
                 }
                 
-            case 2:
+            case $i++:
                 if (!$this->brioche->getValidSize()) {
                     return 'size';
                 }
                 
-            case 3:
+            case $i++:
                 if (!$this->brioche->getValidPerso()) {
                     return 'perso';
                 }
                 
-            case 4:
+            case $i++:
                 if (!$this->brioche->getValidAddress()) {
                     return 'address';
                 }
                 
-            case 5:
+            case $i++:
+                if (!$this->brioche->getValidTime()) {
+                    return 'time';
+                }
+                
+            case $i++:
                 return 'summary';
         }
     }

@@ -3,8 +3,8 @@
 <div class="row text-center">
     <div class="col-md-6">
         <h4>Brioche</h3>
-        {% if brioche.getValidType or brioche.getValidSize %}
-            {% if brioche.getValidType %}
+        {% if brioche.validType or brioche.validSize %}
+            {% if brioche.validType %}
                 <p>
                     Type <b>{{ brioche.typeTitle }}</b><br />
                     {% if not brioche.locked %}
@@ -17,7 +17,7 @@
                 </div>
             {% endif %}
 
-            {% if brioche.getValidSize %}
+            {% if brioche.validSize %}
                 <p>
                     Taille {{ brioche.size.value }} (~{{ brioche.size.averageWeight }}g),<br />
                     pour <b>{{ brioche.size.nbPeople }}</b> personnes<br />
@@ -38,7 +38,7 @@
     </div>
     <div class="col-md-6">
         <h4>Touche personnelle</h4>
-        {% if brioche.getValidPerso %}
+        {% if brioche.validPerso %}
             <p>
                 {% if brioche.butter == 1 %}
                     Moins beurrée,<br />
@@ -68,18 +68,40 @@
 <div class="row text-center">
     <div class="col-md-6">
         <h4>Date de livraison</h4>
-        {% if brioche.getValidRound %}
-            <p>
-                <span class="date">
-                    <b>{{ brioche.round.date|localizeddate('none', 'none', 'fr', null, 'EEEE d MMMM') }}</b>
-                </span>
-                <br />
-                {% if not brioche.locked %}
-                    <a href="{{ path('brioche_round') }}">Modifier</a><br />
-                {% endif %}
-                <br />
-                Entre <b>8h</b> et <b>9h</b><br />
-            </p>
+        {% if brioche.validRound or brioche.validTime %}
+            {% if brioche.validRound %}
+                <p>
+                    <span class="date">
+                        <b>{{ brioche.round.date|localizeddate('none', 'none', 'fr', null, 'EEEE d MMMM') }}</b>
+                    </span>
+                    <br />
+
+                    {% if not brioche.locked %}
+                        <a href="{{ path('brioche_round') }}">Modifier</a><br />
+                    {% endif %}
+                </p>
+            {% else %}
+                <div class="well">
+                    <a href="{{ path('brioche_round') }}">Choisir la tournée</a>
+                </div>
+            {% endif %}
+            {% if brioche.validTime %}
+                <p>
+                    Entre
+                    <b>{{ brioche.shipTimeMin|localizeddate('none', 'none', 'fr', null, 'H\'h\'mm') }}</b>
+                    et
+                    <b>{{ brioche.shipTimeMax|localizeddate('none', 'none', 'fr', null, 'H\'h\'mm') }}</b>
+                    <br />
+
+                    {% if not brioche.locked %}
+                        <a href="{{ path('brioche_time') }}">Modifier</a>
+                    {% endif %}
+                </p>
+            {% else %}
+                <div class="well">
+                    <a href="{{ path('brioche_time') }}">Choisir l'heure de livraison</a>
+                </div>
+            {% endif %}
         {% else %}
             <div class="well">
                 <a href="{{ path('brioche_round') }}">Choisir</a>
@@ -88,7 +110,7 @@
     </div>
     <div class="col-md-6">
         <h4>Adresse de livraison</h4>
-        {% if brioche.getValidAddress %}
+        {% if brioche.validAddress %}
             <address style="margin-bottom:0">
                 <strong>{{ client.fullName }}</strong><br />
                 {{ client.address }}<br />

@@ -1,0 +1,45 @@
+{% extends "BriocheCoreBundle:Brioche:layout.html.twig" %}
+
+{% block title %}Heure de livraison - {{ parent() }}{% endblock %}
+
+{% block metadesc %}Définissez l'heure avant laquelle vous souhaitez être livré.{% endblock %}
+
+{% block body %}
+{{ parent() }}
+
+<section class="size">
+    <h2 class="text-center">Heure de livraison</h2>
+    <br />
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <div class="thumbnail">
+                <img src="http://dummyimage.com/800x200/ababab/515151.jpg" alt="alt">
+                <h3 class="text-center">{{ brioche.typeTitle }} {{ brioche.size.value }}</h3>
+                <br />
+                <div class="panel">
+                    <div class="panel-body">
+                        <p class="lead">
+                            Définissez la tranche horaire dans laquelle vous souhaitez être livré.
+                            Selon le nombre de brioches à livrer dans la même tournée,
+                            il est possible que vous soyez livré un peu plus tôt.
+                        </p>
+                        <div class="row">
+                            {{ form_start(briocheTimeForm) }}
+                            <div class="col-sm-4 lead text-center">
+                                <p>Entre {{ form_widget(briocheTimeForm.shipTimeMin) }}</p>
+                            </div>
+                            <div class="col-sm-4 lead text-center">
+                                <p>et {{ form_widget(briocheTimeForm.shipTimeMax) }}</p>
+                            </div>
+                            <div class="col-sm-4 text-center">
+                                {{ form_widget(briocheTimeForm.Valider) }}
+                            </div>
+                            {{ form_end(briocheTimeForm) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

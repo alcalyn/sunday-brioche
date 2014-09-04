@@ -24,6 +24,10 @@ class CommandController extends Controller
         $em = $this->getDoctrine()->getManager();
         $brioche = $em->getRepository('BriocheCoreBundle:Brioche')->findFullByToken($token);
         
+        if (null === $brioche) {
+            throw $this->createNotFoundException();
+        }
+        
         $vars = array(
             'brioche'       => $brioche,
             'client'        => $brioche->getClient(),

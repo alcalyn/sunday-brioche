@@ -10,6 +10,7 @@ use Brioche\CoreBundle\Exception\BriocheCoreException;
 use Brioche\CoreBundle\Services\BriocheManager;
 use Brioche\CoreBundle\Services\BriocheBuilder;
 use Brioche\CoreBundle\Form\Type\ClientType;
+use Brioche\CoreBundle\Form\Type\BriocheTimeType;
 use Brioche\CoreBundle\Entity\Brioche;
 
 class BriocheController extends Controller
@@ -189,6 +190,37 @@ class BriocheController extends Controller
         return array(
             'brioche'       => $brioche,
             'clientForm'    => $clientForm->createView(),
+        );
+    }
+
+    /**
+     * @Route(
+     *      "/ma-brioche/heure-de-livraison",
+     *      name="brioche_time"
+     * )
+     * @Template()
+     */
+    public function timeAction(Request $request)
+    {
+        $brioche = $this->getBriocheBuilder()->getCurrentBrioche();
+        
+        if ($brioche->getLocked()) {
+            return $this->redirect($this->generateUrl('brioche_summary'));
+        }
+        
+        $briocheTimeForm = $this->createForm(new BriocheTimeType(), $brioche);
+        
+        $briocheTimeForm->handleRequest($request);
+        
+        if ($briocheTimeForm->isValid()) {
+            $this->getBriocheBuilder()->buildTime();
+            
+            return $this->redirectNextStep('time');
+        }
+        
+        return array(
+            'brioche' => $brioche,
+            'briocheTimeForm' => $briocheTimeForm->createView(),
         );
     }
 
