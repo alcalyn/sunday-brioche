@@ -27,7 +27,9 @@ framework:
 # Twig Configuration
 twig:
     debug:            "%kernel.debug%"
-    strict_variables: "%kernel.debug%"
+    strict_variables: "%kernel.debug%" 
+    globals:
+        enable_analytics: %enable_analytics%
     form:
         resources:
             - 'BriocheCoreBundle:Form:fields.html.twig'
