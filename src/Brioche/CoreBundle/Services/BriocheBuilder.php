@@ -63,9 +63,6 @@ class BriocheBuilder
         
         if (null === $brioche) {
             $brioche = $this->createDefaultBrioche();
-            $this->em->persist($brioche);
-            $this->em->flush();
-            $this->session->set('briocheId', $brioche->getId());
         }
         
         $this->brioche = $brioche;
@@ -122,6 +119,8 @@ class BriocheBuilder
             ->setValidRound(true)
         ;
         
+        $this->em->persist($this->brioche);
+        
         return $this;
     }
     
@@ -145,6 +144,8 @@ class BriocheBuilder
             ->setValidType(true)
         ;
         
+        $this->em->persist($this->brioche);
+        
         return $this;
     }
     
@@ -163,6 +164,8 @@ class BriocheBuilder
         ;
         
         $this->updatePrice();
+        
+        $this->em->persist($this->brioche);
         
         return $this;
     }
@@ -187,6 +190,22 @@ class BriocheBuilder
         
         $this->updatePrice();
         
+        $this->em->persist($this->brioche);
+        
+        return $this;
+    }
+    
+    /**
+     * @return BriocheBuilder
+     */
+    public function buildAddress()
+    {
+        $this->checkLocked();
+        
+        $this->brioche->setValidAddress(true);
+
+        $this->em->persist($this->brioche);
+        
         return $this;
     }
     
@@ -209,6 +228,8 @@ class BriocheBuilder
         }
         
         $brioche->setValidTime(true);
+        
+        $this->em->persist($this->brioche);
         
         return $this;
     }

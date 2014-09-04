@@ -182,7 +182,7 @@ class BriocheController extends Controller
         $clientForm->handleRequest($request);
         
         if ($clientForm->isValid()) {
-            $brioche->setValidAddress(true);
+            $this->getBriocheBuilder()->buildAddress();
             
             return $this->redirectNextStep('address');
         }
