@@ -1,0 +1,30 @@
+{% extends "BriocheCoreBundle::layout.html.twig" %}
+
+{% block title %}Erreur {{ status_code }}, {{ status_text }} - {{ parent() }}{% endblock %}
+
+{% block metadesc %}Cette page a levé une erreur {{ status_code }}, {{ status_text }}.{% endblock %}
+
+{% block body %}
+<section class="error">
+    <h2 class="text-center">Erreur {{ status_code }}, {{ status_text }}</h2>
+    <br />
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <p>
+                        <b>Oups</b>, cette page a levé une erreur <b>{{ status_code }}</b>, {{ status_text }}.<br />
+                        <br />
+                        Si vous pensez que ce n'est pas normal, vous pouvez envoyer un mail à
+                        <a href="mailto:contact@brioche-du-dimanche.com">contact@brioche-du-dimanche.com</a>.<br />
+                        <br />
+                        <a href="javascript:history.back()">Retour en arrière</a><br />
+                        <a href="{{ path('front_index') }}">Revenir à l'accueil</a><br />
+                        <a href="javascript:void()">Rester planté là</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
