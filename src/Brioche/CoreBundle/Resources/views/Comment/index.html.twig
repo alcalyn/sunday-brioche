@@ -13,7 +13,16 @@
             <div class="add-comment">
                 <div class="panel">
                     <div class="panel-body">
-                        {{ form(commentForm) }}
+                        {{ form_start(commentForm) }}
+                        <div class="row">
+                            <div class="col-md-6">
+                                {{ form_row(commentForm.author) }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form_row(commentForm.note) }}
+                            </div>
+                        </div>
+                        {{ form_end(commentForm) }}
                     </div>
                 </div>
             </div>
