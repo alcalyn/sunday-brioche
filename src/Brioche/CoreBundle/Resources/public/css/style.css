@@ -163,3 +163,9 @@ address abbr {
 .stars .glyphicon-star-empty {
     color: lightgrey;
 }
+.extended-rating {
+    display: none;
+}
+.rating-container {
+    cursor: pointer;
+}
