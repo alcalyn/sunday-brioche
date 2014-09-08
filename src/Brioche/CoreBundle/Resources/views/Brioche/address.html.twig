@@ -11,8 +11,21 @@
     <h2 class="text-center">Adresse de livraison</h2>
     <br />
     <div class="row">
-        <div class="col-sm-4 col-sm-offset-4">
-            {{ form(clientForm) }}
+        <div class="col-sm-6 col-sm-offset-3">
+            <div class="thumbnail">
+                <img src="{{ asset('bundles/briochecore/img/type-' ~ (brioche.type ? 'parisienne' : 'vendeenne') ~ '-large.jpg') }}" alt="Brioche {{ brioche.type ? 'Parisienne' : 'Vendéenne' }}">
+                <h3 class="text-center">{{ brioche.typeTitle }} {{ brioche.size.value }}</h3>
+                <div class="padd">
+                    <p class="lead">
+                        Merci de remplir le formulaire suivant.
+                        Les informations ne serviront que pour le paiement et la livraison de votre brioche.
+                    </p>
+                    <br />
+                    {{ form(clientForm) }}
+                    <br />
+                    <br />
+                </div>
+            </div>
         </div>
     </div>
 </section>

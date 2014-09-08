@@ -16,26 +16,24 @@
                 <img src="{{ asset('bundles/briochecore/img/type-' ~ (brioche.type ? 'parisienne' : 'vendeenne') ~ '-large.jpg') }}" alt="Brioche {{ brioche.type ? 'Parisienne' : 'Vendéenne' }}">
                 <h3 class="text-center">{{ brioche.typeTitle }} {{ brioche.size.value }}</h3>
                 <br />
-                <div class="panel">
-                    <div class="panel-body">
-                        <p class="lead">
-                            Définissez la tranche horaire dans laquelle vous souhaitez être livré.
-                            Selon le nombre de brioches à livrer dans la même tournée,
-                            il est possible que vous soyez livré un peu plus tôt.
-                        </p>
-                        <div class="row">
-                            {{ form_start(briocheTimeForm) }}
-                            <div class="col-sm-4 lead text-center">
-                                <p><span class="glyphicon glyphicon-time"></span> Entre {{ form_widget(briocheTimeForm.shipTimeMin) }}</p>
-                            </div>
-                            <div class="col-sm-4 lead text-center">
-                                <p>et {{ form_widget(briocheTimeForm.shipTimeMax) }}</p>
-                            </div>
-                            <div class="col-sm-4 text-center">
-                                {{ form_widget(briocheTimeForm.Valider) }}
-                            </div>
-                            {{ form_end(briocheTimeForm) }}
+                <div class="padd">
+                    <p class="lead">
+                        Définissez la tranche horaire dans laquelle vous souhaitez être livré.
+                        Selon le nombre de brioches à livrer dans la même tournée,
+                        il est possible que vous soyez livré un peu plus tôt.
+                    </p>
+                    <div class="row">
+                        {{ form_start(briocheTimeForm) }}
+                        <div class="col-sm-4 lead text-center">
+                            <p><span class="glyphicon glyphicon-time"></span> Entre {{ form_widget(briocheTimeForm.shipTimeMin) }}</p>
                         </div>
+                        <div class="col-sm-4 lead text-center">
+                            <p>et {{ form_widget(briocheTimeForm.shipTimeMax) }}</p>
+                        </div>
+                        <div class="col-sm-4 text-center">
+                            {{ form_widget(briocheTimeForm.Valider) }}
+                        </div>
+                        {{ form_end(briocheTimeForm) }}
                     </div>
                 </div>
             </div>
