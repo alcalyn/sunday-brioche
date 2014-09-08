@@ -13,7 +13,7 @@
     <div class="row">
         <div class="col-sm-6 col-sm-offset-3">
             <div class="thumbnail">
-                <img src="http://dummyimage.com/800x200/ababab/515151.jpg" alt="alt">
+                <img src="{{ asset('bundles/briochecore/img/type-' ~ (brioche.type ? 'parisienne' : 'vendeenne') ~ '-large.jpg') }}" alt="Brioche {{ brioche.type ? 'Parisienne' : 'Vendéenne' }}">
                 <h3 class="text-center">{{ brioche.typeTitle }} {{ brioche.size.value }}</h3>
                 <div class="padd">
                     <p class="lead">

@@ -13,7 +13,7 @@
     <div class="row">
         <div class="col-sm-6 col-sm-offset-3">
             <div class="thumbnail">
-                <img src="http://dummyimage.com/800x200/ababab/515151.jpg" alt="alt">
+                <img src="{{ asset('bundles/briochecore/img/type-' ~ (brioche.type ? 'parisienne' : 'vendeenne') ~ '-large.jpg') }}" alt="Brioche {{ brioche.type ? 'Parisienne' : 'Vendéenne' }}">
                 <h3 class="text-center">{{ brioche.typeTitle }}</h3>
                 <br />
                 <ul class="nav nav-pills nav-justified" id="size-tab" role="tablist">
@@ -28,13 +28,10 @@
                         {% for size in sizes %}
                             <div class="tab-pane{% if size.value == brioche.size.value %} active{% endif %}" id="taille-{{ size.value }}">
                                 <div class="row">
-                                    <div class="col-sm-5">
-                                        <img src="http://dummyimage.com/200x150/ababab/515151.jpg" class="img-thumbnail img-responsive" alt="Brioche {{ size.averageWeight }} grammes">
-                                    </div>
-                                    <div class="col-sm-7">
+                                    <div class="col-sm-10 col-sm-offset-1">
                                         <h3 class="no-margin-top">Brioche {{ size.averageWeight }} grammes</h3>
-                                        <p class="lead price text-success">Prix : {{ size.price|number_format(2, '.') }} €</p>
                                         <p>Pour <b>{{ size.nbPeople }}</b> personnes</p>
+                                        <p class="lead price text-success">Prix : <b>{{ size.price|number_format(2, '.') }} €</b></p>
                                     </div>
                                 </div>
                             </div>
