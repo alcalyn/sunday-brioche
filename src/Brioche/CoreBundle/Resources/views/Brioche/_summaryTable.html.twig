@@ -87,10 +87,15 @@
             {% endif %}
             {% if brioche.validTime %}
                 <p>
-                    Entre
-                    <b>{{ brioche.shipTimeMin|localizeddate('none', 'none', 'fr', null, 'H\'h\'mm') }}</b>
-                    et
-                    <b>{{ brioche.shipTimeMax|localizeddate('none', 'none', 'fr', null, 'H\'h\'mm') }}</b>
+                    {% if brioche.shipTimeMin == brioche.shipTimeMax %}
+                        À
+                        <b>{{ brioche.shipTimeMin|localizeddate('none', 'none', 'fr', null, 'H\'h\'mm') }}</b>
+                    {% else %}
+                        Entre
+                        <b>{{ brioche.shipTimeMin|localizeddate('none', 'none', 'fr', null, 'H\'h\'mm') }}</b>
+                        et
+                        <b>{{ brioche.shipTimeMax|localizeddate('none', 'none', 'fr', null, 'H\'h\'mm') }}</b>
+                    {% endif %}
                     <br />
 
                     {% if not brioche.locked %}
