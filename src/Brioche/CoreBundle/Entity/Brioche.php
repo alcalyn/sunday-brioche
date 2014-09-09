@@ -230,6 +230,7 @@ class Brioche
             ->setSugar(1)
             ->setShipTimeMin(new \DateTime('8:00'))
             ->setShipTimeMax(new \DateTime('9:00'))
+            ->setCodeReduction(0)
             ->setValidRound(false)
             ->setValidType(false)
             ->setValidSize(false)
