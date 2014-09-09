@@ -12,4 +12,19 @@ use Doctrine\ORM\EntityRepository;
  */
 class CodeRepository extends EntityRepository
 {
+    public function findCode($code)
+    {
+        return $this->_em->createQueryBuilder()
+                ->select('c, ct, b')
+                ->from('BriocheCoreBundle:Code', 'c')
+                ->leftJoin('c.codeType', 'ct')
+                ->leftJoin('c.brioches', 'b')
+                ->where('c.code = :code')
+                ->setParameters(array(
+                    ':code' => $code,
+                ))
+                ->getQuery()
+                ->getOneOrNullResult()
+        ;
+    }
 }

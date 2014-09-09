@@ -17,3 +17,7 @@ brioche_core_maillist_controller:
 brioche_core_comment_controller:
     resource: "@BriocheCoreBundle/Controller/CommentController.php"
     type:     annotation
+
+brioche_core_code_controller:
+    resource: "@BriocheCoreBundle/Controller/CodeController.php"
+    type:     annotation

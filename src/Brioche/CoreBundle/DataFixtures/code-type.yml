@@ -1,0 +1,14 @@
+model: Brioche\CoreBundle\Entity\CodeType
+fixtures:
+    reduce10:
+        title: '-10% sur le prix total'
+        effect: 'price_coef:0.90'
+    reduce15:
+        title: '-15% sur le prix total'
+        effect: 'price_coef:0.85'
+    reduce20:
+        title: '-20% sur le prix total'
+        effect: 'price_coef:0.80'
+    free:
+        title: 'Brioche gratuite'
+        effect: 'price_coef:0.00'

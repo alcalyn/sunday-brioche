@@ -1,0 +1,46 @@
+{% if not brioche.locked %}
+    <tr class="code-promo-form">
+        <td class="desc" colspan="2">
+            <form id="form-promo" method="post" action="{{ path('code_apply') }}">
+                <div class="row">
+                    <div class="col-sm-6 col-md-8">
+                        <div class="form-group has-feedback{% if brioche.code %} has-success{% endif %}">
+                            <label class="required col-sm-4 control-label" for="code_promo">Code promo</label>
+                            <div class="col-sm-8">
+                                <input
+                                    id="code_promo"
+                                    type="text"
+                                    name="code_promo"
+                                    placeholder="Code promo"
+                                    class="form-control input-sm"
+                                    {% if brioche.code %}value="{{ brioche.code.code }}"{% endif %}
+                                />
+                                {% if brioche.code %}
+                                    <span class="glyphicon glyphicon-ok form-control-feedback"></span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <button class="btn btn-sm btn-success" name="code_promo" type="submit">
+                            <span class="glyphicon glyphicon-ok-circle"></span>
+                            <span class="button-apply-code-text">{% if brioche.code %}Remplacer{% else %}Appliquer{% endif %}</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </td>
+    </tr>
+{% endif %}
+
+{% if brioche.code %}
+    <tr class="code-promo">
+        <td class="desc">{{ brioche.code.codeType.title }}</td>
+        <td class="price">{{ (-brioche.codeReduction)|number_format(2, '.') }} €</td>
+    </tr>
+{% else %}
+    <tr class="code-promo" style="display:none">
+        <td class="desc"></td>
+        <td class="price"></td>
+    </tr>
+{% endif %}

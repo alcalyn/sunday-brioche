@@ -2,9 +2,12 @@ services:
     brioche_core.brioche_manager:
         class: Brioche\CoreBundle\Services\BriocheManager
         
+    brioche_core.code_manager:
+        class: Brioche\CoreBundle\Services\CodeManager
+        
     brioche_core.brioche_builder:
         class: Brioche\CoreBundle\Services\BriocheBuilder
-        arguments: [@doctrine.orm.entity_manager, @session, @brioche_core.brioche_manager]
+        arguments: [@doctrine.orm.entity_manager, @session, @brioche_core.brioche_manager, @brioche_core.code_manager]
         
     brioche_core.brioche_payment:
         class: Brioche\CoreBundle\Services\BriochePaymentService

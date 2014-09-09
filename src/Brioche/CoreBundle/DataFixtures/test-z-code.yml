@@ -1,0 +1,18 @@
+model: Brioche\CoreBundle\Entity\Code
+tags: [ test ]
+fixtures:
+    code1:
+        code: AREA4
+        codeType: reduce15
+        owner: 'Juju test'
+        multipleUses: false
+    code2:
+        code: TURNE
+        codeType: reduce10
+        multipleUses: true
+        round: r3
+    code3:
+        code: FREEE
+        codeType: free
+        multipleUses: false
+        owner: 'Test free'

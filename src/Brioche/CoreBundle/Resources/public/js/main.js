@@ -18,6 +18,7 @@ $(function () {
     initActions();
     initMailListFormAjax();
     initStarRating();
+    initFormPromo();
     Brioche.init();
 });
 
@@ -247,4 +248,59 @@ function initStarRating() {
             clearCaption: 'Votre note'
         });
     });
+}
+
+function initFormPromo() {
+    var $form = $('#form-promo');
+    var $input = $form.find('input[type=text]');
+    var $submit = $form.find('button[type=submit]');
+    
+    if ($form.size() > 0) {
+        $form.submit(function () {
+            var action = $form.attr('action');
+            var data = $form.serialize();
+            
+            $.post(action, data, function (r) {
+                $form.find('.form-control-feedback').remove();
+                $form.find('.has-success').removeClass('has-success');
+                $form.find('.has-error').removeClass('has-error');
+                
+                $input.removeAttr('disabled');
+                $submit.removeAttr('disabled');
+                
+                if (r.ok) {
+                    $input.closest('.has-feedback').addClass('has-success');
+                    $input.after('<span class="glyphicon glyphicon-ok form-control-feedback"></span>');
+                    
+                    $('.mail-list-bottom-message').html('Votre email a bien été enregistrée.');
+                    
+                    $('.code-promo').show();
+                    $('.code-promo .desc').html(r.codeTitle);
+                    $('.code-promo .price').html(r.codeReduction);
+                    $('.price-table .total .price').html(r.updatedPrice);
+                    $('.button-apply-code-text').html('Remplacer');
+                    
+                    $input.popover('destroy');
+                } else {
+                    $input
+                        .popover({
+                            content: r.reason
+                        })
+                        .popover('show')
+                        .on('hidden.bs.popover', function () {
+                            $input.popover('destroy');
+                        })
+                    ;
+                    
+                    $input.closest('.has-feedback').addClass('has-error');
+                    $input.after('<span class="glyphicon glyphicon-remove form-control-feedback"></span>');
+                }
+            });
+            
+            $input.attr('disabled', 'disabled');
+            $submit.attr('disabled', 'disabled');
+            
+            return false;
+        });
+    }
 }

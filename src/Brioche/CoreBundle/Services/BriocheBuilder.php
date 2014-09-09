@@ -3,8 +3,9 @@
 namespace Brioche\CoreBundle\Services;
 
 use Symfony\Component\HttpFoundation\Session\Session;
-use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityManagerInterface as EM;
 use Brioche\CoreBundle\Exception\BriocheCoreException;
+use Brioche\CoreBundle\Exception\BriocheException;
 use Brioche\CoreBundle\Entity\Brioche;
 use Brioche\CoreBundle\Entity\Client;
 use Brioche\CoreBundle\Entity\Round;
@@ -14,7 +15,7 @@ use Brioche\CoreBundle\Entity\Size;
 class BriocheBuilder
 {
     /**
-     * @var EntityManagerInterface
+     * @var EM
      */
     private $em;
     
@@ -34,15 +35,21 @@ class BriocheBuilder
     private $briocheManager;
     
     /**
-     * @param \Doctrine\ORM\EntityManagerInterface $em
+     * @var CodeManager
+     */
+    private $codeManager;
+    
+    /**
+     * @param EM $em
      * @param \Symfony\Component\HttpFoundation\Session\Session $session
      * @param \Brioche\CoreBundle\Services\BriocheManager $briocheManager
      */
-    public function __construct(EntityManagerInterface $em, Session $session, BriocheManager $briocheManager)
+    public function __construct(EM $em, Session $session, BriocheManager $briocheManager, CodeManager $codeManager)
     {
         $this->em = $em;
         $this->session = $session;
         $this->briocheManager = $briocheManager;
+        $this->codeManager = $codeManager;
         
         $this->loadBrioche();
     }
@@ -248,6 +255,36 @@ class BriocheBuilder
     }
     
     /**
+     * @param string $codeValue
+     * 
+     * @return \Brioche\CoreBundle\Entity\Code $code
+     * 
+     * @throws BriocheException if impossible to apply code
+     */
+    public function applyCode($codeValue)
+    {
+        $code = $this->em->getRepository('BriocheCoreBundle:Code')->findCode($codeValue);
+        
+        if (null === $code) {
+            throw new BriocheException('Ce code n\'existe pas.');
+        }
+        
+        if (!$code->getMultipleUses() && ($code->getBrioches()->count() > 0)) {
+            throw new BriocheException('Ce code a déjà été utilisé.');
+        }
+        
+        if ((null !== $code->getRound()) && ($this->brioche->getRound() !== $code->getRound())) {
+            throw new BriocheException('Ce code n\'est pas utilisable dans cette tournée.');
+        }
+        
+        $this->brioche->setCode($code);
+        
+        $this->updatePrice();
+        
+        return $code;
+    }
+    
+    /**
      * Lock current brioche and detach from builder
      */
     public function lockBrioche()
@@ -286,6 +323,17 @@ class BriocheBuilder
     {
         $price = $this->briocheManager->calculatePrice($this->brioche);
         $this->brioche->setPrice($price);
+        
+        $code = $this->brioche->getCode();
+        
+        if ($code) {
+            $reduction = $this->codeManager->getCodeReduction($code, $this->brioche);
+
+            $this->brioche
+                ->setPrice($price - $reduction)
+                ->setCodeReduction($reduction)
+            ;
+        }
         
         return $this;
     }

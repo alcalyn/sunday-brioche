@@ -9,9 +9,10 @@
             <td class="desc">Agrément : {{ brioche.extra.title }}</td>
             <td class="price">{{ brioche.extra.price|number_format(2, '.') }} €</td>
         </tr>
+        {% include 'BriocheCoreBundle:Brioche:_codePromo.html.twig' %}
         <tr class="total">
             <td class="desc">Total :</td>
-            <td class="price text-success">{{ brioche.price|number_format(2, '.') }} €</td>
+            <td class="price text-success">{{ brioche.price|number_format(2, '.') }}&nbsp;€</td>
         </tr>
     </tbody>
 </table>

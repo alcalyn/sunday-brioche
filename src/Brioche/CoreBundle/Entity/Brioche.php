@@ -100,6 +100,21 @@ class Brioche
     private $shipTimeMax;
     
     /**
+     * @var Code
+     * 
+     * @ORM\ManyToOne(targetEntity="Brioche\CoreBundle\Entity\Code", inversedBy="brioches")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $code;
+    
+    /**
+     * @var float
+     * 
+     * @ORM\Column(name="code_reduction", type="decimal", precision=4, scale=2)
+     */
+    private $codeReduction;
+    
+    /**
      * @var boolean
      * 
      * @ORM\Column(name="validRound", type="boolean")
@@ -507,6 +522,52 @@ class Brioche
     public function getPaid()
     {
         return $this->paid;
+    }
+
+    /**
+     * Set code
+     *
+     * @param \Brioche\CoreBundle\Entity\Code $code
+     * @return Brioche
+     */
+    public function setCode(Code $code = null)
+    {
+        $this->code = $code;
+
+        return $this;
+    }
+
+    /**
+     * Get code
+     *
+     * @return \Brioche\CoreBundle\Entity\Code 
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * Set codeReduction
+     *
+     * @param string $codeReduction
+     * @return Brioche
+     */
+    public function setCodeReduction($codeReduction)
+    {
+        $this->codeReduction = $codeReduction;
+
+        return $this;
+    }
+
+    /**
+     * Get codeReduction
+     *
+     * @return string 
+     */
+    public function getCodeReduction()
+    {
+        return $this->codeReduction;
     }
 
     /**
