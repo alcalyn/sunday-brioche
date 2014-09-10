@@ -5,8 +5,15 @@ body {
     -o-background-size: cover;
     background-size: cover;
     background-color:#333;
-    padding-top: 70px;
+    padding-top: 50px;
     overflow-x: hidden;
+}
+#main-container {
+    margin-top: 24px;
+}
+.jumbotron h2 {
+    font-size: 36px;
+    margin: 0;
 }
 h1 {
     margin: 0;
@@ -183,4 +190,11 @@ address abbr {
 }
 #form-promo .has-feedback .form-control-feedback {
     top: -2px;
+}
+.jumbotron {
+    background-color: rgba(255,255,255,0.5);
+}
+footer .copy {
+    padding: 24px 0;
+    color: lightgray;
 }

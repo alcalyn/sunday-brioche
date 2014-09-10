@@ -1,5 +1,22 @@
 {% extends "BriocheCoreBundle::layout.html.twig" %}
 
+{% block jumbotron %}
+<div class="jumbotron">
+    <div class="container text-center">
+        <h2>Brioche du Dimanche</h2>
+        <br />
+        <p>
+            Commandez et personnalisez votre brioche en ligne,<br />
+            puis faîtes vous livrer gratuitement en Essonne !
+        </p>
+        <br />
+        <p>
+            <a class="btn btn-primary btn-lg" href="{{ path('brioche_index') }}">Commander ma brioche</a>
+        </p>
+    </div>
+</div>
+{% endblock %}
+
 {% block body %}
 <section class="home-steps">
     <h2 class="text-center">Fonctionnement</h2>
