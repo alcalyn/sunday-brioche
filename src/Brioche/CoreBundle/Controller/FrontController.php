@@ -5,6 +5,7 @@ namespace Brioche\CoreBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 
 class FrontController extends Controller
 {
@@ -13,9 +14,25 @@ class FrontController extends Controller
      *      "/",
      *      name = "front_index"
      * )
+     * @Cache(smaxage="172800")
      * @Template()
      */
     public function indexAction()
+    {
+        return array();
+    }
+    
+    /**
+     * Rounds as fragment to include asyncronously with hinclude
+     * 
+     * @Route(
+     *      "/ajax/rounds",
+     *      name = "front_rounds"
+     * )
+     * @Cache(smaxage="120")
+     * @Template()
+     */
+    public function roundsAction()
     {
         $em = $this->getDoctrine()->getManager();
         $roundRepository = $em->getRepository('BriocheCoreBundle:Round');
@@ -33,6 +50,7 @@ class FrontController extends Controller
      *      "/produits-allergies",
      *      name = "front_products"
      * )
+     * @Cache(smaxage="172800")
      * @Template()
      */
     public function productsAction()
@@ -45,6 +63,7 @@ class FrontController extends Controller
      *      "/villes-desservies",
      *      name = "front_cities"
      * )
+     * @Cache(smaxage="172800")
      * @Template()
      */
     public function citiesAction()
@@ -62,6 +81,7 @@ class FrontController extends Controller
      *      "/contact",
      *      name = "front_contact"
      * )
+     * @Cache(smaxage="172800")
      * @Template()
      */
     public function contactAction()

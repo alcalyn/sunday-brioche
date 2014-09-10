@@ -24,22 +24,20 @@
         <form action="{{ path('brioche_round') }}" method="post" class="form-round">
             <input type="hidden" name="round" />
         </form>
-        <div>
-            <div class="panel">
-                <div class="panel-body">
-                    {% if rounds|length == 0 %}
-                        <p class="lead">
-                            Il n'y a pas de tournées prevues pour l'instant.
-                        </p>
-                    {% endif %}
-                    <p>
-                        Vous souhaitez reçevoir un email
-                        lorsqu'une nouvelle tournée est prévue ?
-                        Vous pouvez enregistrer votre adresse email ici :
+        <div class="panel">
+            <div class="panel-body">
+                {% if rounds|length == 0 %}
+                    <p class="lead">
+                        Il n'y a pas de tournées prevues pour l'instant.
                     </p>
-                    {{ form(mailForm) }}
-                    <p class="lead text-success mail-list-bottom-message"></p>
-                </div>
+                {% endif %}
+                <p>
+                    Vous souhaitez reçevoir un email
+                    lorsqu'une nouvelle tournée est prévue ?
+                    Vous pouvez enregistrer votre adresse email ici :
+                </p>
+                {{ form(mailForm) }}
+                <p class="lead text-success mail-list-bottom-message"></p>
             </div>
         </div>
     </div>

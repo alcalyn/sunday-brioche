@@ -19,6 +19,7 @@ $(function () {
     initMailListFormAjax();
     initStarRating();
     initFormPromo();
+    ajaxInclude();
     Brioche.init();
 });
 
@@ -303,4 +304,35 @@ function initFormPromo() {
             return false;
         });
     }
+}
+
+/**
+ * Load all ajax content.
+ * 
+ * Example:
+ * <div
+ *      class="ajax-include"
+ *      data-url="{{ path('route_name', {arg: 'args...'}) }}"
+ *      data-callback="myCallback"
+ * >
+ *   <p>Optional content to display while loading.</p>
+ * </div>
+ * 
+ * Will load "route_name" inside the div and will call myCallback() when loaded.
+ */
+function ajaxInclude() {
+    $('.ajax-include').each(function () {
+        var $item = $(this);
+        var url = $item.data('url');
+        var callback = $item.data('callback');
+        
+        $.get(url, {}, function (content) {
+            $item.html(content);
+            window[callback]();
+        });
+    });
+}
+
+function roundsAjaxCallback() {
+    BriocheRound.init();
 }

@@ -75,6 +75,18 @@
     <h2 class="text-center">Prochaines tournées</h2>
     <br />
     
-    {% include 'BriocheCoreBundle::_rounds.html.twig' %}
+    <div class="ajax-include" data-url="{{ path('front_rounds') }}" data-callback="roundsAjaxCallback">
+        {# Here will be loaded rounds asyncronously #}
+
+        <div class="row">
+            <div class="col-sm-4 col-sm-offset-4">
+                <div class="panel">
+                    <div class="panel-body">
+                        <p>Chargement des prochaines tournées...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 {% endblock %}
