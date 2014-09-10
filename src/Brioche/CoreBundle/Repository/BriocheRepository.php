@@ -15,7 +15,7 @@ class BriocheRepository extends EntityRepository
     private function findFull()
     {
         return $this->_em->createQueryBuilder()
-                ->select('b, r, s, e, cl, ci, m')
+                ->select('b, r, s, e, cl, ci, m, co, ct')
                 ->from('BriocheCoreBundle:Brioche', 'b')
                 ->leftJoin('b.round', 'r')
                 ->leftJoin('b.size', 's')
@@ -23,6 +23,8 @@ class BriocheRepository extends EntityRepository
                 ->leftJoin('b.client', 'cl')
                 ->leftJoin('cl.city', 'ci')
                 ->leftJoin('b.messages', 'm')
+                ->leftJoin('b.code', 'co')
+                ->leftJoin('co.codeType', 'ct')
                 ->orderBy('m.dateCreate')
         ;
     }
