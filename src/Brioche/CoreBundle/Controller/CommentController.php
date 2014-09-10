@@ -24,7 +24,7 @@ class CommentController extends Controller
         $comments = $em->getRepository('BriocheCoreBundle:Comment')->findAllEnabledComments();
         
         // Cache validation
-        $lastModified = $comments[0]->getDateCreate();
+        $lastModified = (count($comments) > 0) ? $comments[0]->getDateCreate() : new \DateTime('1991-11-09');
         $response = new Response();
         $response
             ->setLastModified($lastModified)
