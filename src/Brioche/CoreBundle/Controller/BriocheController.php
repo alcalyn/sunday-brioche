@@ -63,6 +63,7 @@ class BriocheController extends Controller
             'brioche'   => $brioche,
             'rounds'    => $rounds,
             'mailForm' => $mailForm->createView(),
+            'skipUrl' => $this->getNextStepUrl('round'),
         );
     }
     
@@ -279,15 +280,28 @@ class BriocheController extends Controller
     }
     
     /**
+     * Get next step of the brioche process
+     * 
+     * @param string $from current step
+     * 
+     * @return string
+     */
+    private function getNextStepUrl($from = null)
+    {
+        $step = $this->getBriocheBuilder()->getNextStep($from);
+        
+        return $this->generateUrl('brioche_'.$step);
+    }
+    
+    /**
      * Return a redirect to the next step of the brioche process
+     * 
+     * @param string $from current step
      * 
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     private function redirectNextStep($from = null)
     {
-        $step = $this->getBriocheBuilder()->getNextStep($from);
-        $path = 'brioche_'.$step;
-        
-        return $this->redirect($this->generateUrl($path));
+        return $this->redirect($this->getNextStepUrl($from));
     }
 }

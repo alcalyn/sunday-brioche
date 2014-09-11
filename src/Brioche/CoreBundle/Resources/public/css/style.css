@@ -9,7 +9,12 @@ body {
     overflow-x: hidden;
 }
 #main-container {
-    margin-top: 24px;
+    margin-top: 64px;
+}
+@media (max-width: 767px) {
+    #main-container {
+        margin-top: 24px;
+    }
 }
 .jumbotron h2 {
     font-size: 36px;
@@ -92,9 +97,6 @@ h1 {
 .fuelux .wizard {
     border-radius: 100px;
     overflow: hidden;
-}
-.fuelux .wizard .steps li:nth-child(1) {
-    border-radius: 100px 0 0 100px;
 }
 .fuelux .wizard .steps a {
     font-size: 16px;

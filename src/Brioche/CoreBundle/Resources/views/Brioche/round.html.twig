@@ -12,5 +12,12 @@
     <br />
     
     {% include 'BriocheCoreBundle::_rounds.html.twig' %}
+
+    {% if rounds|length == 0 %}
+        <a href="{{ skipUrl }}" class="btn btn-primary visible-xs">
+            <span class="glyphicon glyphicon-share-alt"></span>
+            Passer cette étape
+        </a>
+    {% endif %}
 </section>
 {% endblock %}

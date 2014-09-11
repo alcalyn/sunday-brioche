@@ -362,7 +362,7 @@ class BriocheBuilder
             
             $index = array_search($from, $steps);
             
-            if ($index) {
+            if (false !== $index) {
                 $stepFrom = $index + 1;
             }
         }
