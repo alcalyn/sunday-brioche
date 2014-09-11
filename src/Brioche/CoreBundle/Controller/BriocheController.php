@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Cookie;
 use Brioche\CoreBundle\Exception\BriocheCoreException;
 use Brioche\CoreBundle\Services\BriocheManager;
 use Brioche\CoreBundle\Services\BriocheBuilder;
@@ -184,7 +185,13 @@ class BriocheController extends Controller
         if ($clientForm->isValid()) {
             $this->getBriocheBuilder()->buildAddress();
             
-            return $this->redirectNextStep('address');
+            $response = $this->redirectNextStep('address');
+            
+            $cookie = new Cookie('brioche_client_fullname', $client->getFullName(), 0, '/', null, false, false);
+            
+            $response->headers->setCookie($cookie);
+            
+            return $response;
         }
         
         return array(

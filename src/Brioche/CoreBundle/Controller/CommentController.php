@@ -7,7 +7,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Brioche\CoreBundle\Entity\Comment;
 use Brioche\CoreBundle\Form\Type\CommentType;
 
 class CommentController extends Controller
@@ -35,14 +34,32 @@ class CommentController extends Controller
             return $response;
         }
         
-        $comment = new Comment();
-        $brioche = $this->get('brioche_core.brioche_builder')->getCurrentBrioche();
-        $comment->setAuthor($brioche->getClient()->getFullName());
-        $commentForm = $this->createForm(new CommentType(), $comment);
+        $commentForm = $this->createForm(new CommentType(), null, array(
+            'action' => $this->generateUrl('comment_post'),
+        ));
+        
+        return $this->render('BriocheCoreBundle:Comment:index.html.twig', array(
+            'comments' => $comments,
+            'commentForm' => $commentForm->createView(),
+        ), $response);
+    }
+    
+    /**
+     * @Route(
+     *      "/livre-d-or/publier-un-message",
+     *      name = "comment_post"
+     * )
+     * @Method({"POST"})
+     */
+    public function postAction(Request $request)
+    {
+        $commentForm = $this->createForm(new CommentType());
         
         $commentForm->handleRequest($request);
         
         if ($commentForm->isValid()) {
+            $comment = $commentForm->getData();
+            
             if (0 === strlen(trim($comment->getAuthor()))) {
                 $comment->setAuthor('Quelqu\'un');
             }
@@ -52,10 +69,5 @@ class CommentController extends Controller
             
             return $this->redirect($this->generateUrl('comment_index'));
         }
-        
-        return $this->render('BriocheCoreBundle:Comment:index.html.twig', array(
-            'comments' => $comments,
-            'commentForm' => $commentForm->createView(),
-        ), $response);
     }
 }

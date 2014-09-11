@@ -17,6 +17,7 @@ $(function () {
     
     initActions();
     initMailListFormAjax();
+    initGuestBook();
     initStarRating();
     initFormPromo();
     ajaxInclude();
@@ -236,6 +237,16 @@ function getReason(id) {
     }
 }
 
+function initGuestBook() {
+    if ($('section.guest-book').size() > 0) {
+        var fullName = getCookie('brioche_client_fullname');
+
+        if (fullName) {
+            $('#brioche_corebundle_comment_author').val(fullName);
+        }
+    }
+}
+
 function initStarRating() {
     $('.extended-rating').each(function () {
         var $this = $(this);
@@ -245,6 +256,14 @@ function initStarRating() {
             size: 'xs',
             defaultCaption: '{rating} sur 5',
             starCaptions: {},
+            starCaptionClasses: [
+                'label label-default',
+                'label label-danger',
+                'label label-warning',
+                'label label-warning',
+                'label label-success',
+                'label label-success'
+            ],
             clearButton: '',
             clearCaption: 'Votre note'
         });
@@ -335,4 +354,15 @@ function ajaxInclude() {
 
 function roundsAjaxCallback() {
     BriocheRound.init();
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) === ' ') c = c.substring(1);
+        if (c.indexOf(name) !== -1) return decodeURIComponent(c.substring(name.length,c.length).replace(/\+/g, ' '));
+    }
+    return "";
 }
