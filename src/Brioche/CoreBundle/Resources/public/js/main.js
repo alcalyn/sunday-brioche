@@ -354,6 +354,7 @@ function ajaxInclude() {
 
 function roundsAjaxCallback() {
     BriocheRound.init();
+    initMailListFormAjax();
 }
 
 function getCookie(cname) {
