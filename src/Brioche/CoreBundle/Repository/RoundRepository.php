@@ -27,4 +27,28 @@ class RoundRepository extends EntityRepository
                 ->getResult()
         ;
     }
+    
+    /**
+     * Return round $id.
+     * 
+     * WARNING: always use this method to get a round
+     * otherwise Round::getTotal() and Round::isFull() could return bad results
+     * 
+     * @param integer $id
+     * @return \Brioche\CoreBundle\Entity\Round
+     */
+    public function findRound($id)
+    {
+        return $this->_em->createQueryBuilder()
+                ->select('r, b')
+                ->from('BriocheCoreBundle:Round', 'r')
+                ->leftJoin('r.brioches', 'b', 'with', 'b.validated = true')
+                ->where('r.id = :id')
+                ->setParameters(array(
+                    ':id' => $id,
+                ))
+                ->getQuery()
+                ->getOneOrNullResult()
+        ;
+    }
 }

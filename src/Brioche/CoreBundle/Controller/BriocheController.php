@@ -37,20 +37,16 @@ class BriocheController extends Controller
      */
     public function roundAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
         $brioche = $this->getBriocheBuilder()->getCurrentBrioche();
         
         if ($brioche->getLocked()) {
             return $this->redirect($this->generateUrl('brioche_summary'));
         }
         
-        $roundRepository = $em->getRepository('BriocheCoreBundle:Round');
-        $rounds = $roundRepository->findFuturesRounds();
+        $roundRepository = $this->getDoctrine()->getManager()->getRepository('BriocheCoreBundle:Round');
         
         if ($request->isMethod('post')) {
-            $round = $roundRepository->findOneBy(array(
-                'id' => $request->get('round'),
-            ));
+            $round = $roundRepository->findRound($request->get('round'));
             
             $this->getBriocheBuilder()->buildRound($round);
             
@@ -61,9 +57,9 @@ class BriocheController extends Controller
         
         return array(
             'brioche'   => $brioche,
-            'rounds'    => $rounds,
-            'mailForm' => $mailForm->createView(),
-            'skipUrl' => $this->getNextStepUrl('round'),
+            'rounds'    => $roundRepository->findFuturesRounds(),
+            'mailForm'  => $mailForm->createView(),
+            'skipUrl'   => $this->getNextStepUrl('round'),
         );
     }
     
