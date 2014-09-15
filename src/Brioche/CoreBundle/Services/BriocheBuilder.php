@@ -142,7 +142,7 @@ class BriocheBuilder
     {
         $this->checkLocked();
         
-        if ($round->isFull()) {
+        if (!$round->isAvailable()) {
             $this->flashMessages
                 ->addDanger('La tournée que vous avez choisi est maintenant indisponible.')
             ;
@@ -334,7 +334,7 @@ class BriocheBuilder
             return false;
         }
         
-        if ($this->brioche->getRound()->isFull()) {
+        if (!$this->brioche->getRound()->isAvailable()) {
             $this->brioche
                 ->setRound(null)
                 ->setValidRound(false)

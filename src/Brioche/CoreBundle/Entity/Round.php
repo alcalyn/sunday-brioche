@@ -147,13 +147,17 @@ class Round
     }
     
     /**
-     * Return whether round is full or orders
+     * Return whether round can take an other order
      * 
      * @return boolean
      */
-    public function isFull()
+    public function isAvailable()
     {
-        return $this->getTotal() >= $this->getMaximum();
+        $now = new \DateTime();
+        $isNotTooLate = $this->getDate() >= $now->modify('+1 day');
+        $hasFreeCommand = $this->getTotal() < $this->getMaximum();
+        
+        return $isNotTooLate && $hasFreeCommand;
     }
 
     /**

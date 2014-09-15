@@ -3,12 +3,12 @@
         <div class="center-block tournees">
             {% if rounds|length > 0 %}
                 {% for round in rounds %}
-                    <div class="btn-group tournee{% if round.full %} full{% endif%}" data-round-id="{{ round.id }}">
+                    <div class="btn-group tournee{% if not round.available %} full{% endif%}" data-round-id="{{ round.id }}">
                         <button class="btn btn-primary btndate" role="button">
                             <p class="date">{{ round.date|localizeddate('none', 'none', 'fr', null, 'EEEE d MMMM') }}</p>
                             <p class="count"><small>Commandes :</small> {{ round.dummy + round.brioches|length }} / {{ round.maximum }}</p>
                         </button>
-                        {% if not round.full %}
+                        {% if round.available %}
                             <button class="btn btn-success btnaction" role="button">
                                 <span class="glyphicon glyphicon-ok"></span>
                             </button>

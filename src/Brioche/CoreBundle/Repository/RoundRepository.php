@@ -14,14 +14,16 @@ class RoundRepository extends EntityRepository
 {
     public function findFuturesRounds()
     {
+        $now = new \DateTime();
+        
         return $this->_em->createQueryBuilder()
                 ->select('r, b')
                 ->from('BriocheCoreBundle:Round', 'r')
                 ->leftJoin('r.brioches', 'b', 'with', 'b.validated = true')
-                ->where('r.date >= :now')
+                ->where('r.date >= :date')
                 ->orderBy('r.date')
                 ->setParameters(array(
-                    ':now' => new \DateTime(),
+                    ':date' => $now->modify('-4 days'),
                 ))
                 ->getQuery()
                 ->getResult()
@@ -32,7 +34,7 @@ class RoundRepository extends EntityRepository
      * Return round $id.
      * 
      * WARNING: always use this method to get a round
-     * otherwise Round::getTotal() and Round::isFull() could return bad results
+     * otherwise Round::getTotal() and Round::isAvailable() could return bad results
      * 
      * @param integer $id
      * @return \Brioche\CoreBundle\Entity\Round
