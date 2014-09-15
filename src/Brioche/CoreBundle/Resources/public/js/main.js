@@ -194,7 +194,7 @@ function initMailListFormAjax() {
                     
                     $submit.remove();
                     
-                    $('.mail-list-bottom-message').html('Votre email a bien été enregistrée.');
+                    $('.mail-list-bottom-message').html('Votre email a bien été enregistré.');
                     
                     $input.popover('destroy');
                 } else {
@@ -227,13 +227,13 @@ function initMailListFormAjax() {
 function getReason(id) {
     switch (id) {
         case 'form_invalid':
-            return 'L\'adresse email est invalide.';
+            return 'Cet email est invalide.';
         
         case 'duplicate':
-            return 'Cette adresse email est déjà enregistrée.';
+            return 'Cet email est déjà enregistré.';
         
         default:
-            return 'Erreur.';
+            return 'Erreur lors de l\'enregistrement.';
     }
 }
 
