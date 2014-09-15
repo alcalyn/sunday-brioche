@@ -7,7 +7,12 @@ services:
         
     brioche_core.brioche_builder:
         class: Brioche\CoreBundle\Services\BriocheBuilder
-        arguments: [@doctrine.orm.entity_manager, @session, @brioche_core.brioche_manager, @brioche_core.code_manager]
+        arguments:
+            - @doctrine.orm.entity_manager
+            - @session
+            - @brioche_core.brioche_manager
+            - @brioche_core.code_manager
+            - @brioche_core.flash_messages
         
     brioche_core.brioche_payment:
         class: Brioche\CoreBundle\Services\BriochePaymentService
@@ -24,3 +29,7 @@ services:
     brioche_core.mail_list:
         class: Brioche\CoreBundle\Services\MailListService
         arguments: [@form.factory]
+        
+    brioche_core.flash_messages:
+        class: Brioche\CoreBundle\Services\FlashMessages
+        arguments: [@session]

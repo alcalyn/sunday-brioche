@@ -54,7 +54,7 @@ class BriocheController extends Controller
             
             $this->getBriocheBuilder()->buildRound($round);
             
-            return $this->redirectNextStep('round');
+            return $this->redirectNextStep();
         }
         
         $mailForm = $this->get('brioche_core.mail_list')->createForm($this->generateUrl('maillist_add'));
@@ -250,15 +250,13 @@ class BriocheController extends Controller
         }
         
         if ($request->isMethod('post')) {
-            if ($request->get('valid')) {
-                $this->getBriocheBuilder()->lockBrioche();
-                
+            if ($request->get('valid') && $this->getBriocheBuilder()->lockBrioche()) {
                 $commandUrl = $this->generateUrl('command_index', array(
                     'token' => $brioche->getToken(),
                 ), true);
-                
+
                 $this->get('brioche_core.mail_factory')->sendBriocheValidatedMail($brioche->getClient(), $commandUrl);
-                
+
                 return $this->redirect($commandUrl.'#suivi-commande');
             }
             

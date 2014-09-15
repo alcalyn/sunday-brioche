@@ -3,7 +3,7 @@
 namespace Brioche\CoreBundle\Services;
 
 use Symfony\Component\HttpFoundation\Session\Session;
-use Doctrine\ORM\EntityManagerInterface as EM;
+use Doctrine\ORM\EntityManagerInterface;
 use Brioche\CoreBundle\Exception\BriocheCoreException;
 use Brioche\CoreBundle\Exception\BriocheException;
 use Brioche\CoreBundle\Entity\Brioche;
@@ -15,7 +15,7 @@ use Brioche\CoreBundle\Entity\Size;
 class BriocheBuilder
 {
     /**
-     * @var EM
+     * @var EntityManagerInterface
      */
     private $em;
     
@@ -40,16 +40,29 @@ class BriocheBuilder
     private $codeManager;
     
     /**
-     * @param EM $em
+     * @var FlashMessages
+     */
+    private $flashMessages;
+    
+    /**
+     * @param EntityManagerInterface $em
      * @param \Symfony\Component\HttpFoundation\Session\Session $session
      * @param \Brioche\CoreBundle\Services\BriocheManager $briocheManager
+     * @param \Brioche\CoreBundle\Services\CodeManager $codeManager
+     * @param \Brioche\CoreBundle\Services\FlashMessages $flashMessages
      */
-    public function __construct(EM $em, Session $session, BriocheManager $briocheManager, CodeManager $codeManager)
-    {
+    public function __construct(
+            EntityManagerInterface $em,
+            Session $session,
+            BriocheManager $briocheManager,
+            CodeManager $codeManager,
+            FlashMessages $flashMessages
+    ) {
         $this->em = $em;
         $this->session = $session;
         $this->briocheManager = $briocheManager;
         $this->codeManager = $codeManager;
+        $this->flashMessages = $flashMessages;
         
         $this->loadBrioche();
     }
@@ -73,6 +86,7 @@ class BriocheBuilder
         }
         
         $this->brioche = $brioche;
+        $this->checkRound();
         $this->updatePrice();
     }
     
@@ -123,23 +137,23 @@ class BriocheBuilder
      * @param \Brioche\CoreBundle\Entity\Round $round
      * 
      * @return \Brioche\CoreBundle\Services\BriocheBuilder
-     * 
-     * @throws BriocheCoreException if $round is full
      */
     public function buildRound(Round $round)
     {
         $this->checkLocked();
         
         if ($round->isFull()) {
-            throw new BriocheCoreException('This round is full');
+            $this->flashMessages
+                ->addDanger('La tournée que vous avez choisi est maintenant indisponible.')
+            ;
+        } else {
+            $this->brioche
+                ->setRound($round)
+                ->setValidRound(true)
+            ;
+
+            $this->saveBrioche();
         }
-        
-        $this->brioche
-            ->setRound($round)
-            ->setValidRound(true)
-        ;
-        
-        $this->saveBrioche();
         
         return $this;
     }
@@ -286,15 +300,19 @@ class BriocheBuilder
     
     /**
      * Lock current brioche and detach from builder
+     * 
+     * @return boolean
      */
     public function lockBrioche()
     {
+        $this->checkLocked();
+        
         if (!$this->brioche->isAllValid()) {
             throw new BriocheCoreException('Impossible to valid an incomplete brioche');
         }
         
-        if ($this->brioche->getLocked()) {
-            throw new BriocheCoreException('Brioche already locked');
+        if (!$this->checkRound()) {
+            return false;
         }
         
         $this->brioche
@@ -302,6 +320,34 @@ class BriocheBuilder
             ->setDateLock(new \DateTime())
             ->setToken($this->briocheManager->generateToken())
         ;
+    }
+    
+    /**
+     * Check if brioche round is still available
+     * Add a flash message if not
+     * 
+     * @return boolean whether round is not longer available
+     */
+    public function checkRound()
+    {
+        if (null === $this->brioche->getRound()) {
+            return false;
+        }
+        
+        if ($this->brioche->getRound()->isFull()) {
+            $this->brioche
+                ->setRound(null)
+                ->setValidRound(false)
+            ;
+            
+            $this->flashMessages
+                ->addDanger('La tournée que vous avez choisi est maintenant indisponible.')
+            ;
+                
+            return false;
+        }
+        
+        return true;
     }
     
     /**
