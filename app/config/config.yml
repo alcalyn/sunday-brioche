@@ -77,10 +77,10 @@ swiftmailer:
         type: %swiftmailer_spool_type%
         path: "%kernel.root_dir%/spool"
 
-fos_user:
-    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
-    firewall_name: main
-    user_class: Brioche\CoreBundle\Entity\Account
+#fos_user:
+#    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+#    firewall_name: main
+#    user_class: Brioche\CoreBundle\Entity\Account
 
 # Payplug configuration
 alcalyn_payplug:

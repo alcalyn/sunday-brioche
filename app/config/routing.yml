@@ -6,6 +6,6 @@ brioche_core:
     resource: "@BriocheCoreBundle/Resources/config/routing.yml"
     prefix:   /
 
-brioche_core_fosuser:
-    resource: "@BriocheCoreBundle/Resources/config/routingFosUser.yml"
-    prefix:   /
+#brioche_core_fosuser:
+#    resource: "@BriocheCoreBundle/Resources/config/routingFosUser.yml"
+#    prefix:   /

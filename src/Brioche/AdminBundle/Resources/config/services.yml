@@ -1,0 +1,7 @@
+parameters:
+#    brioche_admin.example.class: Brioche\AdminBundle\Example
+
+services:
+#    brioche_admin.example:
+#        class: %brioche_admin.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

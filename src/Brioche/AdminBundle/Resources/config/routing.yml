@@ -1,0 +1,3 @@
+brioche_admin_homepage:
+    resource: "@BriocheAdminBundle/Controller/DefaultController.php"
+    type:     annotation

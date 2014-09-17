@@ -143,7 +143,15 @@ class Round
      */
     public function getTotal()
     {
-        return $this->dummy + $this->getBrioches()->count();
+        $count = 0;
+        
+        foreach ($this->getBrioches() as $brioche) {
+            if ($brioche->getValidated()) {
+                $count++;
+            }
+        }
+        
+        return $this->dummy + $count;
     }
     
     /**

@@ -1,0 +1,29 @@
+<h2>Livre d'or</h2>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            Messages du livre d'or ({{ comments|length }})
+        </h4>
+    </div>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Note</th>
+                <th>Auteur</th>
+                <th>Message</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for comment in comments %}
+                <tr class="{{ (comment.note < 2) ? 'danger' : ((comment.note < 4) ? 'warning' : 'success') }}">
+                    <td><b>{{ comment.note }}</b> / 5</td>
+                    <td>{{ comment.author }}</td>
+                    <td>{{ comment.content|nl2br }}</td>
+                    <td>{{ comment.dateCreate|date('j/m/y H:i') }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

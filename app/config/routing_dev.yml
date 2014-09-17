@@ -15,3 +15,7 @@ _main:
 
 console:
     resource: "@CoreSphereConsoleBundle/Resources/config/routing.yml"
+
+brioche_admin:
+    resource: "@BriocheAdminBundle/Resources/config/routing.yml"
+    prefix:   /

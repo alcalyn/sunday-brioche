@@ -1,0 +1,25 @@
+<h2>Liste d'emails</h2>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            Emails à notifier ({{ mails|length }})
+        </h4>
+    </div>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Adresse Email</th>
+                <th>Date d'ajout</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for mail in mails %}
+                <tr>
+                    <td>{{ mail.mail }}</td>
+                    <td>{{ mail.dateCreate|date('j/m/y H:i') }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

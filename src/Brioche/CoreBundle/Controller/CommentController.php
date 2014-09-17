@@ -64,6 +64,7 @@ class CommentController extends Controller
                 $comment->setAuthor('Quelqu\'un');
             }
             
+            $em = $this->getDoctrine()->getManager();
             $em->persist($comment);
             $em->flush();
             

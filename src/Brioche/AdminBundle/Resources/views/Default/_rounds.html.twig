@@ -1,0 +1,117 @@
+<h2>Tournées et commandes</h2>
+
+<div class="panel-group" id="accordion">
+    {% for round in rounds %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#tournee-{{ round.id }}">
+                        <span class="text-capitalize">{{ round.date|localizeddate('none', 'none', 'fr', null, 'EEEE d MMMM') }}</span>
+                        ({{ round.total }} / {{ round.maximum }})
+                        -
+                        {% transchoice (round.total - round.dummy) %}{0} Pas de commande|{1} <b>Une</b> commande|]1,Inf] <b>%count%</b> commandes{% endtranschoice %}
+                    </a>
+                </h4>
+            </div>
+            <div id="tournee-{{ round.id }}" class="panel-collapse collapse{% if round.isNext %} in{% endif %}">
+                <div class="panel-body">
+                </div>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Type</th>
+                            <th>Taille</th>
+                            <th>Extra</th>
+                            <th>Client</th>
+                            <th>Adresse</th>
+                            <th>Heure</th>
+                            <th>Prix</th>
+                            <th>État</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for brioche in round.brioches %}
+                            <tr class="{% if brioche.validated %}success{% elseif brioche.locked %}info{% endif %}">
+                                <td>{{ brioche.id }}</td>
+                                <td>{{ brioche.validType ? (brioche.type ? 'Parisienne' : 'Vendéenne') : '-' }}</td>
+                                <td>{{ brioche.validSize ? brioche.size.value : '-' }}</td>
+                                <td>
+                                    {% if brioche.validPerso %}
+                                        {% if brioche.butter != 2 %}
+                                            {{ (brioche.butter == 1) ? 'Moins de beurre' : 'Plus de beurre' }}
+                                            <br />
+                                        {% endif %}
+                                        {% if brioche.sugar != 2 %}
+                                            {{ (brioche.sugar == 1) ? 'Moins de sucre' : 'Plus de sucre' }}
+                                            <br />
+                                        {% endif %}
+                                        {{ brioche.extra.title }}
+                                    {% else %}
+                                        -
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if brioche.validAddress %}
+                                        {{ brioche.client.fullName }}<br />
+                                        {{ brioche.client.email }}
+                                    {% else %}
+                                        -
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if brioche.validAddress %}
+                                        <address style="margin-bottom:0">
+                                            {{ brioche.client.address }}<br />
+                                            {{ brioche.client.city.postalcode }} {{ brioche.client.city.title }}<br />
+                                        </address>
+                                    {% else %}
+                                        -
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if brioche.validTime %}
+                                        {% if brioche.shipTimeMin == brioche.shipTimeMax %}
+                                            À <b>{{ brioche.shipTimeMin|localizeddate('none', 'none', 'fr', null, 'H\'h\'mm') }}</b>
+                                        {% else %}
+                                            Entre <b>{{ brioche.shipTimeMin|localizeddate('none', 'none', 'fr', null, 'H\'h\'mm') }}</b>
+                                            et <b>{{ brioche.shipTimeMax|localizeddate('none', 'none', 'fr', null, 'H\'h\'mm') }}</b>
+                                        {% endif %}
+                                    {% else %}
+                                        -
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if brioche.allValid %}
+                                        Prix : {{ brioche.price|number_format(2, '.') }}&nbsp;€<br />
+                                        Payé : {{ brioche.paid|number_format(2, '.') }}&nbsp;€
+                                    {% else %}
+                                        -
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if brioche.validated %}
+                                        Payée<br />
+                                        le {{ brioche.dateValidate|date('j/m H:i') }}
+                                    {% elseif brioche.locked %}
+                                        Verrouillée<br />
+                                        le {{ brioche.dateLock|date('j/m H:i') }}
+                                    {% else %}
+                                        Créée<br />
+                                        le {{ brioche.dateCreate|date('j/m H:i') }}
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if brioche.locked and brioche.token %}
+                                        <a target="_blank" href="{{ path('command_index', {token: brioche.token}) }}">Voir</a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endfor %}
+</div>
