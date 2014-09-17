@@ -36,6 +36,7 @@ class DefaultController extends Controller
     public function sendMailAction(Request $request)
     {
         $mailForm = $this->getMailForm();
+        $flashMsg = $this->get('brioche_core.flash_messages');
         
         $mailForm->handleRequest($request);
         
@@ -44,13 +45,13 @@ class DefaultController extends Controller
             
             try {
                 $this->get('brioche_core.mail_factory')->sendSimpleMail($mail->getTo(), $mail->getContent());
+                
+                $flashMsg->addSuccess('Mail envoyé à '.$mail->getTo());
             } catch (\Exception $e) {
-                $this->get('brioche_core.flash_messages')->addDanger('Erreur lors de l\'envoi du mail : "'.$e->getMessage().'"');
+                $flashMsg->addDanger('Erreur lors de l\'envoi du mail : "'.$e->getMessage().'"');
             }
-            
-            $this->get('brioche_core.flash_messages')->addSuccess('Mail envoyé à '.$mail->getTo());
         } else {
-            $this->get('brioche_core.flash_messages')->addDanger('Erreur dans le formulaire d\'envoi');
+            $flashMsg->addDanger('Erreur dans le formulaire d\'envoi');
         }
         
         return $this->redirect($this->generateUrl('admin_index'));

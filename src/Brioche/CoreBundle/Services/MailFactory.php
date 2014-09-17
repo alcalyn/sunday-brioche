@@ -7,6 +7,7 @@ use Swift_Message;
 use Swift_Mime_Message;
 use Symfony\Component\Templating\EngineInterface;
 use Brioche\CoreBundle\Entity\Client;
+use Brioche\CoreBundle\Exception\BriocheCoreException;
 
 class MailFactory
 {
@@ -145,11 +146,15 @@ class MailFactory
     
     /**
      * @param Swift_Mime_Message $mail
+     * 
+     * @throws BriocheCoreException if an error occured
      */
     public function send(Swift_Mime_Message $mail)
     {
         if (self::MAILS_ENABLED) {
-            $this->mailer->send($mail);
+            if (0 === $this->mailer->send($mail)) {
+                throw new BriocheCoreException('Error when sending mail');
+            }
         }
     }
 }
