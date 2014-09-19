@@ -21,6 +21,7 @@ class DefaultController extends Controller
     {
         return array(
             'rounds' => $this->findAllRounds(),
+            'briochesWithoutRound' => $this->findAllBriocheWithoutRound(),
             'mails' => $this->findAllMails(),
             'comments' => $this->findAllComments(),
             'mailForm' => $this->getMailForm()->createView(),
@@ -90,6 +91,20 @@ class DefaultController extends Controller
         }
         
         return $rounds;
+    }
+    
+    private function findAllBriocheWithoutRound()
+    {
+        return $this->getDoctrine()->getRepository('BriocheCoreBundle:Brioche')->createQueryBuilder('b')
+                ->select('b, s, e, c, city')
+                ->leftJoin('b.size', 's')
+                ->leftJoin('b.extra', 'e')
+                ->leftJoin('b.client', 'c')
+                ->leftJoin('c.city', 'city')
+                ->addOrderBy('b.dateCreate', 'desc')
+                ->getQuery()
+                ->getResult()
+        ;
     }
     
     private function findAllMails()

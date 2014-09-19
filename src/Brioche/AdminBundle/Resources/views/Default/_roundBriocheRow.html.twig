@@ -1,0 +1,75 @@
+<tr class="{% if brioche.validated %}success{% elseif brioche.locked %}info{% endif %}">
+    <td>{{ brioche.id }}</td>
+    <td>{{ brioche.validType ? (brioche.type ? 'Parisienne' : 'Vendéenne') : '-' }}</td>
+    <td>{{ brioche.validSize ? brioche.size.value : '-' }}</td>
+    <td>
+        {% if brioche.validPerso %}
+            {% if brioche.butter != 2 %}
+                {{ (brioche.butter == 1) ? 'Moins de beurre' : 'Plus de beurre' }}
+                <br />
+            {% endif %}
+            {% if brioche.sugar != 2 %}
+                {{ (brioche.sugar == 1) ? 'Moins de sucre' : 'Plus de sucre' }}
+                <br />
+            {% endif %}
+            {{ brioche.extra.title }}
+        {% else %}
+            -
+        {% endif %}
+    </td>
+    <td>
+        {% if brioche.validAddress %}
+            {{ brioche.client.fullName }}<br />
+            {{ brioche.client.email }}
+        {% else %}
+            -
+        {% endif %}
+    </td>
+    <td>
+        {% if brioche.validAddress %}
+            <address style="margin-bottom:0">
+                {{ brioche.client.address }}<br />
+                {{ brioche.client.city.postalcode }} {{ brioche.client.city.title }}<br />
+            </address>
+        {% else %}
+            -
+        {% endif %}
+    </td>
+    <td>
+        {% if brioche.validTime %}
+            {% if brioche.shipTimeMin == brioche.shipTimeMax %}
+                À <b>{{ brioche.shipTimeMin|localizeddate('none', 'none', 'fr', null, 'H\'h\'mm') }}</b>
+            {% else %}
+                Entre <b>{{ brioche.shipTimeMin|localizeddate('none', 'none', 'fr', null, 'H\'h\'mm') }}</b>
+                et <b>{{ brioche.shipTimeMax|localizeddate('none', 'none', 'fr', null, 'H\'h\'mm') }}</b>
+            {% endif %}
+        {% else %}
+            -
+        {% endif %}
+    </td>
+    <td>
+        {% if brioche.allValid %}
+            Prix : {{ brioche.price|number_format(2, '.') }}&nbsp;€<br />
+            Payé : {{ brioche.paid|number_format(2, '.') }}&nbsp;€
+        {% else %}
+            -
+        {% endif %}
+    </td>
+    <td>
+        {% if brioche.validated %}
+            Payée<br />
+            le {{ brioche.dateValidate|date('j/m H:i') }}
+        {% elseif brioche.locked %}
+            Verrouillée<br />
+            le {{ brioche.dateLock|date('j/m H:i') }}
+        {% else %}
+            Créée<br />
+            le {{ brioche.dateCreate|date('j/m H:i') }}
+        {% endif %}
+    </td>
+    <td>
+        {% if brioche.locked and brioche.token %}
+            <a target="_blank" href="{{ path('command_index', {token: brioche.token}) }}">Voir</a>
+        {% endif %}
+    </td>
+</tr>
