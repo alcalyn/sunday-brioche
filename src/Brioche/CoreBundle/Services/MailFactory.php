@@ -12,13 +12,6 @@ use Brioche\CoreBundle\Exception\BriocheCoreException;
 class MailFactory
 {
     /**
-     * Set to false to disable mail in dev
-     * 
-     * @var boolean
-     */
-    const MAILS_ENABLED = true;
-    
-    /**
      * @var EngineInterface
      */
     private $templating;
@@ -151,10 +144,8 @@ class MailFactory
      */
     public function send(Swift_Mime_Message $mail)
     {
-        if (self::MAILS_ENABLED) {
-            if (0 === $this->mailer->send($mail)) {
-                throw new BriocheCoreException('Error when sending mail');
-            }
+        if (0 === $this->mailer->send($mail)) {
+            throw new BriocheCoreException('Error when sending mail');
         }
     }
 }

@@ -20,7 +20,7 @@ parameters:
     debug_toolbar:          true
     debug_redirects:        false
     use_assetic_controller: true
-    swiftmailer_spool_type: memory # 'memory': send immaediately, or 'file': use spool
+    swiftmailer_spool: { type: memory } # { type: memory } : send immaediately ; { type: file, path: "%kernel.root_dir%/spool" } : use spool
 
     payplug_account_url:                ~
     payplug_account_amount_min:         ~
