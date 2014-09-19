@@ -1,19 +1,31 @@
 <section class="thread message">
-    <div class="panel">
-        <div class="panel-body">
-            <p class="lead">{{ message.content|nl2br }}</p>
-            <p class="text-right">
-                {% if message.author is constant('Brioche\\CoreBundle\\Entity\\Message::AUTHOR_CLIENT') %}
-                    <b>{{ message.brioche.client.fullName }}</b>,
-                {% elseif message.author is constant('Brioche\\CoreBundle\\Entity\\Message::AUTHOR_BRIOCHE_DU_DIMANCHE') %}
-                    <b>Brioche du Dimanche</b>,
-                {% else %}
-                    <b>Robot</b>,
-                {% endif %}
+    <div class="row">
+        <div class="
+             {% if message.author is constant('Brioche\\CoreBundle\\Entity\\Message::AUTHOR_CLIENT') %}
+                 col-sm-10 col-sm-offset-2
+             {% elseif message.author is constant('Brioche\\CoreBundle\\Entity\\Message::AUTHOR_BRIOCHE_DU_DIMANCHE') %}
+                 col-sm-10
+             {% else %}
+                 col-sm-12
+             {% endif %}
+             ">
+            <div class="panel">
+                <div class="panel-body">
+                    <p class="lead">{{ message.content|nl2br }}</p>
+                    <p class="text-right">
+                        {% if message.author is constant('Brioche\\CoreBundle\\Entity\\Message::AUTHOR_CLIENT') %}
+                            <b>{{ message.brioche.client.fullName }}</b>,
+                        {% elseif message.author is constant('Brioche\\CoreBundle\\Entity\\Message::AUTHOR_BRIOCHE_DU_DIMANCHE') %}
+                            <b>Brioche du Dimanche</b>,
+                        {% else %}
+                            <b>Robot</b>,
+                        {% endif %}
 
-                le <span class="text-capitalize">{{ message.dateCreate|localizeddate('none', 'none', 'fr', null, 'EEEE d MMMM') }}</span>
-                à {{ message.dateCreate|localizeddate('none', 'none', 'fr', null, 'H\'h\'mm') }}
-            </p>
+                        le <span class="text-capitalize">{{ message.dateCreate|localizeddate('none', 'none', 'fr', null, 'EEEE d MMMM') }}</span>
+                        à {{ message.dateCreate|localizeddate('none', 'none', 'fr', null, 'H\'h\'mm') }}
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
 </section>

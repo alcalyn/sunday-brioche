@@ -69,9 +69,11 @@ class CommandController extends Controller
         $messageForm->handleRequest($request);
         
         if ($messageForm->isValid()) {
+            $env = $this->container->getParameter('kernel.environment');
+            
             $message
                 ->setBrioche($brioche)
-                ->setAuthor(Message::AUTHOR_CLIENT)
+                ->setAuthor(('dev' === $env) ? Message::AUTHOR_BRIOCHE_DU_DIMANCHE : Message::AUTHOR_CLIENT)
             ;
             
             $em->persist($message);
