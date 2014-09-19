@@ -1,0 +1,7 @@
+.jumbotron {
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#80ffffff', endColorstr='#80ffffff');
+}
+section.size select {
+    width: 54px;
+    height: 28px;
+}

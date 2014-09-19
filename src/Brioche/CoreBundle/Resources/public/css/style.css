@@ -8,6 +8,9 @@ body {
     padding-top: 50px;
     overflow-x: hidden;
 }
+a {
+    color: #dd4814;
+}
 #main-container {
     margin-top: 64px;
 }

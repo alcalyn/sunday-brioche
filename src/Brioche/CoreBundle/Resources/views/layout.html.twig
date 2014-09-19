@@ -7,8 +7,25 @@
         
         <title>{% block title %}Brioche du Dimanche Essonne{% endblock %}</title>
 
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="//bootswatch.com/united/bootstrap.min.css">
+        <!--[if gte IE 9 | !IE ]><!-->
+            <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+            <link rel="stylesheet" href="//bootswatch.com/united/bootstrap.min.css">
+        <!--<![endif]-->
+        <!--[if lt IE 9]>
+            {% stylesheets
+                'bundles/briochecore/css/ie/bootstrap.min.css'
+                filter='cssrewrite'
+            %}
+                <link rel="stylesheet" type="text/css" href="{{ asset_url }}" />
+            {% endstylesheets %}
+            {% stylesheets
+                'bundles/briochecore/css/ie/bootstrap.united.min.css'
+                filter='cssrewrite'
+            %}
+                <link rel="stylesheet" type="text/css" href="{{ asset_url }}" />
+            {% endstylesheets %}
+        <![endif]-->
+        
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css">
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/select2/3.5.0/select2.min.css">
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/select2/3.5.0/select2-bootstrap.min.css">
@@ -20,6 +37,15 @@
         %}
             <link rel="stylesheet" type="text/css" href="{{ asset_url }}" />
         {% endstylesheets %}
+        
+        <!--[if lt IE 9]>
+            {% stylesheets
+                'bundles/briochecore/css/ie/style.css'
+                filter='cssrewrite'
+            %}
+                <link rel="stylesheet" type="text/css" href="{{ asset_url }}" />
+            {% endstylesheets %}
+        <![endif]-->
 
         {% block extra_css %}{% endblock %}
 
