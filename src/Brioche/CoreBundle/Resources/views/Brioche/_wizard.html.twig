@@ -45,7 +45,10 @@
                         {% if app.request.get('_route') == step.route %}active{% endif %}
                         {% if step.complete %}complete{% endif %}
                     ">
-                        <a href="{{ path(step.route) }}">{{ step.title }}</a>
+                        <a href="{{ path(step.route) }}">
+                            {% if step.complete %}<span class="glyphicon glyphicon-ok"></span>{% endif %}
+                            {{ step.title }}
+                        </a>
                         <span class="chevron"></span>
                     </li>
                 {% endfor %}
