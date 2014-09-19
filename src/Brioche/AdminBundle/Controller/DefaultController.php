@@ -101,6 +101,7 @@ class DefaultController extends Controller
                 ->leftJoin('b.extra', 'e')
                 ->leftJoin('b.client', 'c')
                 ->leftJoin('c.city', 'city')
+                ->where('b.round is null')
                 ->addOrderBy('b.dateCreate', 'desc')
                 ->getQuery()
                 ->getResult()
