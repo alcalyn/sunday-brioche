@@ -3,23 +3,27 @@
 <div class="panel panel-default">
     <div class="panel-heading">
         <h4 class="panel-title">
-            Emails à notifier ({{ mails|length }})
+            <a data-toggle="collapse" data-parent="#accordion" href="#mails">
+                Emails à notifier ({{ mails|length }})
+            </a>
         </h4>
     </div>
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th>Adresse Email</th>
-                <th>Date d'ajout</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for mail in mails %}
+    <div id="mails" class="panel-collapse collapse in">
+        <table class="table table-hover">
+            <thead>
                 <tr>
-                    <td>{{ mail.mail }}</td>
-                    <td>{{ mail.dateCreate|date('j/m/y H:i') }}</td>
+                    <th>Adresse Email</th>
+                    <th>Date d'ajout</th>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                {% for mail in mails %}
+                    <tr>
+                        <td>{{ mail.mail }}</td>
+                        <td>{{ mail.dateCreate|date('j/m/y H:i') }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>

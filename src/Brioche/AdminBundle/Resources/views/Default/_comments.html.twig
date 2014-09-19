@@ -3,39 +3,43 @@
 <div class="panel panel-default">
     <div class="panel-heading">
         <h4 class="panel-title">
-            Messages du livre d'or ({{ comments|length }})
+            <a data-toggle="collapse" data-parent="#accordion" href="#comments">
+                Messages du livre d'or ({{ comments|length }})
+            </a>
         </h4>
     </div>
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th>Note</th>
-                <th>Auteur</th>
-                <th>Message</th>
-                <th>Date</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for comment in comments %}
-                <tr class="{{ (comment.note < 2) ? 'danger' : ((comment.note < 4) ? 'warning' : 'success') }} {% if comment.disabled %}disabled{% endif %}">
-                    <td><b>{{ comment.note }}</b> / 5</td>
-                    <td>{{ comment.author }}</td>
-                    <td>{{ comment.content|nl2br }}</td>
-                    <td>{{ comment.dateCreate|date('j/m/y H:i') }}</td>
-                    <td>
-                        {% if comment.disabled %}
-                            <a href="{{ path('admin_author_comment', {id: comment.id, status: 'enable'}) }}">
-                                <span class="label label-default">Refusé</span>
-                            </a>
-                        {% else %}
-                            <a href="{{ path('admin_author_comment', {id: comment.id, status: 'disable'}) }}">
-                                <span class="label label-success">Visible</span>
-                            </a>
-                        {% endif %}
-                    </td>
+    <div id="comments" class="panel-collapse collapse in">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Note</th>
+                    <th>Auteur</th>
+                    <th>Message</th>
+                    <th>Date</th>
+                    <th>Status</th>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                {% for comment in comments %}
+                    <tr class="{{ (comment.note < 2) ? 'danger' : ((comment.note < 4) ? 'warning' : 'success') }} {% if comment.disabled %}disabled{% endif %}">
+                        <td><b>{{ comment.note }}</b> / 5</td>
+                        <td>{{ comment.author }}</td>
+                        <td>{{ comment.content|nl2br }}</td>
+                        <td>{{ comment.dateCreate|date('j/m/y H:i') }}</td>
+                        <td>
+                            {% if comment.disabled %}
+                                <a href="{{ path('admin_author_comment', {id: comment.id, status: 'enable'}) }}">
+                                    <span class="label label-default">Refusé</span>
+                                </a>
+                            {% else %}
+                                <a href="{{ path('admin_author_comment', {id: comment.id, status: 'disable'}) }}">
+                                    <span class="label label-success">Visible</span>
+                                </a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
