@@ -112,6 +112,22 @@ class DefaultController extends Controller
         ;
     }
     
+    /**
+     * @Route(
+     *      "/admin/author-comment/{id}/{status}",
+     *      name = "admin_author_comment"
+     * )
+     */
+    public function authorCommentAction($id, $status)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $comment = $em->getRepository('BriocheCoreBundle:Comment')->find($id);
+        $comment->setDisabled('enable' !== $status);
+        $em->flush();
+        
+        return $this->redirect($this->generateUrl('admin_index'));
+    }
+    
     private function getMailForm()
     {
         return $this->createForm(new MailType(), null, array(
