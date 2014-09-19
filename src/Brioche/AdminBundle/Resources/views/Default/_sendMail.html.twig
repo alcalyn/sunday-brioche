@@ -3,14 +3,18 @@
 <div class="panel panel-default">
     <div class="panel-heading">
         <h4 class="panel-title">
-            Envoyer un email de Brioche du Dimanche
+            <a data-toggle="collapse" data-parent="#accordion" href="#send-mail">
+                Envoyer un email de Brioche du Dimanche
+            </a>
         </h4>
     </div>
-    <div class="panel-body">
-        {{ form(mailForm) }}
-        
-        Cordialement,<br />
-        <a style="color: #428bca" href="#">http://brioche-du-dimanche.com</a><br />
-        contact@brioche-du-dimanche.com
+    <div id="send-mail" class="panel-collapse collapse">
+        <div class="panel-body">
+            {{ form(mailForm) }}
+
+            Cordialement,<br />
+            <a style="color: #428bca" href="#">http://brioche-du-dimanche.com</a><br />
+            contact@brioche-du-dimanche.com
+        </div>
     </div>
 </div>
