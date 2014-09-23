@@ -5,3 +5,7 @@ section.size select {
     width: 54px;
     height: 28px;
 }
+.nav img {
+    height: 32px;
+    width: 32px;
+}
