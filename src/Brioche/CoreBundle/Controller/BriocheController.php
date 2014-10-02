@@ -205,7 +205,7 @@ class BriocheController extends Controller
             
             $response = $this->redirectNextStep('address');
             
-            $cookie = new Cookie('brioche_client_fullname', $client->getFullName(), 0, '/', null, false, false);
+            $cookie = new Cookie('brioche_client_fullname', $client->getFirstName(), 0, '/', null, false, false);
             
             $response->headers->setCookie($cookie);
             
