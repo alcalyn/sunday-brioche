@@ -104,6 +104,91 @@ class BriocheBuilder
     }
     
     /**
+     * Push current brioche to history and create a new one
+     * 
+     * @return BriocheBuilder
+     */
+    public function saveToHistory()
+    {
+        $this->addToHistory($this->brioche);
+        
+        $brioche = $this->createDefaultBriocheForClient($this->brioche->getClient());
+        
+        $this->brioche = $brioche;
+        
+        return $this->saveBrioche();
+    }
+    
+    /**
+     * Add a brioche to history so user can create another one
+     * or return to the command page of an old brioche
+     * 
+     * @param \Brioche\CoreBundle\Entity\Brioche $brioche
+     * 
+     * @return BriocheBuilder
+     */
+    public function addToHistory(Brioche $brioche)
+    {
+        if (!$brioche->getLocked()) {
+            throw new BriocheCoreException('Cannot add to history a non locked brioche');
+        }
+        
+        $history = $this->getHistory();
+        $history[$brioche->getId()] = true;
+        
+        $this->session->set('briochesHistory', $history);
+        
+        return $this;
+    }
+    
+    /**
+     * Return an array of brioches id as key
+     * which are already locked by the current user
+     * 
+     * @return array
+     */
+    public function getHistory()
+    {
+        if ($this->session->has('briochesHistory')) {
+            return $this->session->get('briochesHistory');
+        } else {
+            return array();
+        }
+    }
+    
+    /**
+     * Return array of Brioche which are in the history
+     * 
+     * @return Brioche[]
+     */
+    public function getHistoryFull()
+    {
+        $history = $this->em
+            ->getRepository('BriocheCoreBundle:Brioche')
+            ->findFullByIds(array_keys($this->getHistory()))
+        ;
+        
+        usort($history, $this->sortHistoryCallbackBuilder());
+        
+        return $history;
+    }
+    
+    /**
+     * Return closure which sort an array of brioche to display in history
+     * 
+     * @return \Closure
+     */
+    private static function sortHistoryCallbackBuilder()
+    {
+        return function (Brioche $b0, Brioche $b1) {
+            $t0 = $b0->getRound()->getDate()->getTimestamp();
+            $t1 = $b1->getRound()->getDate()->getTimestamp();
+            
+            return $t1 - $t0;
+        };
+    }
+    
+    /**
      * Get brioche that is currently building
      * 
      * @return Brioche
@@ -130,6 +215,14 @@ class BriocheBuilder
             ->setSize($size)
             ->setExtra(null)
             ->setClient(new Client())
+        ;
+    }
+    
+    public function createDefaultBriocheForClient(Client $client)
+    {
+        return $this
+            ->createDefaultBrioche()
+            ->setClient($client)
         ;
     }
     
@@ -320,6 +413,8 @@ class BriocheBuilder
             ->setDateLock(new \DateTime())
             ->setToken($this->briocheManager->generateToken())
         ;
+        
+        return true;
     }
     
     /**

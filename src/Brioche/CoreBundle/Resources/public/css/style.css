@@ -23,6 +23,9 @@ a {
     margin-bottom: -16px;
     margin-top: 16px;
 }
+div.thumbnail:hover, div.thumbnail:focus, div.thumbnail.active {
+    border-color: #dd4814;
+}
 .jumbotron h2 {
     font-size: 36px;
     margin: 0;
@@ -211,4 +214,21 @@ address abbr {
 footer .copy {
     padding: 24px 0;
     color: lightgray;
+}
+.my-brioches .command-success {
+    background-color: #dff0d8;
+}
+.my-brioches .command-warning {
+    background-color: #fcf8e3;
+}
+.my-brioches .command-default {
+    background-color: #ddd;
+}
+.my-brioches .img-brioche {
+    max-height: 220px;
+    margin: auto;
+}
+.my-brioches i {
+    position: relative;
+    top: 8px;
 }

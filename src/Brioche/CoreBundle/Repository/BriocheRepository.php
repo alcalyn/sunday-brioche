@@ -43,6 +43,19 @@ class BriocheRepository extends EntityRepository
         ;
     }
     
+    public function findFullByIds(array $ids)
+    {
+        $q = $this->findFull()
+                ->where('b.id in (:ids)')
+                ->setParameter(':ids', $ids)
+        ;
+        
+        return $q
+                ->getQuery()
+                ->getResult()
+        ;
+    }
+    
     public function findFullByToken($token)
     {
         $q = $this->findFull()

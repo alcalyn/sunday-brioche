@@ -25,7 +25,28 @@ class BriocheController extends Controller
      */
     public function indexAction()
     {
-        return $this->redirectNextStep();
+        $builder = $this->getBriocheBuilder();
+        
+        if (!$builder->getCurrentBrioche()->getLocked() && (0 === count($builder->getHistory()))) {
+            return $this->redirectNextStep();
+        }
+        
+        if ($builder->getCurrentBrioche()->getLocked()) {
+            $builder->saveToHistory();
+        }
+        
+        $brioche = $builder->getCurrentBrioche();
+        $completedSteps = $brioche->getCompletedSteps();
+        $brioche->stepsPercent = floor(($completedSteps[0] * 100) / $completedSteps[1]);
+        $brioche->stepNumber = $completedSteps[0];
+        $brioche->stepNumberMax = $completedSteps[1];
+        
+        return array(
+            'brioche' => $builder->getCurrentBrioche(),
+            'briochesHistory' => $builder->getHistoryFull(),
+            'nextStepUrl' => $this->getNextStepUrl(),
+            'disableWizard' => true,
+        );
     }
     
     /**
@@ -240,20 +261,17 @@ class BriocheController extends Controller
         $brioche = $this->getBriocheBuilder()->getCurrentBrioche();
         
         if ($brioche->getLocked()) {
-            return $this->redirect($this->generateUrl('command_index', array(
-                'token' => $brioche->getToken(),
-            )));
+            return $this->redirect($this->getCommandUrl($brioche));
         }
         
         if ($request->isMethod('post')) {
             if ($request->get('valid') && $this->getBriocheBuilder()->lockBrioche()) {
-                $commandUrl = $this->generateUrl('command_index', array(
-                    'token' => $brioche->getToken(),
-                ), true);
+                
+                $commandUrl = $this->getCommandUrl($brioche).'#suivi-commande';
 
                 $this->get('brioche_core.mail_factory')->sendBriocheValidatedMail($brioche->getClient(), $commandUrl);
 
-                return $this->redirect($commandUrl.'#suivi-commande');
+                return $this->redirect($commandUrl);
             }
             
             return $this->redirect($this->generateUrl('brioche_summary'));
@@ -297,5 +315,19 @@ class BriocheController extends Controller
     private function redirectNextStep($from = null)
     {
         return $this->redirect($this->getNextStepUrl($from));
+    }
+    
+    /**
+     * Return command url for a brioche
+     * 
+     * @param \Brioche\CoreBundle\Entity\Brioche $brioche
+     * 
+     * @return string
+     */
+    private function getCommandUrl(Brioche $brioche)
+    {
+        return $this->generateUrl('command_index', array(
+            'token' => $brioche->getToken(),
+        ), true);
     }
 }

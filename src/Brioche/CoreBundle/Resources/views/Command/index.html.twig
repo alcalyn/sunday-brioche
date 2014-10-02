@@ -12,7 +12,7 @@
 
             {% include 'BriocheCoreBundle:Command:_firstMessageSection.html.twig' %}
 
-            {% if not brioche.validated %}
+            {% if brioche.round.available and not brioche.validated %}
                 {% include 'BriocheCoreBundle:Command:_paymentOptionsSection.html.twig' %}
             {% endif %}
 

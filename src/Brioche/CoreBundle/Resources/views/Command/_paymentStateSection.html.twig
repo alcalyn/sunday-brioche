@@ -24,10 +24,17 @@
                     </p>
                 {% endif %}
             {% else %}
-                <p class="lead text-center">
-                    Aucun paiement n'a encore été reçu.
-                    <a href="?">Rafraîchir</a>.
-                </p>
+                {% if brioche.round.available %}
+                    <p class="lead text-center">
+                        Aucun paiement n'a encore été reçu.
+                        <a href="?">Rafraîchir</a>.
+                    </p>
+                {% else %}
+                    <p class="lead text-center">
+                        Aucun paiement n'a été reçu, et la tournée est déjà passée.
+                        <a href="{{ path('brioche_index') }}">Commander une autre brioche</a>.
+                    </p>
+                {% endif %}
             {% endif %}
         </div>
     </div>

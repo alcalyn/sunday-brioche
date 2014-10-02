@@ -36,13 +36,13 @@ class DefaultController extends Controller
      */
     public function sendMailAction(Request $request)
     {
+        $flashMsg = $this->get('brioche_core.flash_messages');
         $mailForm = $this->getMailForm();
         
         $mailForm->handleRequest($request);
         
         if ($mailForm->isValid()) {
             $mail = $mailForm->getData();
-            $flashMsg = $this->get('brioche_core.flash_messages');
             
             try {
                 $this->get('brioche_core.mail_factory')->sendSimpleMail($mail->getTo(), $mail->getContent());

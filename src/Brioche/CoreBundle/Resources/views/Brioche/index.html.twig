@@ -1,0 +1,84 @@
+{% extends "BriocheCoreBundle:Brioche:layout.html.twig" %}
+
+{% block title %}Mes brioches - {{ parent() }}{% endblock %}
+
+{% block metadesc %}Liste de vos brioches. Créez-en une nouvelle ou accédez à une ancienne commande.{% endblock %}
+
+{% block body %}
+{{ parent() }}
+
+<section class="my-brioches">
+    <h2 class="text-center">Mes brioches</h2>
+    <br />
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <div class="thumbnail">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <img
+                            src="{{ asset('bundles/briochecore/img/create-new.png') }}"
+                            class="img-responsive img-brioche"
+                            alt="Créer une nouvelle Brioche du Dimanche"
+                        />
+                    </div>
+                    <div class="col-sm-8">
+                        {% if brioche.stepNumber > 0 %}
+                            <h3><a href="{{ nextStepUrl }}">Ma brioche</a></h3>
+                            <br />
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="{{ brioche.stepsPercent }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ brioche.stepsPercent }}%;">
+                                            <span>{{ brioche.stepNumber }} / {{ brioche.stepNumberMax }}</span>
+                                        </div>
+                                    </div>
+                                    <a href="{{ nextStepUrl }}">Terminer ma brioche</a>
+                                </div>
+                            </div>
+                        {% else %}
+                            <h3><a href="{{ nextStepUrl }}">Nouvelle brioche</a></h3>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% for brioche in briochesHistory %}
+                <div class="thumbnail command-{{ brioche.round.available ? (brioche.validated ? 'success' : 'warning') : 'default' }}">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <img
+                                src="{{ asset('bundles/briochecore/img/type-' ~ (brioche.type ? 'parisienne' : 'vendeenne') ~ '.jpg') }}"
+                                class="img-responsive img-brioche"
+                                alt="Brioche {{ brioche.type ? 'Parisienne' : 'Vendéenne' }}"
+                            />
+                        </div>
+                        <div class="col-sm-8">
+                            <h4><a href="{{ path('command_index', {'token': brioche.token}) }}">{{ brioche.type ? 'Parisienne' : 'Vendéenne' }} {{ brioche.size.value }}</a></h4>
+                            <p>
+                                Tournée du
+                                <b><span class="text-capitalize">{{ brioche.round.date|localizeddate('none', 'none', 'fr', null, 'EEEE d MMMM') }}</span></b>
+                            </p>
+                            <p>
+                                {% if not brioche.round.available %}
+                                    {% if brioche.validated %}
+                                        <span class="label label-success">Livrée</span><br />
+                                        <i>Vous avez été livré. <a href="{{ path('comment_index') }}">Comment l'avez vous trouvée ?</a></i>
+                                    {% else %}
+                                        <span class="label label-default">Abandonnée</span><br />
+                                        <i>La tournée est déjà passée. <a href="{{ nextStepUrl }}">Commander une autre brioche</a>.</i>
+                                    {% endif %}
+                                {% elseif brioche.validated %}
+                                    <span class="label label-success">Payée</span><br />
+                                    <i>Vous allez bientôt être livré. <a href="{{ path('command_index', {'token': brioche.token}) }}">Communiquer avec Brioche du Dimanche</a>.</i>
+                                {% else %}
+                                    <span class="label label-primary">Validée</span><br />
+                                    <i>Votre commande sera prise en compte dès qu'un paiement est reçu. <a href="{{ path('command_index', {'token': brioche.token}) }}">Payer</a>.</i>
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

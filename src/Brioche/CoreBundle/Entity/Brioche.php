@@ -725,6 +725,33 @@ class Brioche
             $this->getValidTime()
         ;
     }
+    
+    /**
+     * Return [completed steps, max steps number]
+     * 
+     * @return int[]
+     */
+    public function getCompletedSteps()
+    {
+        $n = 0;
+        
+        $steps = array(
+            $this->getValidRound(),
+            $this->getValidType(),
+            $this->getValidSize(),
+            $this->getValidPerso(),
+            $this->getValidAddress(),
+            $this->getValidTime(),
+        );
+        
+        foreach ($steps as $boolean) {
+            if ($boolean) {
+                $n++;
+            }
+        }
+        
+        return array($n, count($steps));
+    }
 
     /**
      * Set validated
