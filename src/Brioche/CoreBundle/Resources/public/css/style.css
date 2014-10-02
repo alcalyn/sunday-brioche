@@ -23,7 +23,7 @@ a {
     margin-bottom: -16px;
     margin-top: 16px;
 }
-div.thumbnail:hover, div.thumbnail:focus, div.thumbnail.active {
+div.thumbnail.thumbnail-hover:hover, div.thumbnail.thumbnail-hover:focus, div.thumbnail.thumbnail-hover.active {
     border-color: #dd4814;
 }
 .jumbotron h2 {

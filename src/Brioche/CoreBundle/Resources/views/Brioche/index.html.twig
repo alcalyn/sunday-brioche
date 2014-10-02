@@ -12,7 +12,7 @@
     <br />
     <div class="row">
         <div class="col-sm-6 col-sm-offset-3">
-            <div class="thumbnail">
+            <div class="thumbnail thumbnail-hover">
                 <div class="row">
                     <div class="col-sm-4">
                         <img
@@ -42,7 +42,7 @@
                 </div>
             </div>
             {% for brioche in briochesHistory %}
-                <div class="thumbnail command-{{ brioche.round.available ? (brioche.validated ? 'success' : 'warning') : 'default' }}">
+                <div class="thumbnail thumbnail-hover command-{{ brioche.round.available ? (brioche.validated ? 'success' : 'warning') : 'default' }}">
                     <div class="row">
                         <div class="col-sm-4">
                             <img

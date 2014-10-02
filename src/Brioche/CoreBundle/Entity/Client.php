@@ -213,4 +213,20 @@ class Client
     {
         return $this->email;
     }
+    
+    /**
+     * @return Client
+     */
+    public function createClone()
+    {
+        $clone = new Client();
+        
+        return $clone
+            ->setFirstName($this->getFirstName())
+            ->setLastName($this->getLastName())
+            ->setAddress($this->getAddress())
+            ->setCity($this->getCity())
+            ->setEmail($this->getEmail())
+        ;
+    }
 }

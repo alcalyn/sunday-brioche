@@ -112,7 +112,7 @@ class BriocheBuilder
     {
         $this->addToHistory($this->brioche);
         
-        $brioche = $this->createDefaultBriocheForClient($this->brioche->getClient());
+        $brioche = $this->createDefaultBriocheForClient($this->brioche->getClient()->createClone());
         
         $this->brioche = $brioche;
         
