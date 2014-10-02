@@ -68,14 +68,6 @@ class Client
      * @Assert\NotBlank
      */
     private $city;
-    
-    /**
-     * @var Account
-     * 
-     * @ORM\OneToOne(targetEntity="Brioche\CoreBundle\Entity\Account")
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $account;
 
     /**
      * Get id
@@ -220,28 +212,5 @@ class Client
     public function getEmail()
     {
         return $this->email;
-    }
-
-    /**
-     * Set account
-     *
-     * @param \Brioche\CoreBundle\Entity\Account $account
-     * @return Client
-     */
-    public function setAccount(Account $account = null)
-    {
-        $this->account = $account;
-
-        return $this;
-    }
-
-    /**
-     * Get account
-     *
-     * @return \Brioche\CoreBundle\Entity\Account 
-     */
-    public function getAccount()
-    {
-        return $this->account;
     }
 }
