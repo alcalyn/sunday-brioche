@@ -91,5 +91,10 @@ alcalyn_payplug:
         currencies:         %payplug_account_currencies%
         payplugPublicKey:   %payplug_account_payplugPublicKey%
         yourPrivateKey:     %payplug_account_yourPrivateKey%
+    # Sandbox parameters
+    sandbox:
+        account:
+            url:                %payplug_sandbox_account_url%
+            yourPrivateKey:     %payplug_sandbox_account_yourPrivateKey%
     class:
         ipn: Brioche\CoreBundle\Entity\IPN

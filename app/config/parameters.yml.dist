@@ -1,4 +1,5 @@
 parameters:
+    # Database
     database_driver:   pdo_mysql
     database_host:     127.0.0.1
     database_port:     ~
@@ -6,6 +7,7 @@ parameters:
     database_user:     root
     database_password: ~
 
+    # Mailer
     mailer_transport:  smtp
     mailer_host:       127.0.0.1
     mailer_port:       25
@@ -22,9 +24,14 @@ parameters:
     use_assetic_controller: true
     swiftmailer_spool: { type: memory } # { type: memory } : send immaediately ; { type: file, path: "%kernel.root_dir%/spool" } : use spool
 
+    # Payplug parameters
     payplug_account_url:                ~
     payplug_account_amount_min:         ~
     payplug_account_amount_max:         ~
     payplug_account_currencies:         ~
     payplug_account_payplugPublicKey:   ~
     payplug_account_yourPrivateKey:     ~
+
+    # Payplug sandbox parameters
+    payplug_sandbox_account_url:            ~
+    payplug_sandbox_account_yourPrivateKey: ~
