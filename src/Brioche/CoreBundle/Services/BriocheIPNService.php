@@ -3,6 +3,7 @@
 namespace Brioche\CoreBundle\Services;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Brioche\CoreBundle\Exception\BriocheException;
 use Brioche\CoreBundle\Entity\IPN;
 use Brioche\CoreBundle\Entity\Brioche;
 
@@ -36,6 +37,12 @@ class BriocheIPNService
         if ($ipn->getState() === IPN::PAYMENT_PAID) {
             // Update brioche if payment is sucess
             $brioche = $this->findBrioche($ipn->getOrder());
+            
+            if (null === $brioche) {
+                throw new BriocheException(
+                    'Brioche order with id #'.$ipn->getOrder().' does not exists. Cannot process IPN.'
+                );
+            }
 
             $brioche->setPaid($brioche->getPaid() + ($ipn->getAmount() / 100));
             

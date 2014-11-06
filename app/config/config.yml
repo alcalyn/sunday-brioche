@@ -93,6 +93,7 @@ alcalyn_payplug:
         yourPrivateKey:     %payplug_account_yourPrivateKey%
     # Sandbox parameters
     sandbox:
+        enabled:            false
         account:
             url:                %payplug_sandbox_account_url%
             yourPrivateKey:     %payplug_sandbox_account_yourPrivateKey%
